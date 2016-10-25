@@ -32,7 +32,7 @@ exports.seed = function(knex, Promise) {
 						user_name: 'CoachBobby',
 						password: 'password3',
 						team_id: 2
-					})
+					}),
 				knex('Coaches')
 					.insert({
 						id: 4,

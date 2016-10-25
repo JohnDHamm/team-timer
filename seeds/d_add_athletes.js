@@ -18,7 +18,7 @@ exports.seed = function(knex, Promise) {
 					}),
 				knex('Athletes')
 					.insert({
-						id: 1,
+						id: 2,
 						first_name: 'Maya',
 						last_name: 'Reilly',
 						display_name: 'Maya',
@@ -28,7 +28,7 @@ exports.seed = function(knex, Promise) {
 					}),
 				knex('Athletes')
 					.insert({
-						id: 1,
+						id: 3,
 						first_name: 'Devin',
 						last_name: 'Reilly',
 						display_name: 'Devin',
@@ -38,7 +38,7 @@ exports.seed = function(knex, Promise) {
 					}),
 				knex('Athletes')
 					.insert({
-						id: 1,
+						id: 4,
 						first_name: 'Bobby',
 						last_name: 'Smith',
 						display_name: 'Junior',
