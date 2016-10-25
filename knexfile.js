@@ -10,7 +10,8 @@ module.exports = {
     // enabling foreign key constraint for SQLite3 - disabled by default
     pool: {
       afterCreate: (db, cb) => db.run('PRAGMA foreign_keys = ON', cb)
-    }
+    },
+    useNullAsDefault: true
   },
 
   staging: {
