@@ -77,16 +77,23 @@ app.post('/api/addAthlete', (req, res) => {
 		})
 })
 
-// app.get('/api/getAthletes/Team/:team_id', (req, res) => {
-// 	let team_id = req.params.team_id
-// 	knex('Athletes')
-// 		.join('Groups', 'Teams.id', team_id)
-// 		.select('*')
-// 		.where('Groups.team_id', team_id)
-// 		.then((data) => {
-// 			res.json(data)
-// 		})
-// })
+app.get('/api/getAthletes/Team/:team_id', (req, res) => {
+	let team_id = req.params.team_id
+	knex('Athletes')
+		.join('Groups', 'Athletes.group_id', 'Groups.id')
+		.join('Teams', 'Groups.team_id', 'Teams.id')
+		.select('*')
+		.where('Teams.id', team_id)
+		.then((data) => {
+			res.json(data)
+		})
+})
+//SELECT Athletes.*
+// FROM Athletes
+// JOIN Groups ON Athletes.group_id = Groups.id
+// JOIN Teams ON Groups.team_id = Teams.id
+// WHERE Teams.id = 1
+
 
 app.get('/api/getAthletes/Group/:group_id', (req, res) => {
 	let group_id = req.params.group_id
