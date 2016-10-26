@@ -108,8 +108,16 @@ app.get('/api/workouts/getAthlete/:athlete_id', (req, res) => {
 		})
 })
 
-// /api/workouts/Discipline/:discipline (run, bike, etc)
-
+//need to limit by users team
+app.get('/api/workouts/Discipline/:discipline', (req, res) => {
+	let discipline = req.params.discipline
+	knex('Workouts')
+		.select('*')
+		.where('discipline', discipline)
+		.then((data) => {
+			res.json(data)
+		})
+})
 
 
 
