@@ -1,0 +1,20 @@
+{
+  "name": "lib",
+  "homepage": "https://github.com/JohnDHamm/team-timer",
+  "authors": [
+    "John Hamm <johndhamm1@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.97.7"
+  }
+}
