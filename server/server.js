@@ -82,18 +82,12 @@ app.get('/api/getAthletes/Team/:team_id', (req, res) => {
 	knex('Athletes')
 		.join('Groups', 'Athletes.group_id', 'Groups.id')
 		.join('Teams', 'Groups.team_id', 'Teams.id')
-		.select('*')
+		.select('Athletes.*')
 		.where('Teams.id', team_id)
 		.then((data) => {
 			res.json(data)
 		})
 })
-//SELECT Athletes.*
-// FROM Athletes
-// JOIN Groups ON Athletes.group_id = Groups.id
-// JOIN Teams ON Groups.team_id = Teams.id
-// WHERE Teams.id = 1
-
 
 app.get('/api/getAthletes/Group/:group_id', (req, res) => {
 	let group_id = req.params.group_id
@@ -163,6 +157,16 @@ app.post('/api/saveWorkout', (req, res) => {
 		.insert(req.body)
 		.then((data) => {
 			res.json(data)
+		})
+})
+
+app.delete('/api/deleteWorkouts/:date', (req, res) => {
+	let date = req.params.date
+	knex('Workouts')
+		.where('date', date)
+		.del()
+		.then((data) => {
+			res.json(data)  //returns # of deleted workouts
 		})
 })
 
