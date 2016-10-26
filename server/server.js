@@ -14,10 +14,6 @@ app.set('port', port)
 app.use(express.static('/'))
 app.use(bodyParser.json())
 
-app.get('/apiTest', (req, res) => {
-	console.log("testing api call");
-	res.json('hello sexy')
-})
 
 // APIs
 

@@ -7,6 +7,12 @@ module.exports = {
     connection: {
       filename: './teamtimer.sqlite3'
     },
+    seeds: {
+      directory: './db/seeds'
+    },
+    migrations: {
+      directory: './db/migrations'
+    },
     // enabling foreign key constraint for SQLite3 - disabled by default
     pool: {
       afterCreate: (db, cb) => db.run('PRAGMA foreign_keys = ON', cb)
