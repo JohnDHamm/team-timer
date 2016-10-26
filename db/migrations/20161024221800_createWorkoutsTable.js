@@ -2,6 +2,7 @@ module.exports.up = (knex, Promise) => {
   return knex.schema.createTable('Workouts', table => {
   	table.increments() //creates an incrementing id as primary key
   	table.string('description')
+    table.string('discipline')
   	table.string('date')
   	table.integer('laps')
   	table.integer('lap_distance')

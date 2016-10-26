@@ -1,11 +1,9 @@
-'use strict'
+'use strict';
 
 exports.seed = function(knex, Promise) {
-	// Deletes ALL existing entries
 	return knex('Groups').del()
 		.then(function () {
 			return Promise.all([
-				// Inserts seed entries
 				knex('Groups')
 					.insert({
 						id: 1,
@@ -33,6 +31,20 @@ exports.seed = function(knex, Promise) {
 						group_name: 'All',
 						description: 'all athletes',
 						team_id: 2
+					}),
+				knex('Groups')
+					.insert({
+						id: 5,
+						group_name: 'Noobs',
+						description: 'membership less than 2 years',
+						team_id: 3
+					}),
+				knex('Groups')
+					.insert({
+						id: 6,
+						group_name: 'Elite',
+						description: 'membership over 2 years',
+						team_id: 3
 					})
 			]);
 		});
