@@ -4,19 +4,24 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Team Timer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 	<link rel="stylesheet" href="">
 </head>
 <body ng-app="TeamTimerApp">
+
+	<div ng-include="'partials/navbar.html'"></div>
 
 	<div ng-view></div>
 
 
 <!-- ============= LINK TAGS ============= -->
   <!-- BEGINNING OF THE DANG LINK TAGS -->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 
   <script type="text/javascript" src="lib/node_modules/angular/angular.min.js"></script>
   <script type="text/javascript" src="lib/node_modules/angular-route/angular-route.min.js"></script>
 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
   <!-- APP FIRST -->
   <script type="text/javascript" src="app/app.js"></script>
@@ -25,6 +30,7 @@
 
   <!-- CONTROLLERS LAST -->
 
+  <script type="text/javascript" src="/app/controllers/navCtrl.js"></script>
   <script type="text/javascript" src="/app/controllers/loginCtrl.js"></script>
   <script type="text/javascript" src="/app/controllers/adminCtrl.js"></script>
   <script type="text/javascript" src="/app/controllers/coachCtrl.js"></script>
