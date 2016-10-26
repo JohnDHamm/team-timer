@@ -112,6 +112,7 @@ app.get('/api/workouts/getAthlete/:athlete_id', (req, res) => {
 		})
 })
 
+// /api/workouts/Discipline/:discipline (run, bike, etc)
 
 
 
