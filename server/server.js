@@ -25,6 +25,14 @@ app.get('/api/getTeams', (req, res) => {
 		})
 })
 
+app.post('/api/addTeam', (req, res) => {
+	knex('Teams')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data) //returns new id#
+		})
+})
+
 app.get('/api/getCoaches/:team_id', (req, res) => {
 	let team_id = req.params.team_id
 	knex('Coaches')
@@ -35,11 +43,35 @@ app.get('/api/getCoaches/:team_id', (req, res) => {
 		})
 })
 
+app.post('/api/addCoach', (req, res) => {
+	knex('Coaches')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data) //returns new id#
+		})
+})
+
 app.get('/api/getGroups/:team_id', (req, res) => {
 	let team_id = req.params.team_id
 	knex('Groups')
 		.select('*')
 		.where('team_id', team_id)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.post('/api/addGroup', (req, res) => {
+	knex('Groups')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.post('/api/addAthlete', (req, res) => {
+	knex('Athletes')
+		.insert(req.body)
 		.then((data) => {
 			res.json(data)
 		})
@@ -108,7 +140,7 @@ app.get('/api/workouts/getAthlete/:athlete_id', (req, res) => {
 		})
 })
 
-//need to limit by users team
+//need to limit by user's team
 app.get('/api/workouts/Discipline/:discipline', (req, res) => {
 	let discipline = req.params.discipline
 	knex('Workouts')
@@ -118,6 +150,15 @@ app.get('/api/workouts/Discipline/:discipline', (req, res) => {
 			res.json(data)
 		})
 })
+
+app.post('/api/saveWorkout', (req, res) => {
+	knex('Workouts')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
 
 
 
