@@ -11,7 +11,7 @@ const app = express()
 
 app.set('port', port)
 
-app.use(express.static('/'))
+app.use(express.static('client'))
 app.use(bodyParser.json())
 
 
@@ -99,7 +99,6 @@ app.post('/api/addAthlete', (req, res) => {
 		})
 })
 
-
 app.put('/api/editAthlete/:athlete_id', (req, res) => {
 	const athlete_id = req.params.athlete_id
 	knex('Athletes')
@@ -109,8 +108,6 @@ app.put('/api/editAthlete/:athlete_id', (req, res) => {
 			res.json(data)
 		})
 })
-
-
 
 app.get('/api/getWorkouts/Date/:date', (req, res) => {
 	const date = req.params.date
