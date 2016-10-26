@@ -25,8 +25,16 @@ app.get('/api/getTeams', (req, res) => {
 		})
 })
 
+app.post('/api/addTeam', (req, res) => {
+	knex('Teams')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data) //returns new id#
+		})
+})
+
 app.get('/api/getCoaches/:team_id', (req, res) => {
-	let team_id = req.params.team_id
+	const team_id = req.params.team_id
 	knex('Coaches')
 		.select('*')
 		.where('team_id', team_id)
@@ -35,8 +43,16 @@ app.get('/api/getCoaches/:team_id', (req, res) => {
 		})
 })
 
+app.post('/api/addCoach', (req, res) => {
+	knex('Coaches')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data) //returns new id#
+		})
+})
+
 app.get('/api/getGroups/:team_id', (req, res) => {
-	let team_id = req.params.team_id
+	const team_id = req.params.team_id
 	knex('Groups')
 		.select('*')
 		.where('team_id', team_id)
@@ -45,19 +61,28 @@ app.get('/api/getGroups/:team_id', (req, res) => {
 		})
 })
 
-// app.get('/api/getAthletes/Team/:team_id', (req, res) => {
-// 	let team_id = req.params.team_id
-// 	knex('Athletes')
-// 		.join('Groups', 'Teams.id', team_id)
-// 		.select('*')
-// 		.where('Groups.team_id', team_id)
-// 		.then((data) => {
-// 			res.json(data)
-// 		})
-// })
+app.post('/api/addGroup', (req, res) => {
+	knex('Groups')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.get('/api/getAthletes/Team/:team_id', (req, res) => {
+	const team_id = req.params.team_id
+	knex('Athletes')
+		.join('Groups', 'Athletes.group_id', 'Groups.id')
+		.join('Teams', 'Groups.team_id', 'Teams.id')
+		.select('Athletes.*')
+		.where('Teams.id', team_id)
+		.then((data) => {
+			res.json(data)
+		})
+})
 
 app.get('/api/getAthletes/Group/:group_id', (req, res) => {
-	let group_id = req.params.group_id
+	const group_id = req.params.group_id
 	knex('Athletes')
 		.select('*')
 		.where('group_id', group_id)
@@ -66,8 +91,29 @@ app.get('/api/getAthletes/Group/:group_id', (req, res) => {
 		})
 })
 
-app.get('/api/getWorkout/:date', (req, res) => {
-	let date = req.params.date
+app.post('/api/addAthlete', (req, res) => {
+	knex('Athletes')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+
+app.put('/api/editAthlete/:athlete_id', (req, res) => {
+	const athlete_id = req.params.athlete_id
+	knex('Athletes')
+		.where('id', athlete_id)
+		.update(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+
+
+app.get('/api/getWorkouts/Date/:date', (req, res) => {
+	const date = req.params.date
 	knex('Workouts')
 		.select('*')
 		.where('date', date)
@@ -76,20 +122,8 @@ app.get('/api/getWorkout/:date', (req, res) => {
 		})
 })
 
-//need this? (from getWorkout api)
-// app.get('/api/getAthlete/:athlete_id', (req, res) => {
-// 	let athlete_id = req.params.athlete_id
-// 	knex('Athletes')
-// 		.join('Workouts', 'Athletes.id', 'Workouts.athlete_id')
-// 		.select('*')
-// 		.where('id', athlete_id)
-// 		.then((data) => {
-// 			res.json(data)
-// 		})
-// })
-
-app.get('/api/workouts/getCoach/:coach_id', (req, res) => {
-	let coach_id = req.params.coach_id
+app.get('/api/getWorkouts/Coach/:coach_id', (req, res) => {
+	const coach_id = req.params.coach_id
 	knex('Workouts')
 		.select('*')
 		.where('coach_id', coach_id)
@@ -98,8 +132,8 @@ app.get('/api/workouts/getCoach/:coach_id', (req, res) => {
 		})
 })
 
-app.get('/api/workouts/getAthlete/:athlete_id', (req, res) => {
-	let athlete_id = req.params.athlete_id
+app.get('/api/getWorkouts/Athlete/:athlete_id', (req, res) => {
+	const athlete_id = req.params.athlete_id
 	knex('Workouts')
 		.select('*')
 		.where('athlete_id', athlete_id)
@@ -108,9 +142,9 @@ app.get('/api/workouts/getAthlete/:athlete_id', (req, res) => {
 		})
 })
 
-//need to limit by users team
-app.get('/api/workouts/Discipline/:discipline', (req, res) => {
-	let discipline = req.params.discipline
+//need to limit by user's team
+app.get('/api/getWorkouts/Discipline/:discipline', (req, res) => {
+	const discipline = req.params.discipline
 	knex('Workouts')
 		.select('*')
 		.where('discipline', discipline)
@@ -118,6 +152,25 @@ app.get('/api/workouts/Discipline/:discipline', (req, res) => {
 			res.json(data)
 		})
 })
+
+app.post('/api/saveWorkout', (req, res) => {
+	knex('Workouts')
+		.insert(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.delete('/api/deleteWorkouts/:date', (req, res) => {
+	const date = req.params.date
+	knex('Workouts')
+		.where('date', date)
+		.del()
+		.then((data) => {
+			res.json(data)  //returns # of deleted workouts
+		})
+})
+
 
 
 
