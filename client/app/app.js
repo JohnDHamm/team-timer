@@ -28,6 +28,10 @@ const app = angular.module("TeamTimerApp", ["ngRoute"])
 			templateUrl: 'partials/analysis.html',
 			controller: 'analysisCtrl'
 		})
+		.when('/timerTest/:testNum', {
+			templateUrl: 'partials/timer.html',
+			controller: 'timerCtrl'
+		})
 		.otherwise('/login', {
 		})
 
