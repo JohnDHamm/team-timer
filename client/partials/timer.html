@@ -1,0 +1,22 @@
+<h3>Test Timer 01</h3>
+
+<h2 id="readout">00:00.000</h2>
+
+<button id="startBtn" ng-click="start()">start</button>
+<button id="lapBtn" ng-click="recordLap()">lap</button>
+<button id="stopBtn" ng-click="stop()">stop</button>
+<button id="resetBtn" ng-click="reset()">reset</button>
+
+<div id="lapTimes">
+	<div ng-repeat="lap in lapArray">
+		<h3>{{lap}}</h3>
+	</div>
+</div>
+
+
+
+
+
+
+
+
