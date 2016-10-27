@@ -25,7 +25,7 @@ function Stopwatch(elem) {
 		var time = new Date(timeInMilliseconds);
 		var minutes = time.getMinutes().toString();
 		var seconds = time.getSeconds().toString();
-		var milliseconds = time.getMilliseconds().toString();
+		var milliseconds = (time.getMilliseconds() / 10).toFixed().toString();
 
 		if (minutes.length < 2) {
 			minutes = '0' + minutes;
@@ -35,7 +35,7 @@ function Stopwatch(elem) {
 			seconds = '0' + seconds;
 		}
 
-		while (milliseconds.length < 3) {
+		while (milliseconds.length < 2) {
 			milliseconds = '0' + milliseconds;
 		}
 
