@@ -2,7 +2,8 @@ function Stopwatch(elem) {
 	var time = 0;
 	var interval;
 	var offset;
-	var lapStart;
+	var lapStart1;
+	var lapStart2;
 
 	function update() {
 		if (this.isOn) {
@@ -69,10 +70,10 @@ function Stopwatch(elem) {
 	this.lap = function() {
 		const now = Date.now()
 		// console.log("lap now", now);
-		const thisLapTime = now - lapStart;
+		const elapsedTime = now - lapStart;
 		// console.log("thisLapTime", thisLapTime);
-		const formattedLapTime = timeFormatter(thisLapTime);
-		lapStart = now;
+		const formattedLapTime = timeFormatter(elapsedTime);
+		// lapStart = now;
 		return formattedLapTime;
 	}
 }
