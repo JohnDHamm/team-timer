@@ -5,6 +5,9 @@ function Stopwatch(elem) {
 	var lapStart1;
 	var lapStart2;
 
+	// console.log("athleteArray", athleteArray);
+	// console.log("", athleteArray[0]);
+
 	function update() {
 		if (this.isOn) {
 			var timePassed = delta();
@@ -13,6 +16,7 @@ function Stopwatch(elem) {
 
 		var formattedTime = timeFormatter(time);
 		elem.textContent = formattedTime;
+		// athleteArray[index].readout = elem.textContent;
 	}
 
 	function delta() {
@@ -74,6 +78,7 @@ function Stopwatch(elem) {
 		// console.log("thisLapTime", thisLapTime);
 		const formattedLapTime = timeFormatter(elapsedTime);
 		// lapStart = now;
-		return formattedLapTime;
+		time = 0;
+		return elapsedTime;
 	}
 }

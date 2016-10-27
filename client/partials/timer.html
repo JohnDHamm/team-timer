@@ -8,28 +8,27 @@
 	<button id="resetBtn" ng-click="reset()">reset</button>
 </div>
 
-<div id="athlete1">
-	<button id="lapBtn1" ng-click="recordLap(lapArray1)">lap 1</button>
-</div>
+<div ng-repeat="athlete in athleteArray">
+	<div>
+		<button ng-click="recordLap(athlete.lapTimesArray)">{{athlete.name}}</button>
+	</div>
 
-<div id="athlete2">
-	<button id="lapBtn2" ng-click="recordLap(lapArray2)">lap 2</button>
 </div>
+<h3 id="readout1">00:00.00</h3>
+
+<!-- <div id="athlete2">
+	<button id="lapBtn2" ng-click="recordLap(lapArray2)">lap 2</button>
+</div> -->
 
 <div class="container">
 	<div class="row">
 
 		<div id="lapTimes1" class="col s6">
-			<div ng-repeat="lap in lapArray1">
-				<h3>Athlete 1: {{lap}}</h3>
+			<div ng-repeat="athlete in athleteArray">
+				<h3>elapsed: {{athlete.lapTimesArray}}</h3>
 			</div>
 		</div>
 
-		<div id="lapTimes2" class="col s6">
-			<div ng-repeat="lap in lapArray2">
-				<h3>Athlete 2: {{lap}}</h3>
-			</div>
-		</div>
 
 	</div>
 
