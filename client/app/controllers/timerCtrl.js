@@ -5,6 +5,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 	//hard coding, this would come from workout setup/current user info
 	const date = Date.now()
 	const description = "testing timer db interaction";
+	const discipline = "run";
 	const coach_id = 3;
 	const laps = 3;
 	const lap_distance = 100;
@@ -62,7 +63,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
 		console.log("finalWorkouts", finalWorkouts);
 		//save to db
-
+		saveWorkouts(finalWorkouts);
 	}
 
 	const convertLapTimes = (array) => {
@@ -71,7 +72,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		for (let i = 0; i < array.length - 1; i++) {
 			trueArray.push(array[i + 1] - array[i]);
 		}
-		return trueArray;
+		return trueArray.join();
 	}
 
 	const addCommonWorkoutData = (newWorkoutsArray) => {
@@ -79,11 +80,19 @@ app.controller("timerCtrl", function($scope, DbFactory){
 			newWorkoutsArray[i].date = date
 			newWorkoutsArray[i].coach_id = coach_id
 			newWorkoutsArray[i].description = description
+			newWorkoutsArray[i].discipline = discipline
 			newWorkoutsArray[i].laps = laps
 			newWorkoutsArray[i].lap_distance = lap_distance
 			newWorkoutsArray[i].lap_metric = lap_metric
 		}
 		return newWorkoutsArray;
+	}
+
+	const saveWorkouts = (workoutsArray) => {
+		workoutsArray.forEach(workout => {
+			console.log("workout to save", JSON.stringify(workout));
+			DbFactory.saveWorkout(JSON.stringify(workout))
+		})
 	}
 
 	//------STOPWATCH----------
