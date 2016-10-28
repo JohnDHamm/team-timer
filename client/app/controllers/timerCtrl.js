@@ -6,28 +6,34 @@ app.controller("timerCtrl", function($scope){
 
 	$scope.athleteArray = [
 		{
-			name: 'athlete one',
-			id: 1,
+			index: 0,
+			display_name: 'athlete one',
+			athlete_id: 1,
 			lapTimesArray: [0],
-			readout: '00:00.00'
+			readout: '00:00.00',
+			lap: 0,
+			elapsed: 0,
+			lastLapTime: '00:00.00'
 		},
 		{
-			name: 'athlete two',
-			id: 2,
+			index: 1,
+			display_name: 'athlete two',
+			athlete_id: 2,
 			lapTimesArray: [0],
-			readout: '00:00.00'
+			readout: '00:00.00',
+			lap: 0,
+			elapsed: 0,
+			lastLapTime: '00:00.00'
 		},
 
 	]
 
-	// const watch = new Stopwatch(readout);
 	var time = 0;
 	var interval;
 	var offset;
 	var lapStart;
 
 	$scope.start = function() {
-	  // watch.start();
 		interval = setInterval(update, 10);
 		offset = Date.now();
 		lapStart = offset;
@@ -41,18 +47,17 @@ app.controller("timerCtrl", function($scope){
 	}
 
 
-	// $scope.reset = function() {
-	//   // watch.reset();
-	// 	time = 0;
-	// 	update();
-	// }
-
-
-	$scope.recordLap = function() {
-		// let currentArray = `lapArray${id}`
-		// console.log("pressed lap for", currentArray);
-	  // array.push(watchAthlete.lap())
-	  // console.log("lapArray", $scope.lapArray);
+	$scope.recordLap = function(index) {
+		const thisAthlete = $scope.athleteArray[index];
+		thisAthlete.lap += 1;
+		var nowLap = Date.now();
+		var elapsedTime = nowLap - lapStart;
+		thisAthlete.elapsed = elapsedTime;
+		thisAthlete.lapTimesArray.push(elapsedTime);
+		console.log("athlete:", thisAthlete.athlete_id);
+		console.log("laps:", thisAthlete.lapTimesArray);
+		thisAthlete.lastLapTime = timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
+		console.log("lastLapTime", thisAthlete.lastLapTime);
 	}
 
 
@@ -64,7 +69,8 @@ app.controller("timerCtrl", function($scope){
 		readout.textContent = formattedTime;
 		$scope.$apply(function() {
 			for (let i = 0; i < $scope.athleteArray.length; i++) {
-				$scope.athleteArray[i].readout = formattedTime;
+				var newTime = time - $scope.athleteArray[i].elapsed;
+				$scope.athleteArray[i].readout = timeFormatter(newTime);
 			}
 		});
 	}

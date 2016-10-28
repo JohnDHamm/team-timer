@@ -1,16 +1,15 @@
-<h3>Test Timer 01</h3>
+<h5>Test Timer 01</h5>
 
 <h2 id="readout">00:00.00</h2>
 
 <div>
 	<button id="startBtn" ng-click="start()">start</button>
 	<button id="stopBtn" ng-click="stop()">stop</button>
-	<!-- <button id="resetBtn" ng-click="reset()">reset</button> -->
 </div>
 
 <div ng-repeat="athlete in athleteArray">
 	<div>
-		<button ng-click="recordLap(athlete.id)">{{athlete.name}}</button>
+		<button ng-click="recordLap(athlete.index)">{{athlete.display_name}}</button>
 		<h3>{{athlete.readout}}</h3>
 	</div>
 </div>
@@ -21,6 +20,9 @@
 
 		<div id="lapTimes1" class="col s6">
 			<div ng-repeat="athlete in athleteArray">
+				<p>{{athlete.display_name}}</p>
+				<p>lap: {{athlete.lap}}</p>
+				<p>last lap: {{athlete.lastLapTime}}</p>
 				<p>elapsed: {{athlete.lapTimesArray}}</p>
 			</div>
 		</div>
