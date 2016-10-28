@@ -1,33 +1,86 @@
 "use strict";
 
-app.controller("timerCtrl", function($scope){
+app.controller("timerCtrl", function($scope, DbFactory){
+
+	const date = Date.now()
+	const description = "testing timer db interaction";
+	const coach_id = 3;
+	const laps = 3;
+	const lap_distance = 100;
+	const lap_metric = 'meter';
+	const workoutObjTemplate = {
+		date,
+		description,
+		coach_id,
+		laps,
+		lap_distance,
+		lap_metric
+	}
+	console.log("workoutObjTemplate", workoutObjTemplate);
+
+
+
+	//get athletes from specified group - DbFactory
+		// returns array of objects
+	const group_id = 2;
+
+	$scope.athleteArray = []
+
+	DbFactory
+		.getAthletesByGroup(group_id)
+		.then((data) => {
+			// console.log(`group ${group_id}: `, data);
+			createAthleteArray(data)
+			// console.log("athleteArray", $scope.athleteArray);
+		})
+
+
+
+
+
+
+	const createAthleteArray = (athletesFromDb) => {
+		//arg = array of athlete objects from db
+		//loop over athletesFromDb
+		for (let i = 0; i < athletesFromDb.length; i++) {
+			//create new obj with data and new items for stopwatch
+			const newObj = athletesFromDb[i];
+			newObj.index = i;
+			newObj.lapTimesArray = [0];
+			newObj.readout =  '00:00.00';
+			newObj.lap =  0;
+			newObj.elapsed = 0;
+			newObj.lastLapTime = '00:00.00';
+			// console.log("newObj", newObj);
+			//push new obj to $scope.athleteArray
+			$scope.athleteArray.push(newObj)
+		}
+	}
+
+	const createWorkouts = (athleteArray) => {
+		console.log("array after stop", athleteArray);
+		//arg = array of athlete objects after timing
+		//loop over array
+		var newWorkoutsArray = [];
+
+		for (let i = 0; i < athleteArray.length; i++) {
+			//create new workout obj to save to db
+			var newWorkoutObj = workoutObjTemplate;
+			console.log("athleteArray[i].id", athleteArray[i].id);
+			newWorkoutObj.athlete_id = athleteArray[i].id;
+			newWorkoutObj.data = athleteArray[i].lapTimesArray;
+			console.log("newWorkoutObj", newWorkoutObj);
+			newWorkoutsArray.push(newWorkoutObj)
+			//save to db
+
+		}
+		console.log("newWorkoutsArray", newWorkoutsArray);
+	}
+
+
+	//------STOPWATCH----------
 
 	const readout = document.getElementById('readout');
-
-	$scope.athleteArray = [
-		{
-			index: 0,
-			display_name: 'athlete one',
-			athlete_id: 1,
-			lapTimesArray: [0],
-			readout: '00:00.00',
-			lap: 0,
-			elapsed: 0,
-			lastLapTime: '00:00.00'
-		},
-		{
-			index: 1,
-			display_name: 'athlete two',
-			athlete_id: 2,
-			lapTimesArray: [0],
-			readout: '00:00.00',
-			lap: 0,
-			elapsed: 0,
-			lastLapTime: '00:00.00'
-		},
-
-	]
-
 	var time = 0;
 	var interval;
 	var offset;
@@ -39,13 +92,11 @@ app.controller("timerCtrl", function($scope){
 		lapStart = offset;
 	}
 
-
 	$scope.stop = function() {
-	  // watch.stop();
 		clearInterval(interval);
 		interval = null;
+		createWorkouts($scope.athleteArray);
 	}
-
 
 	$scope.recordLap = function(index) {
 		const thisAthlete = $scope.athleteArray[index];
@@ -54,12 +105,11 @@ app.controller("timerCtrl", function($scope){
 		var elapsedTime = nowLap - lapStart;
 		thisAthlete.elapsed = elapsedTime;
 		thisAthlete.lapTimesArray.push(elapsedTime);
-		console.log("athlete:", thisAthlete.athlete_id);
-		console.log("laps:", thisAthlete.lapTimesArray);
+		// console.log("athlete:", thisAthlete.athlete_id);
+		// console.log("laps:", thisAthlete.lapTimesArray);
 		thisAthlete.lastLapTime = timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
-		console.log("lastLapTime", thisAthlete.lastLapTime);
+		// console.log("lastLapTime", thisAthlete.lastLapTime);
 	}
-
 
 	function update() {
 		var timePassed = delta();
@@ -87,19 +137,15 @@ app.controller("timerCtrl", function($scope){
 		var minutes = time.getMinutes().toString();
 		var seconds = time.getSeconds().toString();
 		var milliseconds = (time.getMilliseconds() / 10).toFixed().toString();
-
 		if (minutes.length < 2) {
 			minutes = '0' + minutes;
 		}
-
 		if (seconds.length < 2) {
 			seconds = '0' + seconds;
 		}
-
 		while (milliseconds.length < 2) {
 			milliseconds = '0' + milliseconds;
 		}
-
 		return minutes + ':' + seconds + '.' + milliseconds;
 	}
 
