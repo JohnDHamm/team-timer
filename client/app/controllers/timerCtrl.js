@@ -14,7 +14,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 
 	//get athletes from specified group - DbFactory
 		// returns array of objects
-	const group_id = 2;
+	const group_id = 1;
 
 	$scope.athleteArray = []
 
