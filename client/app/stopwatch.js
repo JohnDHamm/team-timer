@@ -2,11 +2,7 @@ function Stopwatch(elem) {
 	var time = 0;
 	var interval;
 	var offset;
-	var lapStart1;
-	var lapStart2;
-
-	// console.log("athleteArray", athleteArray);
-	// console.log("", athleteArray[0]);
+	var lapStart;
 
 	function update() {
 		if (this.isOn) {
@@ -16,7 +12,6 @@ function Stopwatch(elem) {
 
 		var formattedTime = timeFormatter(time);
 		elem.textContent = formattedTime;
-		// athleteArray[index].readout = elem.textContent;
 	}
 
 	function delta() {
