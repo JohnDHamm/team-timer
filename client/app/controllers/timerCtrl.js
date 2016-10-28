@@ -2,22 +2,13 @@
 
 app.controller("timerCtrl", function($scope, DbFactory){
 
+	//hard coding, this would come from workout setup/current user info
 	const date = Date.now()
 	const description = "testing timer db interaction";
 	const coach_id = 3;
 	const laps = 3;
 	const lap_distance = 100;
 	const lap_metric = 'meter';
-	const workoutObjTemplate = {
-		date,
-		description,
-		coach_id,
-		laps,
-		lap_distance,
-		lap_metric
-	}
-	console.log("workoutObjTemplate", workoutObjTemplate);
-
 
 
 	//get athletes from specified group - DbFactory
@@ -33,10 +24,6 @@ app.controller("timerCtrl", function($scope, DbFactory){
 			createAthleteArray(data)
 			// console.log("athleteArray", $scope.athleteArray);
 		})
-
-
-
-
 
 
 	const createAthleteArray = (athletesFromDb) => {
@@ -58,25 +45,46 @@ app.controller("timerCtrl", function($scope, DbFactory){
 	}
 
 	const createWorkouts = (athleteArray) => {
-		console.log("array after stop", athleteArray);
 		//arg = array of athlete objects after timing
 		//loop over array
 		var newWorkoutsArray = [];
 
 		for (let i = 0; i < athleteArray.length; i++) {
 			//create new workout obj to save to db
-			var newWorkoutObj = workoutObjTemplate;
-			console.log("athleteArray[i].id", athleteArray[i].id);
+			var newWorkoutObj = {};
 			newWorkoutObj.athlete_id = athleteArray[i].id;
-			newWorkoutObj.data = athleteArray[i].lapTimesArray;
-			console.log("newWorkoutObj", newWorkoutObj);
+			//convert elapsed times to true lap times
+			const trueLapTimeArray = convertLapTimes(athleteArray[i].lapTimesArray);
+			newWorkoutObj.data = trueLapTimeArray;
 			newWorkoutsArray.push(newWorkoutObj)
-			//save to db
-
 		}
-		console.log("newWorkoutsArray", newWorkoutsArray);
+		//add common workout data
+		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
+		console.log("finalWorkouts", finalWorkouts);
+		//save to db
+
 	}
 
+	const convertLapTimes = (array) => {
+		//convert to individual lap times form elapsed time data
+		const trueArray = []
+		for (let i = 0; i < array.length - 1; i++) {
+			trueArray.push(array[i + 1] - array[i]);
+		}
+		return trueArray;
+	}
+
+	const addCommonWorkoutData = (newWorkoutsArray) => {
+		for (var i = 0; i < newWorkoutsArray.length; i++) {
+			newWorkoutsArray[i].date = date
+			newWorkoutsArray[i].coach_id = coach_id
+			newWorkoutsArray[i].description = description
+			newWorkoutsArray[i].laps = laps
+			newWorkoutsArray[i].lap_distance = lap_distance
+			newWorkoutsArray[i].lap_metric = lap_metric
+		}
+		return newWorkoutsArray;
+	}
 
 	//------STOPWATCH----------
 
