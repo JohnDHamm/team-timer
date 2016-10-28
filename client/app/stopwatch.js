@@ -69,10 +69,11 @@ function Stopwatch(elem) {
 	this.lap = function() {
 		const now = Date.now()
 		// console.log("lap now", now);
-		const thisLapTime = now - lapStart;
+		const elapsedTime = now - lapStart;
 		// console.log("thisLapTime", thisLapTime);
-		const formattedLapTime = timeFormatter(thisLapTime);
-		lapStart = now;
-		return formattedLapTime;
+		const formattedLapTime = timeFormatter(elapsedTime);
+		// lapStart = now;
+		time = 0;
+		return elapsedTime;
 	}
 }
