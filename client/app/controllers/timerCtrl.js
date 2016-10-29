@@ -3,7 +3,7 @@
 app.controller("timerCtrl", function($scope, DbFactory){
 
 	//hard coding, this would come from workout setup/current user info
-	const date = Date.now()
+	const date = Date.now().toFixed();
 	const description = "testing timer db interaction";
 	const discipline = "run";
 	const coach_id = 3;
@@ -153,7 +153,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		var time = new Date(timeInMilliseconds);
 		var minutes = time.getMinutes().toString();
 		var seconds = time.getSeconds().toString();
-		var milliseconds = (time.getMilliseconds() / 10).toFixed().toString();
+		var milliseconds = Math.round((time.getMilliseconds() / 10)).toString().slice(0,2);
 		if (minutes.length < 2) {
 			minutes = '0' + minutes;
 		}
