@@ -55,6 +55,9 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		console.log("currentTotalLap", currentTotalLap);
 		//update readout
 		totalLapsReadout.textContent = currentTotalLap;
+		if (currentTotalLap === laps) {
+			stop();
+		}
 	}
 
 	const createWorkouts = (athleteArray) => {
@@ -120,7 +123,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		lapStart = offset;
 	}
 
-	$scope.stop = function() {
+	const stop = function() {
 		clearInterval(interval);
 		interval = null;
 		createWorkouts($scope.athleteArray);
