@@ -1,6 +1,6 @@
 "use strict";
 
-const app = angular.module("TeamTimerApp", ["ngRoute"])
+const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial"])
 	.config($routeProvider => {
 
 	$routeProvider.
