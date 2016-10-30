@@ -32,6 +32,7 @@ app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, DbFactory, $
 			lap_metric: $scope.lap_metric,
 			coach_id: currentCoach.id
 		};
+		console.log("setupObj", setupObj);
 
 		WorkoutFactory.setCurrentWorkoutParams(setupObj);
 		//go to timer page
