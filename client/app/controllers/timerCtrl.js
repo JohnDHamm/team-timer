@@ -3,28 +3,20 @@
 app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 
 	//hard coding, this would come from workout setup/current user info
-	// const date = Date.now().toFixed();
-	// const description = "testing cancelling timer";
-	// const discipline = "run";
-	// const coach_id = 3;
-	// const laps = 4;
-	// const lap_distance = 100;
-	// const lap_metric = 'meter';
-	WorkoutFactory.setCurrentWorkoutParams(); //temp hard coding
+	WorkoutFactory.setCurrentWorkoutParams(); //temp for hard coding
+
+	//setup vars
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
-	console.log("workoutParams", workoutParams);
 
 	const totalLapsReadout = document.getElementById('totalLaps');
 
 	//get athletes from specified group - DbFactory
 		// returns array of objects
-	const group_id = workoutParams.group_id;
-
 	$scope.athleteArray = []
 	$scope.timerOn = false;
 
 	DbFactory
-		.getAthletesByGroup(group_id)
+		.getAthletesByGroup(workoutParams.group_id)
 		.then((data) => {
 			createAthleteArray(data)
 		})
