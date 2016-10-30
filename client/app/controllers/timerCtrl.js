@@ -1,29 +1,24 @@
 "use strict";
 
-app.controller("timerCtrl", function($scope, DbFactory){
+app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 
 	//hard coding, this would come from workout setup/current user info
-	const date = Date.now()
-	const description = "testing timer db interaction";
-	const discipline = "run";
-	const coach_id = 3;
-	const laps = 3;
-	const lap_distance = 100;
-	const lap_metric = 'meter';
+	WorkoutFactory.setCurrentWorkoutParams(); //temp for hard coding
 
+	//setup vars
+	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
+
+	const totalLapsReadout = document.getElementById('totalLaps');
 
 	//get athletes from specified group - DbFactory
 		// returns array of objects
-	const group_id = 1;
-
 	$scope.athleteArray = []
+	$scope.timerOn = false;
 
 	DbFactory
-		.getAthletesByGroup(group_id)
+		.getAthletesByGroup(workoutParams.group_id)
 		.then((data) => {
-			// console.log(`group ${group_id}: `, data);
 			createAthleteArray(data)
-			// console.log("athleteArray", $scope.athleteArray);
 		})
 
 
@@ -39,9 +34,21 @@ app.controller("timerCtrl", function($scope, DbFactory){
 			newObj.lap =  0;
 			newObj.elapsed = 0;
 			newObj.lastLapTime = '00:00.00';
-			// console.log("newObj", newObj);
 			//push new obj to $scope.athleteArray
 			$scope.athleteArray.push(newObj)
+		}
+	}
+
+	const checkTotalLaps = () => {
+		const currentLaps = [];
+		//create array of laps from athleteArray objects
+		for (let i = 0; i < $scope.athleteArray.length; i++) {
+			currentLaps.push($scope.athleteArray[i].lap)
+		}
+		const lowestLap = currentLaps.sort(( a, b ) => a - b )[0]
+		totalLapsReadout.textContent = lowestLap;
+		if (lowestLap === workoutParams.laps) {
+			stop();
 		}
 	}
 
@@ -61,7 +68,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		}
 		//add common workout data
 		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
-		console.log("finalWorkouts", finalWorkouts);
+		// console.log("finalWorkouts", finalWorkouts);
 		//save to db
 		saveWorkouts(finalWorkouts);
 	}
@@ -77,83 +84,99 @@ app.controller("timerCtrl", function($scope, DbFactory){
 
 	const addCommonWorkoutData = (newWorkoutsArray) => {
 		for (var i = 0; i < newWorkoutsArray.length; i++) {
-			newWorkoutsArray[i].date = date
-			newWorkoutsArray[i].coach_id = coach_id
-			newWorkoutsArray[i].description = description
-			newWorkoutsArray[i].discipline = discipline
-			newWorkoutsArray[i].laps = laps
-			newWorkoutsArray[i].lap_distance = lap_distance
-			newWorkoutsArray[i].lap_metric = lap_metric
+			newWorkoutsArray[i].date = workoutParams.date;
+			newWorkoutsArray[i].coach_id = workoutParams.coach_id;
+			newWorkoutsArray[i].description = workoutParams.description;
+			newWorkoutsArray[i].discipline = workoutParams.discipline;
+			newWorkoutsArray[i].laps = workoutParams.laps;
+			newWorkoutsArray[i].lap_distance = workoutParams.lap_distance;
+			newWorkoutsArray[i].lap_metric = workoutParams.lap_metric;
 		}
 		return newWorkoutsArray;
 	}
 
 	const saveWorkouts = (workoutsArray) => {
 		workoutsArray.forEach(workout => {
-			console.log("workout to save", JSON.stringify(workout));
-			DbFactory.saveWorkout(JSON.stringify(workout))
+			DbFactory.saveWorkout(JSON.stringify(workout));
 		})
+	}
+
+	const clearAll = () => {
+		for (let i = 0; i < $scope.athleteArray.length; i++) {
+			$scope.athleteArray[i].lapTimesArray = [0];
+			$scope.athleteArray[i].readout =  '00:00.00';
+			$scope.athleteArray[i].lap =  0;
+			$scope.athleteArray[i].elapsed = 0;
+			$scope.athleteArray[i].lastLapTime = '00:00.00';
+		}
+		totalLapsReadout.textContent = 0;
+		mainReadout.textContent = '00:00.00';
 	}
 
 	//------STOPWATCH----------
 
-	const readout = document.getElementById('readout');
-	var time = 0;
-	var interval;
-	var offset;
-	var lapStart;
+	const mainReadout = document.getElementById('mainReadout');
+	let time = 0;
+	let interval;
+	let offset;
+	let lapStart;
 
 	$scope.start = function() {
+		$scope.timerOn = true;
 		interval = setInterval(update, 10);
 		offset = Date.now();
 		lapStart = offset;
 	}
 
-	$scope.stop = function() {
+	const stop = function() {
 		clearInterval(interval);
 		interval = null;
 		createWorkouts($scope.athleteArray);
 	}
 
+	$scope.cancel = function() {
+		clearInterval(interval);
+		interval = null;
+		$scope.timerOn = false;
+		clearAll();
+	}
+
 	$scope.recordLap = function(index) {
 		const thisAthlete = $scope.athleteArray[index];
-		thisAthlete.lap += 1;
-		var nowLap = Date.now();
-		var elapsedTime = nowLap - lapStart;
+		thisAthlete.lap ++;
+		const nowLap = Date.now();
+		const elapsedTime = nowLap - lapStart;
 		thisAthlete.elapsed = elapsedTime;
 		thisAthlete.lapTimesArray.push(elapsedTime);
-		// console.log("athlete:", thisAthlete.athlete_id);
-		// console.log("laps:", thisAthlete.lapTimesArray);
 		thisAthlete.lastLapTime = timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
-		// console.log("lastLapTime", thisAthlete.lastLapTime);
+		checkTotalLaps();
 	}
 
 	function update() {
-		var timePassed = delta();
+		const timePassed = delta();
 		time += timePassed;
-
-		var formattedTime = timeFormatter(time);
-		readout.textContent = formattedTime;
+		const formattedTime = timeFormatter(time);
+		mainReadout.textContent = formattedTime;
 		$scope.$apply(function() {
 			for (let i = 0; i < $scope.athleteArray.length; i++) {
-				var newTime = time - $scope.athleteArray[i].elapsed;
+				const newTime = time - $scope.athleteArray[i].elapsed;
 				$scope.athleteArray[i].readout = timeFormatter(newTime);
 			}
 		});
 	}
 
 	function delta() {
-		var now = Date.now();
-		var timePassed = now - offset;
+		const now = Date.now();
+		const timePassed = now - offset;
 		offset = now;
 		return timePassed;
 	}
 
 	function timeFormatter(timeInMilliseconds) {
-		var time = new Date(timeInMilliseconds);
-		var minutes = time.getMinutes().toString();
-		var seconds = time.getSeconds().toString();
-		var milliseconds = (time.getMilliseconds() / 10).toFixed().toString();
+		let time = new Date(timeInMilliseconds);
+		let minutes = time.getMinutes().toString();
+		let seconds = time.getSeconds().toString();
+		let milliseconds = Math.round((time.getMilliseconds() / 10)).toString().slice(0,2);
 		if (minutes.length < 2) {
 			minutes = '0' + minutes;
 		}
