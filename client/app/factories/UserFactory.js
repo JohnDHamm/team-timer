@@ -1,6 +1,19 @@
 "use strict";
 
-app.factory("UserFactory", function($q) {
+app.factory("UserFactory", function($q, DbFactory) {
+
+	const checkUser = (userObj) => {
+		console.log("userObj", userObj);
+		DbFactory.getAllCoaches()
+		.then((coaches) => {
+			const allCoaches = coaches;
+			console.log("allCoaches", allCoaches);
+		});
+
+	}
+
+
+
 
 	const currentCoachParams = {};
 
@@ -16,6 +29,6 @@ app.factory("UserFactory", function($q) {
 
 	const getCurrentCoach = () => currentCoachParams;
 
-	return { setCurrentCoach, getCurrentCoach};
+	return { checkUser, setCurrentCoach, getCurrentCoach};
 
 });

@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("navCtrl", function($scope, $location){
+app.controller("navCtrl", function($scope, $location, UserFactory){
 
 		// $scope.logout = function(){
 		// AuthFactory.logout();
@@ -8,5 +8,9 @@ app.controller("navCtrl", function($scope, $location){
 		// // $scope.$apply();
 
 	// };
+	// $scope.teamId = 3;
+	// $scope.coach = UserFactory.getCurrentCoach();
+	// console.log("coach", $scope.coach);
+
 
 });

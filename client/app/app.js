@@ -8,11 +8,11 @@ const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial"])
 			templateUrl: 'partials/login.html',
 			controller: 'loginCtrl'
 		})
-	 .when('/admin/:teamId', {
+	 .when('/admin', {
 			templateUrl: 'partials/admin.html',
 			controller: 'adminCtrl'
 		})
-		.when('/coach/:coachId', {
+		.when('/coach', {
 			templateUrl: 'partials/coach.html',
 			controller: 'coachCtrl'
 		})

@@ -2,6 +2,12 @@
 
 app.factory("DbFactory", function($q, $http) {
 
+	const getAllCoaches = () =>
+		$q((resolve, reject) =>
+			$http
+				.get(`/api/getAllCoaches`)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
 
 	const getGroupsByTeam = team_id =>
 		$q((resolve, reject) =>
@@ -9,6 +15,7 @@ app.factory("DbFactory", function($q, $http) {
 				.get(`/api/getGroups/${team_id}`)
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
+
 
 
 
@@ -26,6 +33,6 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
-	return { getGroupsByTeam, getAthletesByGroup, saveWorkout }
+	return { getAllCoaches, getGroupsByTeam, getAthletesByGroup, saveWorkout }
 
 });

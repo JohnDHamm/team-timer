@@ -33,7 +33,15 @@ app.post('/api/addTeam', (req, res) => {
 		})
 })
 
-app.get('/api/getCoaches/:team_id', (req, res) => {
+app.get('/api/getAllCoaches', (req, res) => {
+	knex('Coaches')
+		.select('*')
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.get('/api/getCoaches/Team/:team_id', (req, res) => {
 	const team_id = req.params.team_id
 	knex('Coaches')
 		.select('*')
