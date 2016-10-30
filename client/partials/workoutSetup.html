@@ -5,6 +5,105 @@
 	</div>
 
 
+	<div class="row">
+		<form class="col s12">
+			<div class="row">
+				<div class="col s6 m3">
+					<p>Group</p>
+					<p>
+						<input id="HPT" ng-model="group_id" type="radio" value="1" />
+						<label for="HPT">HPT</label>
+					</p>
+					<p>
+						<input id="Comp" ng-model="group_id" type="radio" value="2" />
+						<label for="Comp">Comp</label>
+					</p>
+					<p>
+						<input id="Dev" ng-model="group_id" type="radio" value="3" />
+						<label for="Dev">Dev</label>
+					</p>
+
+				</div>
+
+			<!-- </div> -->
+<!-- 			<div class="row">
+				<div class="input-field col s12">
+					<select ng-model="group_id">
+						<option value="" disabled selected>Choose group</option>
+						<option ng-model="group_id" ng-value="1">HPT</option>
+						<option ng-model="group_id" ng-value="2">Comp</option>
+						<option ng-model="group_id" ng-value="3">Dev</option>
+					</select>
+					<label>Group</label>
+				</div>
+			</div> -->
+			<!-- <div class="row"> -->
+				<div class="input-field col s6 m9">
+					<input id="description" type="text" class="validate" ng-model="description">
+					<label for="description">Description</label>
+				</div>
+			</div>
+			<div class="row">
+				<!-- <div class="input-field col s12 m6">
+					<select ng-model="discipline">
+						<option value="" disabled selected>Choose discipline</option>
+						<option value="run">run</option>
+						<option value="bike">bike</option>
+						<option value="swim">swim</option>
+					</select>
+					<label>Discipline</label>
+				</div> -->
+				<div class="col s6 m3">
+					<p>Discipline</p>
+					<p>
+						<input id="run" ng-model="discipline" type="radio" value="run" />
+						<label for="run">run</label>
+					</p>
+					<p>
+						<input id="bike" ng-model="discipline" type="radio" value="bike" />
+						<label for="bike">bike</label>
+					</p>
+					<p>
+						<input id="swim" ng-model="discipline" type="radio" value="swim" />
+						<label for="swim">swim</label>
+					</p>
+				</div>
+				<div class="input-field col s6 m3">
+					<input id="laps" type="number" class="validate" ng-model="laps">
+					<label for="laps">Number of laps</label>
+				</div>
+				<div class="input-field col s6 m3">
+					<input id="lapDistance" type="number" class="validate" ng-model="lap_distance">
+					<label for="lapDistance">Lap distance</label>
+				</div>
+			<!-- </div> -->
+			<!-- <div class="row"> -->
+				<div class="col s6 m3">
+					<p>Lap measure metric</p>
+					<p>
+						<input id="mile" ng-model="lap_metric" type="radio" value="mile" />
+						<label for="mile">mile</label>
+					</p>
+					<p>
+						<input id="meter" ng-model="lap_metric" type="radio" value="meter" />
+						<label for="meter">meter</label>
+					</p>
+					<p>
+						<input id="kilometer" ng-model="lap_metric" type="radio" value="kilometer" />
+						<label for="kilometer">kilometer</label>
+					</p>
+				</div>
+
+			</div>
+
+		</form>
+		<div class="row center-align">
+			<button class="btn" type="" ng-click="saveWorkoutParams()">Start Workout</button>
+
+		</div>
+
+	</div>
+
 
 
 

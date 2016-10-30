@@ -2,16 +2,11 @@
 
 app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 
-	//hard coding, this would come from workout setup/current user info
-	WorkoutFactory.setCurrentWorkoutParams(); //temp for hard coding
-
-	//setup vars
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
 
 	const totalLapsReadout = document.getElementById('totalLaps');
 
 	//get athletes from specified group - DbFactory
-		// returns array of objects
 	$scope.athleteArray = []
 	$scope.timerOn = false;
 
@@ -21,12 +16,8 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 			createAthleteArray(data)
 		})
 
-
 	const createAthleteArray = (athletesFromDb) => {
-		//arg = array of athlete objects from db
-		//loop over athletesFromDb
 		for (let i = 0; i < athletesFromDb.length; i++) {
-			//create new obj with data and new items for stopwatch
 			const newObj = athletesFromDb[i];
 			newObj.index = i;
 			newObj.lapTimesArray = [0];
@@ -34,14 +25,13 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 			newObj.lap =  0;
 			newObj.elapsed = 0;
 			newObj.lastLapTime = '00:00.00';
-			//push new obj to $scope.athleteArray
+
 			$scope.athleteArray.push(newObj)
 		}
 	}
 
 	const checkTotalLaps = () => {
 		const currentLaps = [];
-		//create array of laps from athleteArray objects
 		for (let i = 0; i < $scope.athleteArray.length; i++) {
 			currentLaps.push($scope.athleteArray[i].lap)
 		}
@@ -53,12 +43,9 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 	}
 
 	const createWorkouts = (athleteArray) => {
-		//arg = array of athlete objects after timing
-		//loop over array
 		var newWorkoutsArray = [];
 
 		for (let i = 0; i < athleteArray.length; i++) {
-			//create new workout obj to save to db
 			var newWorkoutObj = {};
 			newWorkoutObj.athlete_id = athleteArray[i].id;
 			//convert elapsed times to true lap times
@@ -68,13 +55,12 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 		}
 		//add common workout data
 		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
-		// console.log("finalWorkouts", finalWorkouts);
-		//save to db
+
 		saveWorkouts(finalWorkouts);
 	}
 
 	const convertLapTimes = (array) => {
-		//convert to individual lap times form elapsed time data
+		//convert to individual lap times from elapsed time data
 		const trueArray = []
 		for (let i = 0; i < array.length - 1; i++) {
 			trueArray.push(array[i + 1] - array[i]);
@@ -188,6 +174,5 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 		}
 		return minutes + ':' + seconds + '.' + milliseconds;
 	}
-
 
 });
