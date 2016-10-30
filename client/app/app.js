@@ -16,9 +16,9 @@ const app = angular.module("TeamTimerApp", ["ngRoute"])
 			templateUrl: 'partials/coach.html',
 			controller: 'coachCtrl'
 		})
-		.when('/workout/:coachId', {
-			templateUrl: 'partials/workout.html',
-			controller: 'workoutCtrl'
+		.when('/workoutSetup', {
+			templateUrl: 'partials/workoutSetup.html',
+			controller: 'workoutSetupCtrl'
 		})
 		.when('/workoutView/:workoutId', {
 			templateUrl: 'partials/workoutView.html',
@@ -28,7 +28,7 @@ const app = angular.module("TeamTimerApp", ["ngRoute"])
 			templateUrl: 'partials/analysis.html',
 			controller: 'analysisCtrl'
 		})
-		.when('/timerTest/:testNum', {
+		.when('/timer', {
 			templateUrl: 'partials/timer.html',
 			controller: 'timerCtrl'
 		})
