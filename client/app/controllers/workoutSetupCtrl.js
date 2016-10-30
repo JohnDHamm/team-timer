@@ -2,9 +2,9 @@
 
 app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, DbFactory, $location){
 
-	$(document).ready(function() {
-    $('select').material_select();
-  });
+	// $(document).ready(function() {
+ //    $('select').material_select();
+ //  });
 
 	//use coach id to get groups from team
 	// const currentCoach = UserFactory.getCurrentCoach()
