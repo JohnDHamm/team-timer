@@ -1,21 +1,24 @@
 "use strict";
 
-app.controller("timerCtrl", function($scope, DbFactory){
+app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 
 	//hard coding, this would come from workout setup/current user info
-	const date = Date.now().toFixed();
-	const description = "testing cancelling timer";
-	const discipline = "run";
-	const coach_id = 3;
-	const laps = 4;
-	const lap_distance = 100;
-	const lap_metric = 'meter';
+	// const date = Date.now().toFixed();
+	// const description = "testing cancelling timer";
+	// const discipline = "run";
+	// const coach_id = 3;
+	// const laps = 4;
+	// const lap_distance = 100;
+	// const lap_metric = 'meter';
+	WorkoutFactory.setCurrentWorkoutParams(); //temp hard coding
+	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
+	console.log("workoutParams", workoutParams);
 
 	const totalLapsReadout = document.getElementById('totalLaps');
 
 	//get athletes from specified group - DbFactory
 		// returns array of objects
-	const group_id = 2;
+	const group_id = workoutParams.group_id;
 
 	$scope.athleteArray = []
 	$scope.timerOn = false;
@@ -52,7 +55,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		}
 		const lowestLap = currentLaps.sort(( a, b ) => a - b )[0]
 		totalLapsReadout.textContent = lowestLap;
-		if (lowestLap === laps) {
+		if (lowestLap === workoutParams.laps) {
 			stop();
 		}
 	}
@@ -89,13 +92,13 @@ app.controller("timerCtrl", function($scope, DbFactory){
 
 	const addCommonWorkoutData = (newWorkoutsArray) => {
 		for (var i = 0; i < newWorkoutsArray.length; i++) {
-			newWorkoutsArray[i].date = date;
-			newWorkoutsArray[i].coach_id = coach_id;
-			newWorkoutsArray[i].description = description;
-			newWorkoutsArray[i].discipline = discipline;
-			newWorkoutsArray[i].laps = laps;
-			newWorkoutsArray[i].lap_distance = lap_distance;
-			newWorkoutsArray[i].lap_metric = lap_metric;
+			newWorkoutsArray[i].date = workoutParams.date;
+			newWorkoutsArray[i].coach_id = workoutParams.coach_id;
+			newWorkoutsArray[i].description = workoutParams.description;
+			newWorkoutsArray[i].discipline = workoutParams.discipline;
+			newWorkoutsArray[i].laps = workoutParams.laps;
+			newWorkoutsArray[i].lap_distance = workoutParams.lap_distance;
+			newWorkoutsArray[i].lap_metric = workoutParams.lap_metric;
 		}
 		return newWorkoutsArray;
 	}
@@ -149,12 +152,12 @@ app.controller("timerCtrl", function($scope, DbFactory){
 	$scope.recordLap = function(index) {
 		const thisAthlete = $scope.athleteArray[index];
 		thisAthlete.lap ++;
-		checkTotalLaps();
 		const nowLap = Date.now();
 		const elapsedTime = nowLap - lapStart;
 		thisAthlete.elapsed = elapsedTime;
 		thisAthlete.lapTimesArray.push(elapsedTime);
 		thisAthlete.lastLapTime = timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
+		checkTotalLaps();
 	}
 
 	function update() {
