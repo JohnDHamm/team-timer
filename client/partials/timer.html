@@ -11,8 +11,8 @@
 
 
 	<div class="row center-align">
-		<button id="startBtn" class="btn" ng-click="start()">start</button>
-<!-- 		<button id="stopBtn" class="btn" ng-click="stop()">stop</button> -->
+		<button id="startBtn" class="btn" ng-click="start()" ng-show="!timerOn">start</button>
+		<button id="stopBtn" class="btn" ng-click="cancel()"" ng-show="timerOn">cancel</button>
 	</div>
 
 

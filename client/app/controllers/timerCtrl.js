@@ -4,21 +4,21 @@ app.controller("timerCtrl", function($scope, DbFactory){
 
 	//hard coding, this would come from workout setup/current user info
 	const date = Date.now().toFixed();
-	const description = "testing timer db interaction";
+	const description = "testing cancelling timer";
 	const discipline = "run";
 	const coach_id = 3;
-	const laps = 3;
+	const laps = 4;
 	const lap_distance = 100;
 	const lap_metric = 'meter';
 
 	const totalLapsReadout = document.getElementById('totalLaps');
-	const totalLapCounter = 0;
 
 	//get athletes from specified group - DbFactory
 		// returns array of objects
-	const group_id = 1;
+	const group_id = 2;
 
 	$scope.athleteArray = []
+	$scope.timerOn = false;
 
 	DbFactory
 		.getAthletesByGroup(group_id)
@@ -50,12 +50,9 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		for (let i = 0; i < $scope.athleteArray.length; i++) {
 			currentLaps.push($scope.athleteArray[i].lap)
 		}
-		console.log("currentLaps", currentLaps);
-		const currentTotalLap = currentLaps.sort(( a, b ) => a - b )[0]
-		console.log("currentTotalLap", currentTotalLap);
-		//update readout
-		totalLapsReadout.textContent = currentTotalLap;
-		if (currentTotalLap === laps) {
+		const lowestLap = currentLaps.sort(( a, b ) => a - b )[0]
+		totalLapsReadout.textContent = lowestLap;
+		if (lowestLap === laps) {
 			stop();
 		}
 	}
@@ -109,6 +106,18 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		})
 	}
 
+	const clearAll = () => {
+		for (let i = 0; i < $scope.athleteArray.length; i++) {
+			$scope.athleteArray[i].lapTimesArray = [0];
+			$scope.athleteArray[i].readout =  '00:00.00';
+			$scope.athleteArray[i].lap =  0;
+			$scope.athleteArray[i].elapsed = 0;
+			$scope.athleteArray[i].lastLapTime = '00:00.00';
+		}
+		totalLapsReadout.textContent = 0;
+		mainReadout.textContent = '00:00.00';
+	}
+
 	//------STOPWATCH----------
 
 	const mainReadout = document.getElementById('mainReadout');
@@ -118,6 +127,7 @@ app.controller("timerCtrl", function($scope, DbFactory){
 	let lapStart;
 
 	$scope.start = function() {
+		$scope.timerOn = true;
 		interval = setInterval(update, 10);
 		offset = Date.now();
 		lapStart = offset;
@@ -127,6 +137,13 @@ app.controller("timerCtrl", function($scope, DbFactory){
 		clearInterval(interval);
 		interval = null;
 		createWorkouts($scope.athleteArray);
+	}
+
+	$scope.cancel = function() {
+		clearInterval(interval);
+		interval = null;
+		$scope.timerOn = false;
+		clearAll();
 	}
 
 	$scope.recordLap = function(index) {
