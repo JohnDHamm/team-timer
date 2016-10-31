@@ -2,6 +2,7 @@
 
 app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory){
 
+	console.log("params", $routeParams);
 	const date = $routeParams.date;
 	console.log("date", date);
 

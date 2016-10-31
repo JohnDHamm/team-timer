@@ -54,7 +54,7 @@ app.factory("DbFactory", function($q, $http) {
 	const getWorkoutsByDate = date =>
 		$q((resolve, reject) =>
 			$http
-				.get(`'/api/getWorkouts/Date//${date}'`)
+				.get(`/api/getWorkouts/Date/${date}`)
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 

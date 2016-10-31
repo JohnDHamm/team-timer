@@ -24,7 +24,7 @@ const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial"])
 			templateUrl: 'partials/workoutSelect.html',
 			controller: 'workoutSelectCtrl'
 		})
-		.when('/workoutView/:workoutId', {
+		.when('/workoutview/:date', {
 			templateUrl: 'partials/workoutView.html',
 			controller: 'workoutViewCtrl'
 		})

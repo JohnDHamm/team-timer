@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("timerCtrl", function($q, $scope, DbFactory, WorkoutFactory){
+app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory){
 
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
 
@@ -82,12 +82,11 @@ app.controller("timerCtrl", function($q, $scope, DbFactory, WorkoutFactory){
 	}
 
 	const saveWorkouts = (workoutsArray) => {
+		const promiseArray = [];
 			workoutsArray.forEach(workout => {
-				DbFactory.saveWorkout(JSON.stringify(workout))
-					.then((id) => {
-						console.log("id", id);
-					});
+				promiseArray.push(DbFactory.saveWorkout(JSON.stringify(workout)))
 			})
+		return Promise.all(promiseArray)
 	}
 
 	const clearAll = () => {
@@ -123,7 +122,14 @@ app.controller("timerCtrl", function($q, $scope, DbFactory, WorkoutFactory){
 		Promise.resolve()
 			.then(() => createWorkouts($scope.athleteArray))
 			.then((finalWorkouts) => saveWorkouts(finalWorkouts))
-			.then((something) => console.log("done!"))
+			.then((data) => {
+				console.log("data", data);
+				console.log("done!")
+				console.log("date", workoutParams.date);
+				$location.path(`/workoutview/${workoutParams.date}`);
+				$scope.$apply();
+			})
+			.catch(console.error)
 	}
 
 	$scope.cancel = function() {
