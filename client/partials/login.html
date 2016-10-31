@@ -16,7 +16,56 @@
 
 	<div layout="row" flex layout-align="center">
 
-		<md-button type="submit" class="md-raised" ng-click="login()">login</md-button>
+		<md-button class="md-raised" ng-click="login()">login</md-button>
 
 	</div>
 </form>
+
+<form >
+	<div layout="row" flex layout-align="center">
+		<md-input-container>
+			<label>email</label>
+			<input name="regEmail" type="email" ng-model="regEmail" class="validate">
+		</md-input-container>
+		<md-input-container>
+			<label>password</label>
+			<input name="regPassword" type="password" ng-model="regPassword" class="validate">
+			<!-- <p>{{errorMsg}}</p> -->
+			<p ng-show="user">User exists, please login</p>
+		</md-input-container>
+	</div>
+
+	<div layout="row" flex layout-align="center">
+		<md-input-container>
+			<label>First Name</label>
+			<input name="first_name" type="text" ng-model="first_name" class="validate">
+		</md-input-container>
+		<md-input-container>
+			<label>Last Name</label>
+			<input name="last_name" type="text" ng-model="last_name" class="validate">
+		</md-input-container>
+	</div>
+
+	<div layout="row" flex layout-align="center">
+		<md-input-container>
+		  <label>Select Team</label>
+		  <md-select id="teamSelect" ng-model="team_id">
+		    <md-option ng-value="team.id" ng-repeat="team in teams">{{ team.team_name }}</md-option>
+		    <!-- <md-option ng-value="newTeam">create new team</md-option> -->
+		  </md-select>
+		</md-input-container>
+	</div>
+
+	<!-- <div layout="row" flex layout-align="center">
+		<md-input-container>
+			<label>Team Name</label>
+			<input name="team_name" type="text" ng-model="team_name" class="validate">
+		</md-input-container>
+	</div> -->
+
+	<div layout="row" flex layout-align="center">
+		<md-button class="md-raised" ng-click="register()">register</md-button>
+	</div>
+
+</form>
+

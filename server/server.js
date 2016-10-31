@@ -41,6 +41,16 @@ app.get('/api/getAllCoaches', (req, res) => {
 		})
 })
 
+app.get('/api/getCoach/:coach_id', (req, res) => {
+	const coach_id = req.params.coach_id
+	knex('Coaches')
+		.select('*')
+		.where('id', coach_id)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
 app.get('/api/getCoaches/Team/:team_id', (req, res) => {
 	const team_id = req.params.team_id
 	knex('Coaches')

@@ -15,11 +15,7 @@ app.factory("WorkoutFactory", function($q) {
 		currentWorkoutParams.lap_metric = setupObj.lap_metric;
 	}
 
-
-
-
 	const getCurrentWorkoutParams = () => currentWorkoutParams;
-
 
 	return { setCurrentWorkoutParams, getCurrentWorkoutParams};
 
