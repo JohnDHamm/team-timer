@@ -130,7 +130,8 @@ app.put('/api/editAthlete/:athlete_id', (req, res) => {
 app.get('/api/getWorkouts/Date/:date', (req, res) => {
 	const date = req.params.date
 	knex('Workouts')
-		.select('*')
+		.join('Athletes', 'Workouts.athlete_id', 'Athletes.id')
+		.select('Workouts.*', 'Athletes.display_name')
 		.where('date', date)
 		.then((data) => {
 			res.json(data)
