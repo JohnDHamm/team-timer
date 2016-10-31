@@ -20,10 +20,12 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 			.then((coachesArray) => {
 				coachesArray.forEach((coach) => {
 					if (coach.email === userObj.email && coach.password === userObj.password) {
-						console.log("match");
+						console.log("match", coach);
 						regUser = true;
 						//setCurrentcoach
-						console.log("go to coach page");
+						UserFactory.setCurrentCoach(coach);
+						$location.path('/workoutsetup');
+						// console.log("go to coach page");
 					} else if (coach.email === userObj.email) {
 						$scope.errorMsg = "password is incorrect";
 						regUser = true;
