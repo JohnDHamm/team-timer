@@ -25,8 +25,11 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			const currentAthlete = 0;
 			$scope.displayName = athletesArray[currentAthlete].name;
 			// const testArray = [510002,520030,515400,505025,500234]
-			$scope.displayTimes = formatTimes(athletesArray[currentAthlete].lapTimes);
-			$scope.displayTimes = formatTimes(testArray);
+			const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
+
+
+			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
+			// $scope.displayTimes = formatTimes(testArray);
 			console.log("$scope.displayTimes", $scope.displayTimes);
 
 
@@ -41,9 +44,9 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 
 
 	function dateFormat (date) {
-		console.log("date", date);
+		// console.log("date", date);
 		const newDate = new Date(1477447627584)
-		console.log("newDate", newDate);
+		// console.log("newDate", newDate);
 		const formattedDate = newDate;
 
 		return formattedDate;
@@ -54,6 +57,19 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			return TimeFormatFactory.fromMs(each)
 		})
 		return formattedArray;
+	}
+
+	const makeDisplayArray = (laps, array) => {
+		const displayArray = [];
+		for (let i = 1; i < laps + 1; i ++) {
+			console.log("array", i, array[i - 1]);
+			const newObj = {};
+			newObj.lapNum = i;
+			newObj.lapTime = array[i - 1];
+			displayArray.push(newObj)
+		}
+		console.log("displayArray", displayArray);
+		return displayArray;
 	}
 
 });
