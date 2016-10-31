@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory){
+app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory, TimerFactory){
 
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
 
@@ -146,19 +146,19 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		const elapsedTime = nowLap - lapStart;
 		thisAthlete.elapsed = elapsedTime;
 		thisAthlete.lapTimesArray.push(elapsedTime);
-		thisAthlete.lastLapTime = timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
+		thisAthlete.lastLapTime = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
 		checkTotalLaps();
 	}
 
 	function update() {
 		const timePassed = delta();
 		time += timePassed;
-		const formattedTime = timeFormatter(time);
+		const formattedTime = TimerFactory.timeFormatter(time);
 		mainReadout.textContent = formattedTime;
 		$scope.$apply(function() {
 			for (let i = 0; i < $scope.athleteArray.length; i++) {
 				const newTime = time - $scope.athleteArray[i].elapsed;
-				$scope.athleteArray[i].readout = timeFormatter(newTime);
+				$scope.athleteArray[i].readout = TimerFactory.timeFormatter(newTime);
 			}
 		});
 	}
@@ -170,21 +170,5 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		return timePassed;
 	}
 
-	function timeFormatter(timeInMilliseconds) {
-		let time = new Date(timeInMilliseconds);
-		let minutes = time.getMinutes().toString();
-		let seconds = time.getSeconds().toString();
-		let milliseconds = Math.round((time.getMilliseconds() / 10)).toString().slice(0,2);
-		if (minutes.length < 2) {
-			minutes = '0' + minutes;
-		}
-		if (seconds.length < 2) {
-			seconds = '0' + seconds;
-		}
-		while (milliseconds.length < 2) {
-			milliseconds = '0' + milliseconds;
-		}
-		return minutes + ':' + seconds + '.' + milliseconds;
-	}
 
 });
