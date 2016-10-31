@@ -9,8 +9,8 @@ exports.seed = function(knex, Promise) {
 						id: 1,
 						first_name: 'Jennifer',
 						last_name: 'Gentry',
-						user_name: 'CoachJen',
-						password: 'password1',
+						email: 'jen@aero.com',
+						password: 'jenpass',
 						team_id: 1
 					}),
 				knex('Coaches')
@@ -18,8 +18,8 @@ exports.seed = function(knex, Promise) {
 						id: 2,
 				    first_name: 'Jeff',
 				    last_name: 'Reilly',
-				    user_name: 'CoachJeff',
-				    password: 'password2',
+				    email: 'jeff@aero.com',
+				    password: 'jeffpass',
 				    team_id: 1,
 					}),
 				knex('Coaches')
@@ -27,8 +27,8 @@ exports.seed = function(knex, Promise) {
 						id: 3,
 				    first_name: 'John',
 				    last_name: 'Hamm',
-				    user_name: 'CoachJohn',
-				    password: 'password3',
+				    email: 'john@aero.com',
+				    password: 'johnpass',
 				    team_id: 1,
 					}),
 				knex('Coaches')
@@ -36,7 +36,7 @@ exports.seed = function(knex, Promise) {
 						id: 4,
 						first_name: 'Bob',
 						last_name: 'Smith',
-						user_name: 'CoachBobby',
+						email: 'CoachBobby@team.com',
 						password: 'password4',
 						team_id: 2
 					}),
@@ -45,7 +45,7 @@ exports.seed = function(knex, Promise) {
 						id: 5,
 						first_name: 'Mike',
 						last_name: 'Towns',
-						user_name: 'CoachMike',
+						email: 'CoachMike@team.com',
 						password: 'password5',
 						team_id: 2
 					}),
@@ -54,7 +54,7 @@ exports.seed = function(knex, Promise) {
 						id: 6,
 						first_name: 'Susan',
 						last_name: 'Brown',
-						user_name: 'CoachSue',
+						email: 'CoachSue@team.com',
 						password: 'password6',
 						team_id: 3
 					})

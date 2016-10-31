@@ -1,18 +1,41 @@
 "use strict";
 
-app.controller("loginCtrl", function($scope, UserFactory){
+app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 
 
-
-
+	$scope.noUser = false;
+	$scope.errorMsg = null;
 
 
 	$scope.login = () => {
-		const user = {
+		let regUser = false;
+		$scope.noUser = false;
+		$scope.errorMsg = null;
+		const userObj = {
 			email: $scope.email,
 			password: $scope.password
 		}
-		UserFactory.checkUser(user);
+
+		DbFactory.getAllCoaches()
+			.then((coachesArray) => {
+				coachesArray.forEach((coach) => {
+					if (coach.email === userObj.email && coach.password === userObj.password) {
+						console.log("match");
+						regUser = true;
+						//setCurrentcoach
+						console.log("go to coach page");
+					} else if (coach.email === userObj.email) {
+						$scope.errorMsg = "password is incorrect";
+						regUser = true;
+					}
+				})
+			})
+			.then(() => {
+				if (!regUser) {
+					$scope.noUser = true;
+				}
+			})
+
 	}
 
 

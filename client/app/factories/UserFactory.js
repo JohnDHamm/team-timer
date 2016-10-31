@@ -2,17 +2,6 @@
 
 app.factory("UserFactory", function($q, DbFactory) {
 
-	const checkUser = (userObj) => {
-		console.log("userObj", userObj);
-		DbFactory.getAllCoaches()
-		.then((coaches) => {
-			const allCoaches = coaches;
-			console.log("allCoaches", allCoaches);
-		});
-
-	}
-
-
 
 
 	const currentCoachParams = {};
@@ -25,10 +14,10 @@ app.factory("UserFactory", function($q, DbFactory) {
 		currentCoachParams.team_id = 1;
 		currentCoachParams.first_name = "Jeff";
 
-	}
+	};
 
 	const getCurrentCoach = () => currentCoachParams;
 
-	return { checkUser, setCurrentCoach, getCurrentCoach};
+	return { setCurrentCoach, getCurrentCoach};
 
 });
