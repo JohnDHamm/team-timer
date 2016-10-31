@@ -24,7 +24,7 @@ app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, UserFactory,
 			laps: $scope.laps,
 			lap_distance: $scope.lap_distance,
 			lap_metric: $scope.lap_metric,
-			coach_id: currentCoach.id
+			coach_id: currentCoach.coach_id
 		};
 		console.log("setupObj", setupObj);
 
