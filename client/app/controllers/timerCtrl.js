@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
+app.controller("timerCtrl", function($q, $scope, DbFactory, WorkoutFactory){
 
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
 
@@ -56,7 +56,7 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 		//add common workout data
 		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
 
-		saveWorkouts(finalWorkouts);
+		return finalWorkouts;
 	}
 
 	const convertLapTimes = (array) => {
@@ -82,9 +82,12 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 	}
 
 	const saveWorkouts = (workoutsArray) => {
-		workoutsArray.forEach(workout => {
-			DbFactory.saveWorkout(JSON.stringify(workout));
-		})
+			workoutsArray.forEach(workout => {
+				DbFactory.saveWorkout(JSON.stringify(workout))
+					.then((id) => {
+						console.log("id", id);
+					});
+			})
 	}
 
 	const clearAll = () => {
@@ -117,7 +120,10 @@ app.controller("timerCtrl", function($scope, DbFactory, WorkoutFactory){
 	const stop = function() {
 		clearInterval(interval);
 		interval = null;
-		createWorkouts($scope.athleteArray);
+		Promise.resolve()
+			.then(() => createWorkouts($scope.athleteArray))
+			.then((finalWorkouts) => saveWorkouts(finalWorkouts))
+			.then((something) => console.log("done!"))
 	}
 
 	$scope.cancel = function() {

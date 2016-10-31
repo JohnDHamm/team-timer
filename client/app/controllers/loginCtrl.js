@@ -11,7 +11,6 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 	DbFactory.getTeams()
 		.then((teams) => {
 			$scope.teams = teams;
-			console.log("teams", $scope.teams);
 		})
 
 
@@ -29,7 +28,6 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 			.then((coachesArray) => {
 				coachesArray.forEach((coach) => {
 					if (coach.email === userObj.email && coach.password === userObj.password) {
-						console.log("match", coach);
 						regUser = true;
 						//setCurrentCoach
 						UserFactory.setCurrentCoach(coach);
@@ -58,13 +56,11 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 			last_name: $scope.last_name,
 			team_id: $scope.team_id
 		}
-		console.log("newUserObj", newUserObj);
 
 		DbFactory.getAllCoaches()
 			.then((coachesArray) => {
 				coachesArray.forEach((coach) => {
 					if (coach.email === newUserObj.email) {
-						console.log("already registered", coach);
 						userExists = true;
 						$scope.user = true;
 					}
@@ -75,7 +71,6 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 					DbFactory.addCoach(newUserObj)
 						.then((coachId) => DbFactory.getCoach(coachId))
 						.then((coach) => {
-							console.log("coach: ", coach[0]);
 							UserFactory.setCurrentCoach(coach[0]);
 							$location.path('/coach');
 						})

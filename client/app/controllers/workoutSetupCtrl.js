@@ -3,7 +3,6 @@
 app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, UserFactory, DbFactory, $location){
 
 	const currentCoach = UserFactory.getCurrentCoach();
-	console.log("currentCoach", currentCoach);
 	$scope.coach = currentCoach.first_name;
 
 	DbFactory.getGroupsByTeam(currentCoach.team_id)
@@ -21,7 +20,6 @@ app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, UserFactory,
 			lap_metric: $scope.lap_metric,
 			coach_id: currentCoach.coach_id
 		};
-		console.log("setupObj", setupObj);
 
 		WorkoutFactory.setCurrentWorkoutParams(setupObj);
 		//go to timer page
