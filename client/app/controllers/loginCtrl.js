@@ -33,7 +33,7 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 						regUser = true;
 						//setCurrentCoach
 						UserFactory.setCurrentCoach(coach);
-						$location.path('/workoutsetup');
+						$location.path('/coach');
 						// console.log("go to coach page");
 					} else if (coach.email === userObj.email) {
 						$scope.errorMsg = "password is incorrect";
@@ -77,7 +77,7 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 						.then((coach) => {
 							console.log("coach: ", coach[0]);
 							UserFactory.setCurrentCoach(coach[0]);
-							$location.path('/workoutsetup');
+							$location.path('/coach');
 						})
 				}
 			})
