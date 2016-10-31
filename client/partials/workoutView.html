@@ -19,9 +19,13 @@
 
 </div>
 
+<div layout="row" flex layout-align="center">
+	<h5>{{displayName}}</h5>
+</div>
 
-<div layout="row" flex>
-
+<div layout="row" flex layout-align="center" ng-repeat="time in displayTimes">
+	<h5>lap #</h5>
+	<h6>{{time}}</h6>
 
 </div>
 

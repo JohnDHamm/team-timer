@@ -39,7 +39,7 @@ app.factory("WorkoutFactory", function($q) {
 		const parsedArray = newArray.map((each) => {
 			return parseInt(each);
 		})
-		console.log("parsedArray", parsedArray);
+		// console.log("parsedArray", parsedArray);
 		return parsedArray;
 
 	}
