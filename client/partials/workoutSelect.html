@@ -3,5 +3,5 @@
 <div ng-repeat="workout in workouts">
 	<h4>{{workout.description}}</h4>
 	<h4>{{workout.discipline}}</h4>
-	<md-button ng-href="#/workoutview/{{workout.date}}">{{workout.date}}</md-button>
+	<md-button ng-href="#/workoutview/{{workout.date}}">{{workout.formattedDate}}</md-button>
 </div>

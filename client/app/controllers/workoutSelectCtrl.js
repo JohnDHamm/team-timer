@@ -1,16 +1,15 @@
 "use strict";
 
-app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory){
+app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, TimeFormatFactory){
 
 	const currentCoach = UserFactory.getCurrentCoach();
 	$scope.coach = currentCoach.first_name;
 
 	DbFactory.getWorkoutsByCoach(currentCoach.coach_id)
 		.then((workouts) => {
-			console.log("workouts", workouts);
-			$scope.workouts = workouts;
-			filterWorkouts(workouts);
+			$scope.workouts = filterWorkouts(workouts);
 		})
+
 
 
 	const filterWorkouts = (workouts) => {
@@ -18,22 +17,30 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory){
 		for (let i = 0; i < workouts.length; i++) {
 			allDates.push(workouts[i].date)
 		}
-		console.log("allDates", allDates);
 		const filteredDates = allDates.filter (function (value, index, array) {
 		    return array.indexOf (value) == index;
 		});
 
-
-
-		for (let i = 0; i < workouts.length; i++) {
-			for (let j = 0; j < filteredDates.length; j++) {
-
+		//loop thru filteredDates
+		const filteredWorkouts = [];
+		for (let i = 0; i < filteredDates.length; i++) {
+			//create new obj
+			const newObj = {};
+			//loop thru workouts
+			for (let j = 0; j < workouts.length; j++) {
+				//if date matches, record details to new obj
+				if (workouts[j].date === filteredDates[i]) {
+					newObj.description = workouts[j].description;
+					newObj.discipline = workouts[j].discipline;
+					newObj.date = workouts[j].date;
+					newObj.formattedDate = TimeFormatFactory.dateFormatter(workouts[j].date);
+				}
 			}
+			//push newObj to filteredWorkouts array
+			filteredWorkouts.push(newObj);
 		}
 
-
-		console.log("filteredDates", filteredDates);
-		return filteredDates;
+		return filteredWorkouts;
 	};
 
 
