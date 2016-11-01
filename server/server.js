@@ -25,6 +25,16 @@ app.get('/api/getTeams', (req, res) => {
 		})
 })
 
+app.get('/api/getTeamName/:team_id', (req, res) => {
+	const team_id = req.params.team_id
+	knex('Teams')
+		.select('Teams.team_name')
+		.where('id', team_id)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
 app.post('/api/addTeam', (req, res) => {
 	knex('Teams')
 		.insert(req.body)
@@ -92,7 +102,7 @@ app.get('/api/getAthletes/Team/:team_id', (req, res) => {
 	knex('Athletes')
 		.join('Groups', 'Athletes.group_id', 'Groups.id')
 		.join('Teams', 'Groups.team_id', 'Teams.id')
-		.select('Athletes.*')
+		.select('Athletes.*', 'Groups.group_name')
 		.where('Teams.id', team_id)
 		.then((data) => {
 			res.json(data)
