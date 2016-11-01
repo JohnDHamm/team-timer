@@ -112,6 +112,20 @@ app.factory("TimeFormatFactory", function($q) {
     ))
   }
 
-  return { fromMs, fromS, toMs, toS };
+  function dateFormatter (date) {
+    console.log("date", date);
+    const newDate = new Date(parseInt(date)).toString()
+    // console.log("newDate", newDate);
+    const formattedDate = newDate
+
+    return formattedDate;
+
+    // var date = new Date(1324339200000);
+    // var dateToStr = date.toUTCString().split(' ');
+    // var cleanDate = dateToStr[2] + ' ' + dateToStr[1] ;
+    // console.log(cleanDate);
+  }
+
+  return { fromMs, fromS, toMs, toS, dateFormatter };
 
 });
