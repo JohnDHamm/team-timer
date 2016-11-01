@@ -141,7 +141,9 @@ app.get('/api/getWorkouts/Date/:date', (req, res) => {
 app.get('/api/getWorkouts/Coach/:coach_id', (req, res) => {
 	const coach_id = req.params.coach_id
 	knex('Workouts')
-		.select('*')
+		.join('Athletes', 'Workouts.athlete_id', 'Athletes.id')
+		.join('Groups', 'Athletes.group_id', 'Groups.id')
+		.select('Workouts.description', 'Workouts.discipline', 'Workouts.date', 'Groups.group_name')
 		.where('coach_id', coach_id)
 		.then((data) => {
 			res.json(data)

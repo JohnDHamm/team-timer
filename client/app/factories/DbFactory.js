@@ -58,7 +58,14 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const getWorkoutsByCoach = coach_id =>
+		$q((resolve, reject) =>
+			$http
+				.get(`/api/getWorkouts/Coach/${coach_id}`)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getGroupsByTeam, getAthletesByGroup, saveWorkout, getWorkoutsByDate }
+
+	return { getAllCoaches, getCoach, addCoach, getTeams, getGroupsByTeam, getAthletesByGroup, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });
