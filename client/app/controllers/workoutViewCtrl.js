@@ -3,10 +3,8 @@
 
 app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory){
 
-	// console.log("params", $routeParams);
 	const date = $routeParams.date;
 	$scope.displayDate = dateFormat(date);
-	// console.log("date", $scope.displayDate);
 	let currentAthlete = 0;
 	$scope.firstAthlete = true;
 	$scope.lastAthlete = false;
@@ -17,7 +15,6 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		.then((workouts) => {
 			const workoutsArray = workouts;
 			totalAthletes = workoutsArray.length;
-			console.log("totalAthletes", totalAthletes);
 			$scope.totalLaps = workoutsArray[0].laps;
 			$scope.lap_distance = workoutsArray[0].lap_distance;
 			$scope.lap_metric = workoutsArray[0].lap_metric;
@@ -25,15 +22,12 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.description = workoutsArray[0].description;
 
 			athletesArray = WorkoutFactory.createAthletesArray(workouts);
-			// console.log("athletesArray", athletesArray);
 
 			$scope.displayName = athletesArray[currentAthlete].name;
 			$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
-			// console.log("calcTimes", $scope.calcTimes);
 
 			const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
 			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
-			// console.log("$scope.displayTimes", $scope.displayTimes);
 
 		})
 
@@ -57,13 +51,11 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	const makeDisplayArray = (laps, array) => {
 		const displayArray = [];
 		for (let i = 1; i < laps + 1; i ++) {
-			// console.log("array", i, array[i - 1]);
 			const newObj = {};
 			newObj.lapNum = i;
 			newObj.lapTime = array[i - 1];
 			displayArray.push(newObj)
 		}
-		// console.log("displayArray", displayArray);
 		return displayArray;
 	}
 
@@ -72,7 +64,6 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		$scope.firstAthlete = false;
 		if (currentAthlete === totalAthletes - 1) {
 			$scope.lastAthlete = true;
-
 		}
 		updateDisplay(currentAthlete);
 	}
@@ -90,22 +81,17 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		$scope.displayName = athletesArray[currentAthlete].name;
 		const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
 		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray);
-		// console.log("$scope.displayTimes", $scope.displayTimes);
 		$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
 	}
 
 	const calcTimes = (laps, array) => {
 		const totalTime = array.reduce((a, b) => a + b)
 		const avgTime = totalTime / laps;
-		console.log("totalTime", totalTime);
-		console.log("avgTime", avgTime);
 		const formatArray = formatTimes([totalTime, avgTime])
-		console.log("formatArray", formatArray);
 		const calcObj = {};
 		calcObj.totalTime = formatArray[0];
 		calcObj.avgTime = formatArray[1];
 		return calcObj
-
 	}
 
 });

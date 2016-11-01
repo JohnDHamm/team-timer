@@ -25,7 +25,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newObj.lap =  0;
 			newObj.elapsed = 0;
 			newObj.lastLapTime = '00:00.00';
-
 			$scope.athleteArray.push(newObj)
 		}
 	}
@@ -123,9 +122,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			.then(() => createWorkouts($scope.athleteArray))
 			.then((finalWorkouts) => saveWorkouts(finalWorkouts))
 			.then((data) => {
-				console.log("data", data);
-				console.log("done!")
-				console.log("date", workoutParams.date);
 				$location.path(`/workoutview/${workoutParams.date}`);
 				$scope.$apply();
 			})
