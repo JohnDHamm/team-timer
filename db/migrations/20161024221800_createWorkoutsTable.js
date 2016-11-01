@@ -3,7 +3,7 @@ module.exports.up = (knex, Promise) => {
   	table.increments() //creates an incrementing id as primary key
   	table.string('description')
     table.string('discipline')
-  	table.string('date')
+  	table.integer('date')
   	table.integer('laps')
   	table.integer('lap_distance')
   	table.string('lap_metric')

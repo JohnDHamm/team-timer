@@ -33,7 +33,25 @@ app.post('/api/addTeam', (req, res) => {
 		})
 })
 
-app.get('/api/getCoaches/:team_id', (req, res) => {
+app.get('/api/getAllCoaches', (req, res) => {
+	knex('Coaches')
+		.select('*')
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.get('/api/getCoach/:coach_id', (req, res) => {
+	const coach_id = req.params.coach_id
+	knex('Coaches')
+		.select('*')
+		.where('id', coach_id)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.get('/api/getCoaches/Team/:team_id', (req, res) => {
 	const team_id = req.params.team_id
 	knex('Coaches')
 		.select('*')
@@ -112,7 +130,8 @@ app.put('/api/editAthlete/:athlete_id', (req, res) => {
 app.get('/api/getWorkouts/Date/:date', (req, res) => {
 	const date = req.params.date
 	knex('Workouts')
-		.select('*')
+		.join('Athletes', 'Workouts.athlete_id', 'Athletes.id')
+		.select('Workouts.*', 'Athletes.display_name')
 		.where('date', date)
 		.then((data) => {
 			res.json(data)

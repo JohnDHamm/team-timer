@@ -15,12 +15,37 @@ app.factory("WorkoutFactory", function($q) {
 		currentWorkoutParams.lap_metric = setupObj.lap_metric;
 	}
 
-
-
-
 	const getCurrentWorkoutParams = () => currentWorkoutParams;
 
 
-	return { setCurrentWorkoutParams, getCurrentWorkoutParams};
+	const createAthletesArray = (workouts) => {
+		const athletesArray = [];
+		workouts.forEach(workout => {
+			let buildObj = {};
+			const lapTimesArray = buildLapTimesArray(workout);
+			buildObj.lapTimes = lapTimesArray;
+			buildObj.name = workout.display_name;
+			// console.log("buildObj", buildObj);
+			athletesArray.push(buildObj);
+
+		})
+
+		return athletesArray;
+
+	}
+
+	const buildLapTimesArray = (workout) => {
+		const newArray = workout.data.split(",");
+		const parsedArray = newArray.map((each) => {
+			return parseInt(each);
+		})
+		// console.log("parsedArray", parsedArray);
+		return parsedArray;
+
+	}
+
+
+	return { setCurrentWorkoutParams, getCurrentWorkoutParams, createAthletesArray };
+
 
 });
