@@ -105,11 +105,21 @@ exports.seed = function(knex, Promise) {
 						group_id: 3,
 						avg_pace: '11:45'
 					}),
+				knex('Athletes')
+					.insert({
+						id: 11,
+						first_name: 'Roxanne',
+						last_name: 'Fields',
+						display_name: 'Roxy',
+						age: 12,
+						group_id: 1,
+						avg_pace: '8:41'
+					}),
 
 				// add SBR athletes
 				knex('Athletes')
 					.insert({
-						id: 11,
+						id: 12,
 						first_name: 'Bobby',
 						last_name: 'Smith',
 						display_name: 'Junior',
@@ -119,7 +129,7 @@ exports.seed = function(knex, Promise) {
 					}),
 				knex('Athletes')
 					.insert({
-						id: 12,
+						id: 13,
 						first_name: 'William',
 						last_name: 'Jones',
 						display_name: 'Jonesy',
@@ -129,7 +139,7 @@ exports.seed = function(knex, Promise) {
 					}),
 				knex('Athletes')
 					.insert({
-						id: 13,
+						id: 14,
 						first_name: 'Bobby',
 						last_name: 'Ford',
 						display_name: 'Bobby F.',
@@ -137,6 +147,8 @@ exports.seed = function(knex, Promise) {
 						group_id: 4,
 						avg_pace: '8:41'
 					})
+
+
 			]);
 		});
 };
