@@ -28,14 +28,12 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			// console.log("athletesArray", athletesArray);
 
 			$scope.displayName = athletesArray[currentAthlete].name;
-			// const testArray = [510002,520030,515400,505025,500234]
+			$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
+			// console.log("calcTimes", $scope.calcTimes);
+
 			const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-
-
 			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
-			// $scope.displayTimes = formatTimes(testArray);
-			console.log("$scope.displayTimes", $scope.displayTimes);
-			// showTimes(workouts);
+			// console.log("$scope.displayTimes", $scope.displayTimes);
 
 		})
 
@@ -59,13 +57,13 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	const makeDisplayArray = (laps, array) => {
 		const displayArray = [];
 		for (let i = 1; i < laps + 1; i ++) {
-			console.log("array", i, array[i - 1]);
+			// console.log("array", i, array[i - 1]);
 			const newObj = {};
 			newObj.lapNum = i;
 			newObj.lapTime = array[i - 1];
 			displayArray.push(newObj)
 		}
-		console.log("displayArray", displayArray);
+		// console.log("displayArray", displayArray);
 		return displayArray;
 	}
 
@@ -91,8 +89,23 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	const updateDisplay = (currentAthlete) => {
 		$scope.displayName = athletesArray[currentAthlete].name;
 		const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
+		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray);
 		// console.log("$scope.displayTimes", $scope.displayTimes);
+		$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
+	}
+
+	const calcTimes = (laps, array) => {
+		const totalTime = array.reduce((a, b) => a + b)
+		const avgTime = totalTime / laps;
+		console.log("totalTime", totalTime);
+		console.log("avgTime", avgTime);
+		const formatArray = formatTimes([totalTime, avgTime])
+		console.log("formatArray", formatArray);
+		const calcObj = {};
+		calcObj.totalTime = formatArray[0];
+		calcObj.avgTime = formatArray[1];
+		return calcObj
+
 	}
 
 });

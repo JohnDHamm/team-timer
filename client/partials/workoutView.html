@@ -26,7 +26,9 @@
 <div layout="row" flex layout-align="center" ng-repeat="time in displayTimes">
 	<h5>{{time.lapNum}}</h5>
 	<h6>{{time.lapTime}}</h6>
-
+</div>
+<div layout="row" flex layout-align="center">
+	<h5>{{calcTimes.totalTime}} total / {{calcTimes.avgTime}} avg</h5>
 </div>
 
 <div layout="row" flex layout-align="center">
