@@ -1,12 +1,9 @@
 <h5>Admin Page</h5>
 
-
 <div layout="row" flex layout-align="center">
-	<!-- <h4>Coach: </h4> -->
 	<h4>Coach: {{coachName}}</h4>
 </div>
 <div layout="row" flex layout-align="center">
-	<!-- <h5>Team: </h5> -->
 	<h5>Team: {{teamName}}</h5>
 </div>
 
@@ -14,16 +11,24 @@
 <div layout="row" flex layout-align="center">
 	<h5>Groups: </h5>
 </div>
-<!-- <div layout="row" flex layout-align="center"> -->
 <div layout="row" flex layout-align="center" ng-repeat="group in groups">
 	<div layout="col">
-		<!-- <h6>group.group_name</h6> -->
 		<h6>{{group.group_name}}</h6>
 	</div>
 	<div layout="col">
-		<!-- <h6>group.description</h6> -->
 		<h6>{{group.description}}</h6>
 	</div>
+</div>
+
+<div>
+	<md-input-container>
+			<label>Group Name</label>
+			<input name="first_name" type="text" ng-model="newGroup_name" class="validate">
+		</md-input-container>
+			<label>Group Description</label>
+			<input name="first_name" type="text" ng-model="newGroup_desc" class="validate">
+		</md-input-container>
+	<md-button ng-click="addGroup()">add group</md-button>
 </div>
 
 <div layout="row" flex layout-align="center">

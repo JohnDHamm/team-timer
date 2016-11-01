@@ -9,7 +9,7 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
-	const addCoach = (coachObj) =>
+	const addCoach = coachObj =>
 		$q((resolve, reject) =>
 			$http
 				.post(`/api/addCoach`, coachObj)
@@ -43,6 +43,15 @@ app.factory("DbFactory", function($q, $http) {
 				.get(`/api/getGroups/${team_id}`)
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
+
+	const addGroup = groupObj =>
+		$q((resolve, reject) =>
+			$http
+				.post(`/api/addGroup`, groupObj)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
+
 
 	const getAthletesByGroup = group_id =>
 		$q((resolve, reject) =>
@@ -80,6 +89,6 @@ app.factory("DbFactory", function($q, $http) {
 		)
 
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, getGroupsByTeam, getAthletesByGroup, getAthletesByTeam, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, getGroupsByTeam, addGroup, getAthletesByGroup, getAthletesByTeam, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });
