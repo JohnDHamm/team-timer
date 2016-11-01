@@ -19,6 +19,8 @@ app.factory("TimerFactory", function($q) {
 		return minutes + ':' + seconds + '.' + milliseconds;
 	}
 
+
+
 	return { timeFormatter }
 
 });

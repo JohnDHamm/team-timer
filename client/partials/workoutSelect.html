@@ -1,1 +1,7 @@
-<h1>Workout Select Page</h1>
+<h4>Coach {{coach}}'s workouts</h4>
+
+<div ng-repeat="workout in workouts">
+	<h4>{{workout.description}}</h4>
+	<h4>{{workout.discipline}}</h4>
+	<md-button ng-href="#/workoutview/{{workout.date}}">{{workout.formattedDate}}</md-button>
+</div>
