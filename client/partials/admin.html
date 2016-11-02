@@ -21,14 +21,22 @@
 </div>
 
 <div>
-	<md-input-container>
+	<div layout="row" flex layout-align="center">
+		<h5>Create new group</h5>
+	</div>
+	<div layout="row" flex layout-align="center">
+		<md-input-container>
 			<label>Group Name</label>
-			<input name="first_name" type="text" ng-model="newGroup_name" class="validate">
+			<input name="newGroup_name" type="text" ng-model="newGroup_name" class="validate">
 		</md-input-container>
+		<md-input-container>
 			<label>Group Description</label>
-			<input name="first_name" type="text" ng-model="newGroup_desc" class="validate">
+			<input name="newGroup_desc" type="text" ng-model="newGroup_desc" class="validate">
 		</md-input-container>
-	<md-button ng-click="addGroup()">add group</md-button>
+	</div>
+	<div layout="row" flex layout-align="center">
+		<md-button class="md-raised" ng-click="addGroup()">add group</md-button>
+	</div>
 </div>
 
 <div layout="row" flex layout-align="center">
@@ -55,13 +63,29 @@
 	</div>
 </div>
 
+<div>
+	<div layout="row" flex layout-align="center">
+		<h5>Add an athlete</h5>
+	</div>
+	<div layout="row" flex layout-align="center">
+		<md-input-container>
+			<label>First Name</label>
+			<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
+		</md-input-container>
+		<md-input-container>
+			<label>Last Name</label>
+			<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
+		</md-input-container>
+	</div>
+	<div layout="row" flex layout-align="center">
+		<md-button class="md-raised" ng-click="addAthlete()">add athlete</md-button>
+	</div>
+</div>
 
 
 
 
-
-
-
+<!--
 <form >
 	<div layout="row" flex layout-align="center">
 		<md-input-container>
@@ -81,4 +105,4 @@
 		<md-button class="md-raised" ng-click="login()">login</md-button>
 
 	</div>
-</form>
+</form> -->
