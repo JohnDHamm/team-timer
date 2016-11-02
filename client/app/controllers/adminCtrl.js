@@ -2,15 +2,17 @@
 
 app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory){
 
-	const team_id = 1;
+	// const team_id = 1;
+	$scope.groups === [];
 
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
 		.then((coach) => {
+			console.log("coach", coach);
 			const currentCoach = coach;
-			// const team_id = currentCoach.team_id;
-			$scope.team_id = team_id;
-			// $scope.team_id = currentCoach.team_id;
+			const team_id = currentCoach.team_id;
+			// $scope.team_id = team_id;
+			$scope.team_id = currentCoach.team_id;
 			$scope.coachName = currentCoach.first_name;
 
 			return Promise.all([DbFactory.getTeamName(team_id), DbFactory.getGroupsByTeam(team_id), DbFactory.getAthletesByTeam(team_id)]);
@@ -19,9 +21,9 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		.then(([team_name, groups, athletes]) => {
 			$scope.teamName = team_name[0].team_name;
 			$scope.groups = groups;
-			console.log("groups", groups);
+			console.log("groups from db", groups);
+			checkForGroup();
 			$scope.athletes = athletes;
-			console.log("athletes", athletes);
 		})
 		.then(() => {
 			$scope.$apply();
@@ -49,10 +51,13 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 				// $scope.$apply();
 				$scope.newGroup_desc = "";
 				$scope.newGroup_name = "";
+				checkForGroup();
 			})
 	}
 
 	$scope.addAthlete = () => {
+		checkForGroup();
+
 		const newAthlete = {
 			first_name: $scope.newAthlete_first_name,
 			last_name: $scope.newAthlete_last_name,
@@ -80,6 +85,15 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			$scope.newAthlete_avg_pace = "";
 			$scope.group_id = "";
 			})
+	}
+
+	const checkForGroup = () => {
+		console.log("$scope.groups[0]", $scope.groups[0]);
+		if ($scope.groups[0] === undefined) {
+			$scope.msg = "There must be at least one group to save athlete!"
+		} else {
+			$scope.msg = "";
+		}
 	}
 
 });

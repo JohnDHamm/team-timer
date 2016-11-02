@@ -37,6 +37,13 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const addTeam = teamObj =>
+		$q((resolve, reject) =>
+			$http
+				.post(`/api/addTeam`, teamObj)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
 	const getGroupsByTeam = team_id =>
 		$q((resolve, reject) =>
 			$http
@@ -94,6 +101,6 @@ app.factory("DbFactory", function($q, $http) {
 		)
 
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, getGroupsByTeam, addGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });
