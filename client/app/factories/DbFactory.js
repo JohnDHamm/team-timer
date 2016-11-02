@@ -9,7 +9,7 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
-	const addCoach = (coachObj) =>
+	const addCoach = coachObj =>
 		$q((resolve, reject) =>
 			$http
 				.post(`/api/addCoach`, coachObj)
@@ -30,6 +30,20 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const getTeamName = team_id =>
+		$q((resolve, reject) =>
+			$http
+				.get(`/api/getTeamName/${team_id}`)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
+	const addTeam = teamObj =>
+		$q((resolve, reject) =>
+			$http
+				.post(`/api/addTeam`, teamObj)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
 	const getGroupsByTeam = team_id =>
 		$q((resolve, reject) =>
 			$http
@@ -37,10 +51,31 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const addGroup = groupObj =>
+		$q((resolve, reject) =>
+			$http
+				.post(`/api/addGroup`, groupObj)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
 	const getAthletesByGroup = group_id =>
 		$q((resolve, reject) =>
 			$http
 				.get(`/api/getAthletes/Group/${group_id}`)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
+	const getAthletesByTeam = team_id =>
+		$q((resolve, reject) =>
+			$http
+				.get(`/api/getAthletes/Team/${team_id}`)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
+	const addAthlete = athleteObj =>
+		$q((resolve, reject) =>
+			$http
+				.post(`/api/addAthlete`, athleteObj)
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
@@ -66,6 +101,6 @@ app.factory("DbFactory", function($q, $http) {
 		)
 
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getGroupsByTeam, getAthletesByGroup, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });
