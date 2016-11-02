@@ -76,6 +76,25 @@
 			<label>Last Name</label>
 			<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
 		</md-input-container>
+		<md-input-container>
+			<label>Display Name</label>
+			<input name="newGroup_desc" type="text" ng-model="newAthlete_display_name" class="validate">
+		</md-input-container>
+		<md-input-container>
+			<label>Age</label>
+			<input name="newGroup_desc" type="number" ng-model="newAthlete_age" class="validate">
+		</md-input-container>
+		<md-input-container>
+			<label>Avg Pace</label>
+			<input name="newGroup_desc" type="text" ng-model="newAthlete_avg_pace" class="validate" placeholder="mm:ss (per mile)">
+		</md-input-container>
+		<md-input-container>
+		  <label>Select Group</label>
+		  <md-select id="groupSelect" ng-model="group_id">
+		    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
+		    <!-- <md-option ng-value="newTeam">create new team</md-option> -->
+		  </md-select>
+		</md-input-container>
 	</div>
 	<div layout="row" flex layout-align="center">
 		<md-button class="md-raised" ng-click="addAthlete()">add athlete</md-button>

@@ -53,26 +53,33 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	$scope.addAthlete = () => {
-		// const newGroup = {
-		// 	group_name: $scope.newGroup_name,
-		// 	description: $scope.newGroup_desc,
-		// 	team_id: $scope.team_id
-		// };
-		// console.log("newGroup", newGroup);
-		// DbFactory.addGroup(newGroup)
-		// 	.then(() => {
-		// 		reloadGroups();
-		// 	})
+		const newAthlete = {
+			first_name: $scope.newAthlete_first_name,
+			last_name: $scope.newAthlete_last_name,
+			display_name: $scope.newAthlete_display_name,
+			age: $scope.newAthlete_age,
+			avg_pace: $scope.newAthlete_avg_pace,
+			group_id: $scope.group_id
+		};
+		console.log("newAthlete", newAthlete);
+		DbFactory.addAthlete(newAthlete)
+			.then((data) => {
+				console.log("data", data);
+				reloadAthletes();
+			})
 	}
 
 	const reloadAthletes = () => {
-		// DbFactory.getGroupsByTeam($scope.team_id)
-		// 	.then((groups) => {
-		// 		$scope.groups = groups;
-		// 		// $scope.$apply();
-		// 		$scope.newGroup_desc = "";
-		// 		$scope.newGroup_name = "";
-		// 	})
+		DbFactory.getAthletesByTeam($scope.team_id)
+			.then((athletes) => {
+				$scope.athletes = athletes;
+			$scope.newAthlete_first_name = "";
+			$scope.newAthlete_last_name = "";
+			$scope.newAthlete_display_name = "";
+			$scope.newAthlete_age = "";
+			$scope.newAthlete_avg_pace = "";
+			$scope.group_id = "";
+			})
 	}
 
 });
