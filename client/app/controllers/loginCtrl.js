@@ -10,14 +10,11 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 	$scope.showSelectTeam = false;
 	$scope.showCreateTeam = false;
 	$scope.showRegisterForm = false;
-	// $scope.addTeam = false;
 
 	DbFactory.getTeams()
 		.then((teams) => {
 			$scope.teams = teams;
 		})
-
-
 
 	$scope.login = () => {
 		let regUser = false;
@@ -33,10 +30,8 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 				coachesArray.forEach((coach) => {
 					if (coach.email === userObj.email && coach.password === userObj.password) {
 						regUser = true;
-						//setCurrentCoach
 						UserFactory.setCurrentCoach(coach);
 						$location.path('/coach');
-						// console.log("go to coach page");
 					} else if (coach.email === userObj.email) {
 						$scope.errorMsg = "password is incorrect";
 						regUser = true;
@@ -103,7 +98,6 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 		DbFactory.getTeamName($scope.team_id)
 			.then((teamName) => {
 				$scope.team_name = teamName[0].team_name;
-				// console.log("selected team id", $scope.team_id);
 				$scope.showRegisterForm = true;
 				$scope.showSelectTeam = false;
 			})
@@ -115,7 +109,6 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 		DbFactory.addTeam(newTeamObj)
 			.then((newTeamId) => {
 				$scope.team_id = newTeamId[0];
-				console.log("new saved team: $scope.team_id", $scope.team_id);
 				DbFactory.getTeams()
 					.then((teams) => {
 						$scope.teams = teams;
