@@ -3,8 +3,12 @@
 const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial", "ngStorage"])
 	.config($routeProvider => {
 
-	$routeProvider.
-		when('/login', {
+	$routeProvider
+		.when('/home', {
+			templateUrl: 'partials/home.html',
+			controller: 'homeCtrl'
+		})
+		.when('/login', {
 			templateUrl: 'partials/login.html',
 			controller: 'loginCtrl'
 		})
@@ -36,7 +40,7 @@ const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial", "ngStorage"
 			templateUrl: 'partials/timer.html',
 			controller: 'timerCtrl'
 		})
-		.otherwise('/login', {
+		.otherwise('/home', {
 		})
 
 });
