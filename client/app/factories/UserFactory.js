@@ -1,17 +1,15 @@
 "use strict";
 
-app.factory("UserFactory", function($q, DbFactory) {
-
-	const currentCoachParams = {};
+app.factory("UserFactory", function($sessionStorage) {
 
 	const setCurrentCoach = (setupObj) => {
-		currentCoachParams.coach_id = setupObj.id;
-		currentCoachParams.team_id = setupObj.team_id;
-		currentCoachParams.first_name = setupObj.first_name;
+		$sessionStorage.coach_id = setupObj.id;
+		$sessionStorage.team_id = setupObj.team_id;
+		$sessionStorage.first_name = setupObj.first_name;
 	};
 
-	const getCurrentCoach = () => currentCoachParams;
+	const getCurrentCoach = () => $sessionStorage;
 
-	return { setCurrentCoach, getCurrentCoach};
+	return { setCurrentCoach, getCurrentCoach };
 
 });

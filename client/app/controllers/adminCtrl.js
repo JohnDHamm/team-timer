@@ -8,7 +8,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
 		.then((coach) => {
-			console.log("coach", coach);
 			const currentCoach = coach;
 			const team_id = currentCoach.team_id;
 			// $scope.team_id = team_id;
@@ -21,7 +20,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		.then(([team_name, groups, athletes]) => {
 			$scope.teamName = team_name[0].team_name;
 			$scope.groups = groups;
-			console.log("groups from db", groups);
 			checkForGroup();
 			$scope.athletes = athletes;
 		})
@@ -37,7 +35,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			description: $scope.newGroup_desc,
 			team_id: $scope.team_id
 		};
-		console.log("newGroup", newGroup);
 		DbFactory.addGroup(newGroup)
 			.then(() => {
 				reloadGroups();
@@ -48,7 +45,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		DbFactory.getGroupsByTeam($scope.team_id)
 			.then((groups) => {
 				$scope.groups = groups;
-				// $scope.$apply();
 				$scope.newGroup_desc = "";
 				$scope.newGroup_name = "";
 				checkForGroup();
@@ -69,7 +65,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		console.log("newAthlete", newAthlete);
 		DbFactory.addAthlete(newAthlete)
 			.then((data) => {
-				console.log("data", data);
 				reloadAthletes();
 			})
 	}
