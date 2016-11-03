@@ -21,10 +21,10 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			const newObj = athletesFromDb[i];
 			newObj.index = i;
 			newObj.lapTimesArray = [0];
-			newObj.readout =  '00:00.00';
+			newObj.readout =  '0:00.00';
 			newObj.lap =  0;
 			newObj.elapsed = 0;
-			newObj.lastLapTime = '00:00.00';
+			newObj.lastLapTime = '0:00.00';
 			$scope.athleteArray.push(newObj)
 		}
 	}
@@ -91,13 +91,13 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	const clearAll = () => {
 		for (let i = 0; i < $scope.athleteArray.length; i++) {
 			$scope.athleteArray[i].lapTimesArray = [0];
-			$scope.athleteArray[i].readout =  '00:00.00';
+			$scope.athleteArray[i].readout =  '0:00.00';
 			$scope.athleteArray[i].lap =  0;
 			$scope.athleteArray[i].elapsed = 0;
-			$scope.athleteArray[i].lastLapTime = '00:00.00';
+			$scope.athleteArray[i].lastLapTime = '0:00.00';
 		}
 		totalLapsReadout.textContent = 0;
-		mainReadout.textContent = '00:00.00';
+		mainReadout.textContent = '0:00.00';
 	}
 
 	//------STOPWATCH----------
