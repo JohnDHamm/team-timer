@@ -1,59 +1,102 @@
+#container {
+	padding: 20px 0;
+	/*background-color: grey;*/
+	background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(red, yellow); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(red, yellow); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(red, yellow); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(red, yellow); /* Standard syntax */
+}
+
 #topTimingBar {
 	background-color: #000;
 	border-radius: 5px;
+	margin-bottom: 20px;
 }
-
 
 #mainReadoutDiv {
 	background-color: #000;
 	color: #fff;
 	margin: 5px;
+	text-align: center;
 }
 
-/*h1*/
-#mainReadout {
+.topBarSmallDivs {
+	margin: 5px;
+	border-radius: 5px;
+	color: #fff;
+	text-align: center;
+}
+
+.topBarText {
 	margin: 0;
 	font-size: 3rem;
-	text-align: center;
+	/*font-family: arial;*/
+	/*font-style: regular;*/
+}
+
+.topIcons {
+	margin-top: 10px;
+	font-size: 2.5rem
 }
 
 #startBtn {
 	background-color: green;
+}
+
+.icon {
 	color: #fff;
-	border-radius: 5px;
-	text-align: center;
-}
-
-#startBtn h1 {
-	margin: 0;
-	font-size: 3rem;
-
-}
-
-#totalLapsDiv {
-	margin: 5px;
-	background-color: blue;
-	color: #fff;
-	border-radius: 5px;
-	text-align: center;
-}
-
-#totalLapsDiv h1 {
-	margin: 0;
-	font-size: 3rem;
-
 }
 
 #stopBtn {
-	margin: 0;
 	background-color: red;
-	color: #fff;
+}
+
+#totalLapsDiv {
+	background-color: blue;
+}
+
+.athleteBtn {
+	margin: 3px auto;
+	background-color: #fff;
+	/*border: 1px solid grey;*/
 	border-radius: 5px;
+}
+
+.currentLapNumDiv {
+	/*margin: 5px;*/
+	background-color: green;
+	border-radius: 5px;
+	color: #fff;
 	text-align: center;
 }
 
-#stopBtn h1 {
-	margin: 0;
-	font-size: 3rem;
+.currentLapNumDiv h1 {
+	margin: 9px 0;
+	font-size: 2.5rem;
+}
+
+
+.athleteNameDiv p {
+	margin: 17px 0 0 0;
+	padding-left: .5rem;
+	font-size: 1.5rem;
+}
+
+.currentLapTime {
+	margin: 7px 0 0 0;
+	text-align: right;
+	font-size: 1.6rem;
+	padding-right: .5rem;
 
 }
+
+.lastLapTime {
+	margin: 5px 0;
+	text-align: right;
+	font-size: .9rem;
+	padding-right: .5rem;
+
+
+}
+
