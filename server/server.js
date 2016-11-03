@@ -20,6 +20,7 @@ app.use(bodyParser.json())
 app.get('/api/getTeams', (req, res) => {
 	knex('Teams')
 		.select('*')
+		.orderBy('team_name')
 		.then((data) => {
 			res.json(data)
 		})
