@@ -1,0 +1,59 @@
+#topTimingBar {
+	background-color: #000;
+	border-radius: 5px;
+}
+
+
+#mainReadoutDiv {
+	background-color: #000;
+	color: #fff;
+	margin: 5px;
+}
+
+/*h1*/
+#mainReadout {
+	margin: 0;
+	font-size: 3rem;
+	text-align: center;
+}
+
+#startBtn {
+	background-color: green;
+	color: #fff;
+	border-radius: 5px;
+	text-align: center;
+}
+
+#startBtn h1 {
+	margin: 0;
+	font-size: 3rem;
+
+}
+
+#totalLapsDiv {
+	margin: 5px;
+	background-color: blue;
+	color: #fff;
+	border-radius: 5px;
+	text-align: center;
+}
+
+#totalLapsDiv h1 {
+	margin: 0;
+	font-size: 3rem;
+
+}
+
+#stopBtn {
+	margin: 0;
+	background-color: red;
+	color: #fff;
+	border-radius: 5px;
+	text-align: center;
+}
+
+#stopBtn h1 {
+	margin: 0;
+	font-size: 3rem;
+
+}

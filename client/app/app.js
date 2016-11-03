@@ -40,6 +40,10 @@ const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial", "ngStorage"
 			templateUrl: 'partials/timer.html',
 			controller: 'timerCtrl'
 		})
+		.when('/timerStyleTest', {
+			templateUrl: 'partials/timerStyleTest.html',
+			controller: 'timerStyleTestCtrl'
+		})
 		.otherwise('/home', {
 		})
 
