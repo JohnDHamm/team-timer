@@ -3,7 +3,8 @@
 
 app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory){
 
-	const date = $routeParams.date;
+	const date = parseInt($routeParams.date);
+	console.log("date workout view", date);
 	$scope.displayDate = TimeFormatFactory.dateFormatter(date);
 	let currentAthlete = 0;
 	$scope.firstAthlete = true;
@@ -30,21 +31,6 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
 
 		})
-
-
-// 	function dateFormat (date) {
-// 		console.log("date", date);
-// 		let newDate = new Date(parseInt(date)).toUTCString()
-// 		// console.log("newDate", newDate);
-// 		const formattedDate = newDate
-
-// 		return formattedDate;
-
-// // 		var date = new Date(1324339200000);
-// //     var dateToStr = date.toUTCString().split(' ');
-// //     var cleanDate = dateToStr[2] + ' ' + dateToStr[1] ;
-// // console.log(cleanDate);
-// 	}
 
 	const formatTimes = (timesArray) => {
 		const formattedArray = timesArray.map((each) => {
