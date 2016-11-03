@@ -113,7 +113,7 @@ app.factory("TimeFormatFactory", function($q) {
   }
 
   function dateFormatter (date) {
-    console.log("date", date);
+    // console.log("date", date);
     const newDate = new Date(parseInt(date)).toString()
     // console.log("newDate", newDate);
     const formattedDate = newDate

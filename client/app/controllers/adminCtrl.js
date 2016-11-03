@@ -62,7 +62,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			avg_pace: $scope.newAthlete_avg_pace,
 			group_id: $scope.group_id
 		};
-		console.log("newAthlete", newAthlete);
+		// console.log("newAthlete", newAthlete);
 		DbFactory.addAthlete(newAthlete)
 			.then((data) => {
 				reloadAthletes();
@@ -83,7 +83,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	const checkForGroup = () => {
-		console.log("$scope.groups[0]", $scope.groups[0]);
+		// console.log("$scope.groups[0]", $scope.groups[0]);
 		if ($scope.groups[0] === undefined) {
 			$scope.msg = "There must be at least one group to save athlete!"
 		} else {
