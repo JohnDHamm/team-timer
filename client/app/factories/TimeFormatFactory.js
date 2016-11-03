@@ -13,7 +13,7 @@ app.factory("TimeFormatFactory", function($q) {
   // Export functions
   // =============================================================================
 
-  function fromMs (ms, format = 'mm:ss') {
+  function fromMs (ms, format = 'mm:ss.sss') {
     if (typeof ms !== 'number' || Number.isNaN(ms)) {
       throw new Error('NaN error')
     }
@@ -96,19 +96,29 @@ app.factory("TimeFormatFactory", function($q) {
         throw new Error('Invalid time format')
     }
 
-    // let hh = zeroFill(2, time.hours)
-    // let mm = zeroFill(2, time.minutes)
-    // let ss = zeroFill(2, time.seconds)
-    // let sss = zeroFill(3, time.miliseconds)
     let hh = time.hours
     let mm = time.minutes
     let ss = time.seconds
     let sss = time.miliseconds
 
+    let ssString = ss.toString();
+    if (ssString.length < 2) {
+      ssString = '0' + ssString;
+    }
+
+    if (ss.length < 2) {
+      ss = '0' + ss;
+    }
+
+    let msString = Math.round(sss / 10).toString();
+    if (sss === 0) {
+      msString = "00"
+    }
+
     return (time.negative ? '-' : '') + (showHr ? (
-      showMs ? `${hh}:${mm}:${ss}.${sss}` : `${hh}:${mm}:${ss}`
+      showMs ? `${hh}:${mm}:${ss}.${msString}` : `${hh}:${mm}:${ss}`
     ) : (
-      showMs ? `${mm}:${ss}.${sss}` : `${mm}:${ss}`
+      showMs ? `${mm}:${ssString}.${msString}` : `${mm}:${ss}`
     ))
   }
 
