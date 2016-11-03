@@ -124,16 +124,37 @@ app.factory("TimeFormatFactory", function($q) {
 
   function dateFormatter (date) {
     // console.log("date", date);
-    const newDate = new Date(parseInt(date)).toString()
+    // const newDate = new Date(parseInt(date)).toString()
     // console.log("newDate", newDate);
-    const formattedDate = newDate
+    // const formattedDate = newDate
 
-    return formattedDate;
+    var dateT = new Date(date);
+    var dateToStr = dateT.toUTCString().split(' ');
+    console.log("dateToStr", dateToStr);
+    var cleanDate = dateToStr[2] + ' ' + dateToStr[1] ;
+    console.log(cleanDate);
 
-    // var date = new Date(1324339200000);
-    // var dateToStr = date.toUTCString().split(' ');
-    // var cleanDate = dateToStr[2] + ' ' + dateToStr[1] ;
-    // console.log(cleanDate);
+    // return cleanDate;
+    var now = new Date(date)
+    // Create an array with the current hour, minute and second
+    // var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+    var time = [ now.getHours(), now.getMinutes()];
+    console.log("time", time);
+    // Determine AM or PM suffix based on the hour
+    var suffix = ( time[0] < 12 ) ? "AM" : "PM";
+    // Convert hour from military time
+    time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+    // If hour is 0, set it to 12
+    time[0] = time[0] || 12;
+    // If seconds and minutes are less than 10, add a zero
+    for ( var i = 1; i < 3; i++ ) {
+      if ( time[i] < 10 ) {
+        time[i] = "0" + time[i];
+      }
+    }
+    // Return the formatted string
+    return cleanDate + " " + time.join(":") + " " + suffix;
+
   }
 
   return { fromMs, fromS, toMs, toS, dateFormatter };
