@@ -56,7 +56,7 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 			last_name: $scope.last_name,
 			team_id: $scope.team_id
 		}
-		console.log("newUserObj", newUserObj);
+		// console.log("newUserObj", newUserObj);
 
 		DbFactory.getAllCoaches()
 			.then((coachesArray) => {
@@ -94,7 +94,7 @@ app.controller("loginCtrl", function($scope, UserFactory, DbFactory, $location){
 
 	$scope.pickTeam = () => {
 		$scope.team_id = $scope.teamSelect;
-		console.log("team selected", $scope.team_id);
+		// console.log("team selected", $scope.team_id);
 		DbFactory.getTeamName($scope.team_id)
 			.then((teamName) => {
 				$scope.team_name = teamName[0].team_name;
