@@ -20,6 +20,7 @@ app.use(bodyParser.json())
 app.get('/api/getTeams', (req, res) => {
 	knex('Teams')
 		.select('*')
+		.orderBy('team_name')
 		.then((data) => {
 			res.json(data)
 		})
@@ -84,6 +85,7 @@ app.get('/api/getGroups/:team_id', (req, res) => {
 	knex('Groups')
 		.select('*')
 		.where('team_id', team_id)
+		.orderBy('group_name')
 		.then((data) => {
 			res.json(data)
 		})
@@ -104,6 +106,7 @@ app.get('/api/getAthletes/Team/:team_id', (req, res) => {
 		.join('Teams', 'Groups.team_id', 'Teams.id')
 		.select('Athletes.*', 'Groups.group_name')
 		.where('Teams.id', team_id)
+		.orderBy('Athletes.display_name')
 		.then((data) => {
 			res.json(data)
 		})

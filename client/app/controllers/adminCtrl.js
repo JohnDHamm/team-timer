@@ -2,7 +2,6 @@
 
 app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory){
 
-	// const team_id = 1;
 	$scope.groups === [];
 
 	Promise.resolve()
@@ -10,7 +9,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		.then((coach) => {
 			const currentCoach = coach;
 			const team_id = currentCoach.team_id;
-			// $scope.team_id = team_id;
 			$scope.team_id = currentCoach.team_id;
 			$scope.coachName = currentCoach.first_name;
 
