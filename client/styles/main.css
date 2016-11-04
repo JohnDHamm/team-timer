@@ -1,11 +1,6 @@
 #container {
 	padding: 20px 0;
-	/*background-color: grey;*/
-	background: rgb(255,238,56); /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(rgb(255,238,56), rgb(233,67,57)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(rgb(255,238,56), rgb(233,67,57)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(rgb(255,238,56), rgb(233,67,57)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgb(255,238,56), rgb(233,67,57)); /* Standard syntax */
+  background: linear-gradient(rgb(255,238,56), rgb(233,67,57));
 }
 
 #topTimingBar {
@@ -19,7 +14,6 @@
 	color: #fff;
 	margin: 5px;
 	text-align: center;
-	/*font-family: 'PT Sans', sans-serif;*/
 }
 
 .topBarSmallDivs {
@@ -32,8 +26,6 @@
 .topBarText {
 	margin: 0;
 	font-size: 2.5rem;
-	/*font-family: arial;*/
-	/*font-style: regular;*/
 }
 
 .topIcons {
@@ -60,12 +52,10 @@
 .athleteBtn {
 	margin: 3px auto;
 	background-color: #fff;
-	/*border: 1px solid grey;*/
 	border-radius: 5px;
 }
 
 .currentLapNumDiv {
-	/*margin: 5px;*/
 	background-color: rgb(55,179,74);
 	border-radius: 5px;
 	color: #fff;
@@ -89,7 +79,6 @@
 	text-align: right;
 	font-size: 1.6rem;
 	padding-right: .5rem;
-
 }
 
 .lastLapTime {
@@ -97,7 +86,5 @@
 	text-align: right;
 	font-size: .9rem;
 	padding-right: .5rem;
-
-
 }
 

@@ -4,7 +4,6 @@
 app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory){
 
 	const date = parseInt($routeParams.date);
-	console.log("date workout view", date);
 	$scope.displayDate = TimeFormatFactory.dateFormatter(date);
 	let currentAthlete = 0;
 	$scope.firstAthlete = true;

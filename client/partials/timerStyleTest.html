@@ -1,20 +1,15 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<!-- *************** top timing bar -->
 <div id="container">
 
+	<!-- *************** top timing bar -->
 	<div layout="row" flex="90" flex-offset="5" id="topTimingBar">
 
 		<div flex="20" id="startBtn" ng-click="start()" ng-show="!timerOn" class="topBarSmallDivs">
-				<!-- <h1 class="topBarText"> -->
-					<!-- <md-icon md-font-icon="play_circle_outline" class="icon"></md-icon> -->
-				<!-- </h1> -->
-				<i class="material-icons topIcons">timer</i>
-
+			<i class="material-icons topIcons">timer</i>
 		</div>
 			<div flex="20" id="stopBtn" ng-click="cancel()" ng-show="timerOn" class="topBarSmallDivs">
 				<i class="material-icons topIcons">cancel</i>
-					<!-- <h1 class="topBarText">X</h1> -->
 			</div>
 
 			<div flex id="mainReadoutDiv">
@@ -27,7 +22,7 @@
 		</div>
 
 
-
+		<!-- *************** athlete buttons -->
 		<div layout="row" flex="90" flex-offset="5" ng-repeat="athlete in athleteArray">
 			<div layout="row" flex class="athleteBtn" ng-click="recordLap(athlete.index)">
 
