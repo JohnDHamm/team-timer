@@ -1,9 +1,31 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<h4>Coach {{coach}}'s workouts</h4>
+<div class="gradientBG">
 
-<div ng-repeat="workout in workouts">
-	<h4>{{workout.description}}</h4>
-	<h4>{{workout.discipline}}</h4>
-	<md-button ng-href="#/workoutview/{{workout.date}}">{{workout.formattedDate}}</md-button>
+	<div layout="row" id="coachNameBar" layout-align="center">
+		<h3>Coach {{coach}}'s workouts</h3>
+	</div>
+
+	<div layout="row"  flex="90" flex-offset="5" class="workoutSection" ng-repeat="workout in workouts" ng-click="goToWorkout(workout.date)">
+		<div layout="column" flex>
+
+			<div layout="row" flex>
+				<div flex="45">
+					<p class="selectDate">{{workout.formattedDate}}</p>
+				</div>
+				<div flex="35">
+					<p class="selectGroup">{{workout.group_name}}</p>
+				</div>
+				<div flex="20">
+					<p class="selectDisc">{{workout.discipline}}</p>
+				</div>
+			</div>
+
+			<div layout="row" layout-align="center">
+				<p class="selectDesc">{{workout.description}}</p>
+			</div>
+
+		</div>
+	</div>
+
 </div>

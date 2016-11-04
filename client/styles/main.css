@@ -5,10 +5,6 @@
 	color: rgb(255,238,56);
 }
 
-
-
-
-
 /*TIMER ************************/
 
 .gradientBG {
@@ -162,4 +158,31 @@
 	margin: 10px 0;
 	font-size: 1.2rem;
 	text-align: center;
+}
+
+/*********** WORKOUT SELECT*/
+.workoutSection {
+	margin: 3px auto;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.selectDate {
+	margin: 5px 0;
+	padding-left: .7rem
+}
+
+.selectGroup {
+	margin: 5px 0;
+	text-align: center;
+}
+
+.selectDisc {
+	margin: 5px 0;
+	text-align: right;
+	padding-right: .7rem;
+}
+
+.selectDesc {
+	margin: 5px 0;
 }
