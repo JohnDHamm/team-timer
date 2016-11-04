@@ -1,38 +1,37 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<h5>Admin Page</h5>
-
 <div layout="row" flex layout-align="center">
-	<h4>Coach: {{coachName}}</h4>
-</div>
-<div layout="row" flex layout-align="center">
-	<h5>Team: {{teamName}}</h5>
+	<h3 class="titleMargin">Team: {{teamName}}</h3>
 </div>
 
-
-<div layout="row" flex layout-align="center">
-	<h5>Groups: </h5>
-	<h6>{{msg}}</h6>
+<div layout="column" flex layout-align="center">
+	<h3 class="titleMargin">Groups</h3>
 </div>
-<div layout="row" flex layout-align="center" ng-repeat="group in groups">
-	<div layout="col">
-		<h6>{{group.group_name}}</h6>
+
+<div class="adminMargin" layout="row" flex layout-align="center" ng-repeat="group in groups">
+	<div flex="35">
+		<p>{{group.group_name}}</p>
 	</div>
-	<div layout="col">
-		<h6>{{group.description}}</h6>
+	<div flex="65">
+		<p>{{group.description}}</p>
 	</div>
+</div>
+<div layout="row" flex flex layout-align="center">
+	<h6 class="errorMsg">{{msg}}</h6>
 </div>
 
 <div>
 	<div layout="row" flex layout-align="center">
-		<h5>Create new group</h5>
+		<h5 class="addNew">Create new group</h5>
 	</div>
 	<div layout="row" flex layout-align="center">
 		<md-input-container>
 			<label>Group Name</label>
 			<input name="newGroup_name" type="text" ng-model="newGroup_name" class="validate">
 		</md-input-container>
-		<md-input-container>
+	</div>
+	<div layout="row" flex="100" layout-align="center">
+		<md-input-container flex="100">
 			<label>Group Description</label>
 			<input name="newGroup_desc" type="text" ng-model="newGroup_desc" class="validate">
 		</md-input-container>
@@ -43,89 +42,71 @@
 </div>
 
 <div layout="row" flex layout-align="center">
-	<h5>Athletes: </h5>
+	<h3 class="titleMargin">Athletes: </h3>
 </div>
-<div layout="row" flex layout-align="center" ng-repeat="athlete in athletes">
-	<div layout="col">
-		<h6>{{athlete.display_name}}</h6>
-	</div>
-	<div layout="col">
-		<h6>{{athlete.first_name}}</h6>
-	</div>
-	<div layout="col">
-		<h6>{{athlete.last_name}}</h6>
-	</div>
-	<div layout="col">
-		<h6>{{athlete.age}}</h6>
-	</div>
-	<div layout="col">
-		<h6>{{athlete.avg_pace}}</h6>
-	</div>
-	<div layout="col">
-		<h6>{{athlete.group_name}}</h6>
+<div layout="row" flex="100" layout-align="center" ng-repeat="athlete in athletes">
+	<div>
+		<p class="athleteList">{{athlete.first_name}} {{athlete.last_name}}  -  {{athlete.group_name}}</p>
 	</div>
 </div>
 
 <div>
 	<div layout="row" flex layout-align="center">
-		<h5>Add an athlete</h5>
+		<h5 class="addNew">Add an athlete</h5>
 	</div>
-	<div layout="row" flex layout-align="center">
-		<md-input-container>
-			<label>First Name</label>
-			<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
-		</md-input-container>
-		<md-input-container>
-			<label>Last Name</label>
-			<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
-		</md-input-container>
-		<md-input-container>
-			<label>Display Name</label>
-			<input name="newGroup_desc" type="text" ng-model="newAthlete_display_name" class="validate">
-		</md-input-container>
-		<md-input-container>
-			<label>Age</label>
-			<input name="newGroup_desc" type="number" ng-model="newAthlete_age" class="validate">
-		</md-input-container>
-		<md-input-container>
-			<label>Avg Pace</label>
-			<input name="newGroup_desc" type="text" ng-model="newAthlete_avg_pace" class="validate" placeholder="mm:ss (per mile)">
-		</md-input-container>
-		<md-input-container>
-		  <label>Select Group</label>
-		  <md-select id="groupSelect" ng-model="group_id">
-		    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
-		    <!-- <md-option ng-value="newTeam">create new team</md-option> -->
-		  </md-select>
-		</md-input-container>
+	<div layout="row" flex="100">
+		<div flex>
+			<md-input-container>
+				<label>First Name</label>
+				<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
+			</md-input-container>
+		</div>
+		<div flex>
+			<md-input-container>
+				<label>Last Name</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
+			</md-input-container>
+		</div>
 	</div>
-	<div layout="row" flex layout-align="center">
+
+	<div layout="row" flex="100">
+		<div flex>
+			<md-input-container>
+				<label>Display Name</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_display_name" class="validate">
+			</md-input-container>
+		</div>
+		<div flex>
+			<md-input-container>
+				<label>Age</label>
+				<input name="newGroup_desc" type="number" ng-model="newAthlete_age" class="validate">
+			</md-input-container>
+		</div>
+	</div>
+
+	<div layout="row" flex="100">
+		<div flex>
+			<md-input-container>
+				<label>Avg Pace</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_avg_pace" class="validate" placeholder="mm:ss">
+			</md-input-container>
+		</div>
+		<div flex>
+			<md-input-container>
+			  <label>Select Group</label>
+			  <md-select id="groupSelect" ng-model="group_id">
+			    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
+			    <!-- <md-option ng-value="newTeam">create new team</md-option> -->
+			  </md-select>
+			</md-input-container>
+		</div>
+	</div>
+
+	<div layout="row" flex="100" layout-align="center">
 		<md-button class="md-raised" ng-click="addAthlete()">add athlete</md-button>
-		<h6>{{msg}}</h6>
+	</div>
+	<div layout="row" flex="100" layout-align="center">
+		<h6 class="errorMsg">{{msg}}</h6>
 	</div>
 </div>
 
-
-
-
-<!--
-<form >
-	<div layout="row" flex layout-align="center">
-		<md-input-container>
-			<label>email</label>
-			<input name="email" type="email" ng-model="email" class="validate">
-		</md-input-container>
-		<md-input-container>
-			<label>password</label>
-			<input name="password" type="password" ng-model="password" class="validate">
-			<p>{{errorMsg}}</p>
-			<p ng-show="noUser">No user exists, please register</p>
-		</md-input-container>
-	</div>
-
-	<div layout="row" flex layout-align="center">
-
-		<md-button class="md-raised" ng-click="login()">login</md-button>
-
-	</div>
-</form> -->

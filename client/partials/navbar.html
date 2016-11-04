@@ -1,12 +1,12 @@
- <nav ng-controller="navCtrl">
-	<div class="nav-wrapper deep-orange darken-4">
-		<!-- <a ng-href="#!" class="brand-logo">Team Timer</a> -->
+<div id="navBar" ng-controller="navCtrl">
 
-		<ul>
-			<li><a ng-href="#/coach">Coach {{coachName}}</a></li>
-			<li><a ng-click="logout()">Logout</a></li>
-
-		</ul>
-
+	<div layout="row" layout-align="center">
+		<div>
+			<md-button ng-href="#/coach">Coach {{coachName}}</md-button>
+		</div>
+		<div>
+			<md-button ng-click="logout()">Logout</md-button>
+		</div>
 	</div>
-</nav>
+
+</div>

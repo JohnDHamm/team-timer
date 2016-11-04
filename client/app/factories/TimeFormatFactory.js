@@ -114,9 +114,8 @@ app.factory("TimeFormatFactory", function($q) {
 	function dateFormatter (date) {
 		// format month + day
 		let dateNew = new Date(date);
-		let dateToStr = dateNew.toUTCString().split(' ');
-		console.log("dateToStr", dateToStr);
-		let cleanDate = dateToStr[2] + ' ' + dateToStr[1] ;
+		let dateToStr = dateNew.toString().split(' ');
+		let cleanDate = dateToStr[1] + ' ' + dateToStr[2] ;
 		// format time
 		let now = new Date(date)
 		let time = [ now.getHours(), now.getMinutes()];

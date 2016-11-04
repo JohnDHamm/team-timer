@@ -85,7 +85,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		if ($scope.groups[0] === undefined) {
 			$scope.msg = "There must be at least one group to save athlete!"
 		} else {
-			$scope.msg = "";
+			$scope.msg = null;
 		}
 	}
 

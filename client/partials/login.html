@@ -1,4 +1,6 @@
-<h5>Login Page</h5>
+<div layout="row" flex="100" layout-align="center">
+	<h2>Welcome to Team Timer!</h2>
+</div>
 
 <!-- ***********LOGIN SECTION -->
 <form >
@@ -33,13 +35,17 @@
 
 
 	<div layout="row" flex layout-align="center" ng-show="showSelectTeam">
-		<md-input-container>
-		  <label>Select Team</label>
-		  <md-select id="teamSelect" ng-model="teamSelect">
-		    <md-option ng-value="team.id" ng-repeat="team in teams">{{ team.team_name }}</md-option>
-		  </md-select>
+		<div layout="row" flex layout-align="center">
+			<md-input-container>
+			  <label>Select Team</label>
+			  <md-select id="teamSelect" ng-model="teamSelect">
+			    <md-option ng-value="team.id" ng-repeat="team in teams">{{ team.team_name }}</md-option>
+			  </md-select>
+			</md-input-container>
+		</div>
+		<div layout="row" flex layout-align="center">
 		  <md-button class="md-raised" ng-click="pickTeam()">Join</md-button>
-		</md-input-container>
+		</div>
 	</div>
 
 	<div layout="row" flex layout-align="center" ng-show="showCreateTeam">
@@ -57,12 +63,22 @@
 
 
 
-	<div layout="row" flex layout-align="center" ng-show="showRegisterForm">
+	<div ng-show="showRegisterForm">
 
 		<div layout="row" flex layout-align="center">
 			<h5>{{team_name}}</h5>
 		</div>
 
+		<div layout="row" flex layout-align="center">
+			<md-input-container>
+				<label>First Name</label>
+				<input name="first_name" type="text" ng-model="first_name" class="validate">
+			</md-input-container>
+			<md-input-container>
+				<label>Last Name</label>
+				<input name="last_name" type="text" ng-model="last_name" class="validate">
+			</md-input-container>
+		</div>
 		<div layout="row" flex layout-align="center">
 			<md-input-container>
 				<label>email</label>
@@ -76,16 +92,6 @@
 			</md-input-container>
 		</div>
 
-		<div layout="row" flex layout-align="center">
-			<md-input-container>
-				<label>First Name</label>
-				<input name="first_name" type="text" ng-model="first_name" class="validate">
-			</md-input-container>
-			<md-input-container>
-				<label>Last Name</label>
-				<input name="last_name" type="text" ng-model="last_name" class="validate">
-			</md-input-container>
-		</div>
 
 		<div layout="row" flex layout-align="center">
 			<md-button class="md-raised" ng-click="register()">register</md-button>

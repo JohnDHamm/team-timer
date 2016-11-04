@@ -1,51 +1,45 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<div class="container">
-	<div class="row">
-		<div class="col m6 offset-m3">
-			<h1 id="mainReadout" class="center-align">0:00.00</h1>
-		</div>
-		<div class="col l1">
-			<h1 id="totalLaps" class="center-align green darken-3 white-text">0</h1>
+<div class="gradientBG">
 
+	<!-- *************** top timing bar -->
+	<div layout="row" flex="90" flex-offset="5" id="topTimingBar">
+		<div flex="20" id="startBtn" ng-click="start()" ng-show="!timerOn" class="topBarSmallDivs">
+			<i class="material-icons topIcons">timer</i>
+		</div>
+		<div flex="20" id="stopBtn" ng-click="cancel()" ng-show="timerOn" class="topBarSmallDivs">
+			<i class="material-icons topIcons">cancel</i>
+		</div>
+
+		<div flex id="mainReadoutDiv">
+			<h1 id="mainReadout" class="topBarText">0:00.00</h1>
+		</div>
+
+		<div flex="20" id="totalLapsDiv" class="topBarSmallDivs">
+			<h1 id="totalLaps" class="topBarText">0</h1>
 		</div>
 	</div>
 
-
-	<div class="row center-align">
-		<button id="startBtn" class="btn" ng-click="start()" ng-show="!timerOn">start</button>
-		<button id="stopBtn" class="btn" ng-click="cancel()"" ng-show="timerOn">cancel</button>
-	</div>
-
-
-		<div ng-repeat="athlete in athleteArray">
-			<div class="card-panel hoverable valign-wrapper" ng-click="recordLap(athlete.index)">
-
-				<div class="row">
-
-					<div class="col l1">
-						<h4>{{athlete.lap}}</h4>
-					</div>
-					<div class="col l4">
-						<h4>{{athlete.display_name}}</h4>
-					</div>
-					<div class="col l3">
-						<h4>{{athlete.readout}}</h4>
-					</div>
-					<div class="col l2 valign">
-						<h6>last lap: {{athlete.lastLapTime}}</h6>
-					</div>
-
+		<!-- *************** athlete buttons -->
+		<div layout="row" flex="90" flex-offset="5" ng-repeat="athlete in athleteArray">
+			<div layout="row" flex class="athleteBtn" ng-click="recordLap(athlete.index)">
+				<div flex="20" class="currentLapNumDiv">
+						<h1>{{athlete.lap}}</h1>
 				</div>
-
+				<div flex class="athleteNameDiv">
+					<p>{{athlete.display_name}}</p>
+				</div>
+				<div flex="35">
+					<div layout="column">
+						<div flex>
+							<p class="currentLapTime">{{athlete.readout}}</p>
+						</div>
+						<div flex>
+							<p class="lastLapTime">last lap: {{athlete.lastLapTime}}</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
 </div>
-
-
-
-
-
-
-

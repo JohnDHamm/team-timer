@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, TimeFormatFactory){
+app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, TimeFormatFactory, $location){
 
 	const currentCoach = UserFactory.getCurrentCoach();
 	$scope.coach = currentCoach.first_name;
@@ -9,8 +9,6 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 		.then((workouts) => {
 			$scope.workouts = filterWorkouts(workouts);
 		})
-
-
 
 	const filterWorkouts = (workouts) => {
 		const allDates = [];
@@ -32,6 +30,7 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 				if (workouts[j].date === filteredDates[i]) {
 					newObj.description = workouts[j].description;
 					newObj.discipline = workouts[j].discipline;
+					newObj.group_name = workouts[j].group_name;
 					newObj.date = workouts[j].date;
 					newObj.formattedDate = TimeFormatFactory.dateFormatter(workouts[j].date);
 				}
@@ -43,6 +42,8 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 		return filteredWorkouts;
 	};
 
-
+	$scope.goToWorkout = (workoutDate) => {
+		$location.path(`/workoutview/${workoutDate}`)
+	}
 
 });
