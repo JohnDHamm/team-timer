@@ -1,41 +1,43 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<h4>WorkoutView Page</h4>
+<div class="gradientBG">
 
-<div layout="row" flex>
-	<div layout="col" flex="20">
-		<h5>{{totalLaps}}</h5>
+<!-- ***********top workout bar -->
+<div layout="row" flex="90" flex-offset="5" id="topWorkoutBar">
+
+	<div flex="15" id="lapsTotal" class="topBarSmallDivs">
+		<h1 class="topBarText">{{totalLaps}}</h1>
 	</div>
-	<div layout="col" flex="20">
-		<h5>{{lap_distance}}</h5>
+	<div flex id="lapDistance">
+		<h5 id="distText">{{lap_distance}}{{metricAbrv}}</h5>
 	</div>
-	<div layout="col" flex="20">
-		<h5>{{lap_metric}}</h5>
+	<div flex="10">
+		<i class="material-icons discIcon">{{discIcon}}</i>
 	</div>
-	<div layout="col" flex="20">
-		<h5>{{discipline}}</h5>
-	</div>
-	<div layout="col" flex="20">
-		<h5>{{displayDate}}</h5>
+
+	<div flex="35">
+		<p class="workoutViewDate">{{displayDate}}</p>
 	</div>
 
 </div>
 
-<div layout="row" flex layout-align="center">
-	<h5>{{displayName}}</h5>
-</div>
 
-<div layout="row" flex layout-align="center" ng-repeat="time in displayTimes">
-	<h5>{{time.lapNum}}</h5>
-	<h6>{{time.lapTime}}</h6>
-</div>
-<div layout="row" flex layout-align="center">
-	<h5>{{calcTimes.totalTime}} total / {{calcTimes.avgTime}} avg</h5>
-</div>
+	<div layout="row" flex layout-align="center">
+		<h5>{{displayName}}</h5>
+	</div>
 
-<div layout="row" flex layout-align="center">
-	<md-button ng-hide="firstAthlete" class="md-raised" ng-click="prevAthlete()">previous</md-button>
-	<md-button ng-hide="lastAthlete" class="md-raised" ng-click="nextAthlete()">next</md-button>
+	<div layout="row" flex layout-align="center" ng-repeat="time in displayTimes">
+		<h5>{{time.lapNum}}</h5>
+		<h6>{{time.lapTime}}</h6>
+	</div>
+	<div layout="row" flex layout-align="center">
+		<h5>{{calcTimes.totalTime}} total / {{calcTimes.avgTime}} avg</h5>
+	</div>
+
+	<div layout="row" flex layout-align="center">
+		<md-button ng-hide="firstAthlete" class="md-raised" ng-click="prevAthlete()">previous</md-button>
+		<md-button ng-hide="lastAthlete" class="md-raised" ng-click="nextAthlete()">next</md-button>
+
+	</div>
 
 </div>
-

@@ -18,7 +18,9 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.totalLaps = workoutsArray[0].laps;
 			$scope.lap_distance = workoutsArray[0].lap_distance;
 			$scope.lap_metric = workoutsArray[0].lap_metric;
+			makeMetricAbrv($scope.lap_metric);
 			$scope.discipline = workoutsArray[0].discipline;
+			makeDiscIcon($scope.discipline);
 			$scope.description = workoutsArray[0].description;
 
 			athletesArray = WorkoutFactory.createAthletesArray(workouts);
@@ -82,6 +84,24 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		calcObj.totalTime = formatArray[0];
 		calcObj.avgTime = formatArray[1];
 		return calcObj
+	}
+
+	const makeMetricAbrv = (metric) => {
+		if (metric === 'mile') {
+			$scope.metricAbrv = 'mi';
+		} else if (metric === 'meter') {
+			$scope.metricAbrv = 'm';
+		} else if (metric === 'yard') {
+			$scope.metricAbrv = 'yd';
+		} else $scope.metricAbrv = 'km';
+	}
+
+	const makeDiscIcon = (disc) => {
+		if (disc === 'run') {
+			$scope.discIcon = 'directions_run';
+		} else if (disc === 'bike') {
+				$scope.discIcon = 'directions_bike';
+			} else $scope.discIcon = 'pool';
 	}
 
 });

@@ -1,4 +1,6 @@
-#container {
+/*TIMER ************************/
+
+.gradientBG {
 	padding: 20px 0;
   background: linear-gradient(rgb(255,238,56), rgb(233,67,57));
 }
@@ -67,7 +69,6 @@
 	font-size: 2.5rem;
 }
 
-
 .athleteNameDiv p {
 	margin: 17px 0 0 0;
 	padding-left: .5rem;
@@ -87,4 +88,36 @@
 	font-size: .9rem;
 	padding-right: .5rem;
 }
+
+/*WORKOUT VIEW ***********************/
+#topWorkoutBar {
+	background-color: #000;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	color: #fff;
+}
+
+#lapsTotal {
+	background-color: rgb(55,179,74);
+}
+
+#distText{
+	margin: 10px 0 0 0;
+	font-size: 2rem;
+	padding-left: .25rem;
+}
+
+.discIcon {
+	margin: 25px 0 0 0;
+	font-size: 1.25rem;
+	text-align: right;
+}
+
+.workoutViewDate {
+	margin: 40px 0 0 0;
+	font-size: .8rem;
+	text-align: right;
+	padding-right: .5rem;
+}
+
 
