@@ -119,5 +119,36 @@
 	text-align: right;
 	padding-right: .5rem;
 }
+#nameBar {
+	margin-bottom: 10px;
+}
 
+.nameBarText {
+	margin: 0;
+	text-align: center;
+}
 
+.lapSection {
+	margin: 3px auto;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.lapNum {
+	margin: 10px 0;
+	font-size: 1.5rem;
+	padding-left: 1rem;
+}
+
+.lapTime {
+	margin: 10px 0;
+	font-size: 1.5rem;
+	text-align: right;
+	padding-right: 1rem;
+}
+
+.lapSummary {
+	margin: 10px 0;
+	font-size: 1.2rem;
+	text-align: center;
+}
