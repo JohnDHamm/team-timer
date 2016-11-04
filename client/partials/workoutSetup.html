@@ -1,12 +1,5 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<div layout="row" flex layout-align="center">
-	<h5>Workout Setup Page</h5>
-</div>
-<div layout="row" flex layout-align="center">
-	<h4>Coach {{coach}}</h4>
-</div>
-
 <form>
 	<div layout="row" flex layout-align="center">
 		<md-input-container>
@@ -17,56 +10,54 @@
 		</md-input-container>
 	</div>
 
-
 	<div layout="row" flex="100" layout-align="center">
 		<md-input-container layout="col" flex="100">
-			<label>Description</label>
+			<label>Workout Description</label>
 	    <input name="description" type="text" class="validate" ng-model="description">
 		</md-input-container>
 	</div>
 
-	<md-input-container>
-	  <label>Select Discipline</label>
-	  <md-select ng-model="discipline">
-	    <md-option value="run">run</md-option>
-	    <md-option value="bike">bike</md-option>
-	    <md-option value="swim">swim</md-option>
-	  </md-select>
-	</md-input-container>
+	<div layout="row" flex="100" layout-align="center">
+		<md-input-container>
+		  <label>Select Discipline</label>
+		  <md-select ng-model="discipline">
+		    <md-option value="run">run</md-option>
+		    <md-option value="bike">bike</md-option>
+		    <md-option value="swim">swim</md-option>
+		  </md-select>
+		</md-input-container>
+	</div>
 
-	<md-input-container>
-		<label>Number of Laps</label>
-    <input name="laps" type="number" class="validate" ng-model="laps">
-	</md-input-container>
+	<div layout="row">
+		<div layout="column">
+			<div flex>
+				<md-input-container>
+					<label>Number of Laps</label>
+			    <input name="laps" type="number" class="validate" ng-model="laps">
+				</md-input-container>
+			</div>
+			<div flex>
+				<md-input-container>
+					<label>Lap distance</label>
+			    <input name="lap_distance" type="number" class="validate" ng-model="lap_distance">
+				</md-input-container>
+			</div>
+		</div>
 
-	<md-input-container>
-		<label>Lap distance</label>
-    <input name="lap_distance" type="number" class="validate" ng-model="lap_distance">
-	</md-input-container>
+		<div layout="row" flex layout-align="center">
+			<md-radio-group  ng-model="lap_metric">
+				<p>Lap metric</p>
+		    <md-radio-button value="mile" aria-label="Label 1">mile</md-radio-button>
+		    <md-radio-button value="meter" aria-label="Label 1">meter</md-radio-button>
+		    <md-radio-button value="km" aria-label="Label 1">km</md-radio-button>
+		    <md-radio-button value="yard" aria-label="Label 1">yard</md-radio-button>
+			</md-radio-group>
+		</div>
 
-	<md-radio-group  ng-model="lap_metric">
-		<label>Lap metric</label>
-    <md-radio-button value="mile" aria-label="Label 1">mile</md-radio-button>
-    <md-radio-button value="meter" aria-label="Label 1">meter</md-radio-button>
-    <md-radio-button value="km" aria-label="Label 1">km</md-radio-button>
-    <md-radio-button value="yard" aria-label="Label 1">yard</md-radio-button>
-	</md-radio-group>
+	</div>
 
 </form>
 
-<div layout="row">
+<div layout="row" layout-align="center">
 	<md-button class="md-raised" ng-click="saveWorkoutParams()">Start Workout</md-button>
 </div>
-
-
-
-
-
-
-
-
-<!-- </div> -->
-
-
-
-
