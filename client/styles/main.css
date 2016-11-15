@@ -126,6 +126,7 @@
 	text-align: right;
 	padding-right: .5rem;
 }
+
 #nameBar {
 	margin-bottom: 10px;
 }
@@ -133,18 +134,20 @@
 .nameBarText {
 	margin: 0;
 	text-align: center;
+	color: #fff;
 }
 
 .lapSection {
 	margin: 3px auto;
-	background-color: #fff;
-	border-radius: 5px;
+	background-color: rgba(0,0,0,.8);
+	border-radius: 2px;
 }
 
 .lapNum {
 	margin: 10px 0;
 	font-size: 1.5rem;
 	padding-left: 1rem;
+	color: #fff;
 }
 
 .lapTime {
@@ -152,12 +155,14 @@
 	font-size: 1.5rem;
 	text-align: right;
 	padding-right: 1rem;
+	color: #fff;
 }
 
 .lapSummary {
 	margin: 10px 0;
 	font-size: 1.2rem;
 	text-align: center;
+	color: #fff;
 }
 
 /*********** WORKOUT SELECT*/
