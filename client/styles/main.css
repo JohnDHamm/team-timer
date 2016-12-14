@@ -8,6 +8,7 @@
 /*TIMER ************************/
 
 .gradientBG {
+	min-height: 100vh;
 	padding: 20px 0;
   background: linear-gradient(rgb(255,238,56), rgb(233,67,57));
 }
@@ -145,11 +146,6 @@
 .athleteNavDiv {
 	text-align: center;
 }
-
-/*.nextAthleteBtn {
-	width: 39px;
-	height: 39px;
-}*/
 
 .lapSection {
 	margin: 3px auto;
