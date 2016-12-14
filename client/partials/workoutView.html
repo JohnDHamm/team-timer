@@ -20,20 +20,24 @@
 
 	<!-- ************ athlete name -->
 	<div layout="row" flex="90" flex-offset="5" id="nameBar">
-		<div flex="25" ng-hide="firstAthlete" ng-click="prevAthlete()">
-			<h1 class="nameBarText"><</h1>
+		<div flex="25" ng-hide="firstAthlete" ng-click="prevAthlete()" class="athleteNavDiv">
+			<!-- <h1 class="nameBarText"><</h1> -->
+			<img src="./img/prevAthlete_button.png" alt="previous athlete" class="athleteNavBtn">
 		</div>
-		<div flex="25" ng-show="firstAthlete">
-			<h1 class="nameBarText">|</h1>
+		<div flex="25" ng-show="firstAthlete" class="athleteNavDiv">
+			<!-- <h1 class="nameBarText">|</h1> -->
+			<img src="./img/blank_button.png" class="athleteNavBtn">
 		</div>
 		<div flex="50">
 			<h1 class="nameBarText">{{displayName}}</h1>
 		</div>
-		<div flex="25" ng-hide="lastAthlete" ng-click="nextAthlete()">
-			<h1 class="nameBarText">></h1>
+		<div flex="25" ng-hide="lastAthlete" ng-click="nextAthlete()" class="athleteNavDiv">
+			<!-- <h1 class="nameBarText">></h1> -->
+			<img src="img/nextAthlete_button.png" alt="next athlete" class="athleteNavBtn">
 		</div>
-		<div flex="25" ng-show="lastAthlete">
-			<h1 class="nameBarText">|</h1>
+		<div flex="25" ng-show="lastAthlete" class="athleteNavDiv">
+			<!-- <h1 class="nameBarText">|</h1> -->
+			<img src="img/blank_button.png" class="athleteNavBtn">
 		</div>
 	</div>
 

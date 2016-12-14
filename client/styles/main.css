@@ -137,6 +137,20 @@
 	color: #fff;
 }
 
+.athleteNavBtn {
+	width: 39px;
+	height: 39px;
+}
+
+.athleteNavDiv {
+	text-align: center;
+}
+
+/*.nextAthleteBtn {
+	width: 39px;
+	height: 39px;
+}*/
+
 .lapSection {
 	margin: 3px auto;
 	background-color: rgba(0,0,0,.8);
