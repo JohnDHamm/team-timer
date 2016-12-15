@@ -38,5 +38,3 @@ client/lib/node_modules
 # Optional REPL history
 .node_repl_history
 
-SASS
-client/.sass-cache/
