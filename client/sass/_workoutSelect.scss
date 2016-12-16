@@ -1,3 +1,9 @@
+#workoutSelectBG {
+	min-height: calc(100vh - 62px);
+	padding-bottom: 10px;
+  background: linear-gradient(rgb(255,238,56), rgb(233,67,57));
+}
+
 .workoutSection {
 	margin: 3px auto;
 	background-color: #fff;

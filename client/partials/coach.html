@@ -1,15 +1,36 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<div layout="row" flex layout-align="center">
-	<h3>Coach {{coach}}'s Office</h3>
-</div>
+<div id="coachBG">
 
-<div layout="row" flex layout-align="center">
-	<md-button class="md-raised" href="#/admin">admin</md-button>
-</div>
-<div layout="row" flex layout-align="center">
-	<md-button class="md-raised" href="#/workoutselect">view workouts</md-button>
-</div>
-<div layout="row" flex layout-align="center">
-	<md-button class="md-raised" href="#/workoutsetup">start new workout</md-button>
+	<div layout="row" flex layout-align="center">
+		<h2 id="coachTitle">Coach {{coach}}'s Locker</h3>
+	</div>
+
+	<div layout="row" flex layout-align="center">
+		<p class="coachBtnDesc">Add, remove, or edit athletes or groups</p>
+	</div>
+	<a href="#/admin">
+		<div layout="row" flex="60" flex-offset="20" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center" class="coachButton">
+			<p class="coachBtnText">ADMIN</p>
+		</div>
+	</a>
+
+	<div layout="row" flex layout-align="center">
+		<p class="coachBtnDesc">Review past workout data</p>
+	</div>
+	<a href="#/workoutselect">
+		<div layout="row" flex="60" flex-offset="20" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center" class="coachButton">
+			<p class="coachBtnText">WORKOUTS</p>
+		</div>
+	</a>
+
+	<div layout="row" flex layout-align="center">
+		<p class="coachBtnDesc">Start a new workout</p>
+	</div>
+	<a href="#/workoutsetup">
+		<div layout="row" flex="60" flex-offset="20" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center" class="coachButton">
+			<p class="coachBtnText">TIMER</p>
+		</div>
+	</a>
+
 </div>

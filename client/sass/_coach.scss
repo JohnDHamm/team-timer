@@ -1,0 +1,37 @@
+#coachBG {
+	min-height: calc(100vh - 62px);
+  background: url(../img/redLockers.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+#coachTitle {
+	color: #fff;
+	text-shadow: 2px 2px 0 #333;
+	margin: 10px 0;
+}
+
+.md-button.md-raised.coachBtn {
+	border: 2px solid rgb(255,238,56);
+}
+
+.coachBtnDesc {
+	color: #fff;
+	margin: 20px 0 10px 0;
+}
+
+.coachButton {
+	border: 3px solid rgb(255,238,56);
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 10px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.coachBtnText {
+	color: #000;
+	margin: 0;
+}

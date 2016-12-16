@@ -1,6 +1,38 @@
 #navBar {
-  background-color: #e94339;
-  color: #ffee38; }
+  background-color: #000;
+  color: #ffee38;
+  height: 52px; }
+
+#coachBG {
+  min-height: calc(100vh - 62px);
+  background: url(../img/redLockers.jpg);
+  background-size: cover;
+  background-position: center; }
+
+#coachTitle {
+  color: #fff;
+  text-shadow: 2px 2px 0 #333;
+  margin: 10px 0; }
+
+.md-button.md-raised.coachBtn {
+  border: 2px solid #ffee38; }
+
+.coachBtnDesc {
+  color: #fff;
+  margin: 20px 0 10px 0; }
+
+.coachButton {
+  border: 3px solid #ffee38;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 10px; }
+
+a {
+  text-decoration: none; }
+
+.coachBtnText {
+  color: #000;
+  margin: 0; }
 
 h3.titleMargin {
   margin: 5px auto; }
@@ -19,6 +51,11 @@ h5.addNew {
 
 .athleteList {
   margin: 5px 10px; }
+
+#workoutViewBG {
+  min-height: calc(100vh - 77px);
+  padding: 20px 0 5px 0;
+  background: linear-gradient(#ffee38, #e94339); }
 
 #topWorkoutBar {
   background-color: #000;
@@ -84,6 +121,11 @@ h5.addNew {
   text-align: center;
   color: #fff; }
 
+#workoutSelectBG {
+  min-height: calc(100vh - 62px);
+  padding-bottom: 10px;
+  background: linear-gradient(#ffee38, #e94339); }
+
 .workoutSection {
   margin: 3px auto;
   background-color: #fff;
@@ -105,9 +147,9 @@ h5.addNew {
 .selectDesc {
   margin: 5px 0; }
 
-.gradientBG {
-  min-height: 100vh;
-  padding: 20px 0;
+#timerBG {
+  min-height: calc(100vh - 77px);
+  padding: 20px 0 5px 0;
   background: linear-gradient(#ffee38, #e94339); }
 
 #topTimingBar {
