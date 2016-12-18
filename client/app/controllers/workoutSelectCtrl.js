@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, TimeFormatFactory, $location){
+app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, TimeFormatFactory, $location, DisplayFactory){
 
 	const currentCoach = UserFactory.getCurrentCoach();
 	$scope.coach = currentCoach.first_name;
@@ -29,7 +29,7 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 				//if date matches, record details to new obj
 				if (workouts[j].date === filteredDates[i]) {
 					newObj.description = workouts[j].description;
-					newObj.discipline = workouts[j].discipline;
+					newObj.discIcon = DisplayFactory.getDiscIcon(workouts[j].discipline);
 					newObj.group_name = workouts[j].group_name;
 					newObj.date = workouts[j].date;
 					newObj.formattedDate = TimeFormatFactory.dateFormatter(workouts[j].date);

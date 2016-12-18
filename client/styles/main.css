@@ -3,6 +3,9 @@
   color: #ffee38;
   height: 52px; }
 
+.navBtn {
+  border: 1px solid #555; }
+
 #coachBG {
   min-height: calc(100vh - 62px);
   background: url(../img/redLockers.jpg);
@@ -72,9 +75,8 @@ h5.addNew {
   padding-left: .25rem; }
 
 .discIcon {
-  margin: 25px 0 0 0;
-  font-size: 1.25rem;
-  text-align: right; }
+  margin: 16px 0 0 0;
+  font-size: 1.75rem; }
 
 .workoutViewDate {
   margin: 40px 0 0 0;
@@ -139,10 +141,13 @@ h5.addNew {
   margin: 5px 0;
   text-align: center; }
 
-.selectDisc {
+.selectDiscDiv {
+  text-align: right; }
+
+.selectDiscIcon {
   margin: 5px 0;
-  text-align: right;
-  padding-right: .7rem; }
+  font-size: 1.25rem;
+  padding-right: 0.7rem; }
 
 .selectDesc {
   margin: 5px 0; }
