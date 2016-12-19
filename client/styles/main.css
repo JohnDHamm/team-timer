@@ -12,6 +12,11 @@
   background-size: cover;
   background-position: center; }
 
+#loginTitle h2 {
+  margin: 20px 0 0 0; }
+#loginTitle h4 {
+  margin: 10px 0 0 0; }
+
 .noBtmMargin {
   margin-bottom: 0; }
 
@@ -20,7 +25,17 @@
 
 .dividerDiv {
   margin: 10px 0;
-  border-top: 1px solid #888; }
+  border-top: 1px solid #bbb; }
+
+.teamBtnDiv {
+  margin-bottom: 10px; }
+
+.instructText {
+  font-size: .8rem;
+  font-style: italic; }
+
+.teamName {
+  margin: 0 0 10px 0; }
 
 #coachBG {
   min-height: calc(100vh - 62px);
