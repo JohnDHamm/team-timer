@@ -1,7 +1,7 @@
 "use strict";
 
 
-app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory){
+app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory, DisplayFactory){
 
 	const date = parseInt($routeParams.date);
 	$scope.displayDate = TimeFormatFactory.dateFormatter(date);
@@ -19,8 +19,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.lap_distance = workoutsArray[0].lap_distance;
 			$scope.lap_metric = workoutsArray[0].lap_metric;
 			makeMetricAbrv($scope.lap_metric);
-			$scope.discipline = workoutsArray[0].discipline;
-			makeDiscIcon($scope.discipline);
+			$scope.discIcon = DisplayFactory.getDiscIcon(workoutsArray[0].discipline);
 			$scope.description = workoutsArray[0].description;
 
 			athletesArray = WorkoutFactory.createAthletesArray(workouts);
@@ -96,12 +95,5 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		} else $scope.metricAbrv = 'km';
 	}
 
-	const makeDiscIcon = (disc) => {
-		if (disc === 'run') {
-			$scope.discIcon = 'directions_run';
-		} else if (disc === 'bike') {
-				$scope.discIcon = 'directions_bike';
-			} else $scope.discIcon = 'pool';
-	}
 
 });
