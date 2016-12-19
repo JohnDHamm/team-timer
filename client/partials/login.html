@@ -1,103 +1,121 @@
-<div layout="row" flex="100" layout-align="center">
-	<h2>Welcome to Team Timer!</h2>
-</div>
+<div id="loginBG">
 
-<!-- ***********LOGIN SECTION -->
-<form >
-	<div layout="row" flex layout-align="center">
-		<md-input-container>
-			<label>email</label>
-			<input name="email" type="email" ng-model="email" class="validate">
-		</md-input-container>
-		<md-input-container>
-			<label>password</label>
-			<input name="password" type="password" ng-model="password" class="validate">
-			<p>{{errorMsg}}</p>
-			<p ng-show="noUser">No user exists, please register</p>
-		</md-input-container>
+	<div layout="row" flex="100" layout-align="center">
+		<h2 class="noBtmMargin">Team Timer</h2>
 	</div>
-
-	<div layout="row" flex layout-align="center">
-		<md-button class="md-raised" ng-click="login()">login</md-button>
+	<div layout="row" flex="100" layout-align="center">
+		<h4 class="noBtmMargin">Multi-athlete lap timer</h4>
 	</div>
-</form>
-
-<md-divider></md-divider>
-
-<!-- ************TEAM JOIN/CREATE -->
-<form >
-
-	<div layout="row" flex layout-align="center">
-		<md-button class="md-raised" ng-click="joinTeam()">Join a Team</md-button>
-		<md-button class="md-raised" ng-click="createTeam()">Create a Team</md-button>
-	</div>
-
-
-
-	<div layout="row" flex layout-align="center" ng-show="showSelectTeam">
-		<div layout="row" flex layout-align="center">
-			<md-input-container>
-			  <label>Select Team</label>
-			  <md-select id="teamSelect" ng-model="teamSelect">
-			    <md-option ng-value="team.id" ng-repeat="team in teams">{{ team.team_name }}</md-option>
-			  </md-select>
-			</md-input-container>
+	<!-- ***********LOGIN SECTION -->
+	<form >
+		<div layout="row" flex="90" flex-offset="5">
+			<p>existing user:</p>
 		</div>
-		<div layout="row" flex layout-align="center">
-		  <md-button class="md-raised" ng-click="pickTeam()">Join</md-button>
-		</div>
-	</div>
-
-	<div layout="row" flex layout-align="center" ng-show="showCreateTeam">
-		<div layout="row" flex layout-align="center">
-			<md-input-container>
-				<label>Team Name</label>
-				<input name="newTeam_name" type="text" ng-model="newTeam_name" class="validate">
-			</md-input-container>
-		</div>
-		<div layout="row" flex layout-align="center">
-			<md-button class="md-raised" ng-click="addTeam()">Save</md-button>
-		</div>
-	</div>
-
-
-
-
-	<div ng-show="showRegisterForm">
-
-		<div layout="row" flex layout-align="center">
-			<h5>{{team_name}}</h5>
-		</div>
-
-		<div layout="row" flex layout-align="center">
-			<md-input-container>
-				<label>First Name</label>
-				<input name="first_name" type="text" ng-model="first_name" class="validate">
-			</md-input-container>
-			<md-input-container>
-				<label>Last Name</label>
-				<input name="last_name" type="text" ng-model="last_name" class="validate">
-			</md-input-container>
-		</div>
-		<div layout="row" flex layout-align="center">
-			<md-input-container>
+		<div layout="row" flex="80" flex-offset="10">
+		<!-- <div layout="row" flex layout-align="center"> -->
+			<md-input-container flex class="inputDiv">
 				<label>email</label>
-				<input name="regEmail" type="email" ng-model="regEmail" class="validate">
-			</md-input-container>
-			<md-input-container>
-				<label>password</label>
-				<input name="regPassword" type="password" ng-model="regPassword" class="validate">
-				<!-- <p>{{errorMsg}}</p> -->
-				<p ng-show="user">User exists, please login</p>
+				<input name="email" type="email" ng-model="email" class="validate">
 			</md-input-container>
 		</div>
 
+		<div layout="row" flex="80" flex-offset="10">
+			<md-input-container flex class="inputDiv">
+				<label>password</label>
+				<input name="password" type="password" ng-model="password" class="validate">
+				<p>{{errorMsg}}</p>
+				<p ng-show="noUser">No user exists, please register</p>
+			</md-input-container>
+		</div>
 
 		<div layout="row" flex layout-align="center">
-			<md-button class="md-raised" ng-click="register()">register</md-button>
+			<md-button class="md-raised" ng-click="login()">login</md-button>
 		</div>
+	</form>
 
+	<div layout="row" flex="90" flex-offset="5">
+		<div flex class="dividerDiv">
+		</div>
 	</div>
 
-</form>
+	<!-- ************TEAM JOIN/CREATE -->
+		<div layout="row" flex="90" flex-offset="5">
+			<p>new user:</p>
+		</div>
+	<form >
 
+		<div layout="row" flex layout-align="center">
+			<md-button class="md-raised" ng-click="joinTeam()">Join a Team</md-button>
+			<md-button class="md-raised" ng-click="createTeam()">Create a Team</md-button>
+		</div>
+
+
+
+		<div layout="row" flex layout-align="center" ng-show="showSelectTeam">
+			<div layout="row" flex layout-align="center">
+				<md-input-container>
+				  <label>Select Team</label>
+				  <md-select id="teamSelect" ng-model="teamSelect">
+				    <md-option ng-value="team.id" ng-repeat="team in teams">{{ team.team_name }}</md-option>
+				  </md-select>
+				</md-input-container>
+			</div>
+			<div layout="row" flex layout-align="center">
+			  <md-button class="md-raised" ng-click="pickTeam()">Join</md-button>
+			</div>
+		</div>
+
+		<div layout="row" flex layout-align="center" ng-show="showCreateTeam">
+			<div layout="row" flex layout-align="center">
+				<md-input-container>
+					<label>Team Name</label>
+					<input name="newTeam_name" type="text" ng-model="newTeam_name" class="validate">
+				</md-input-container>
+			</div>
+			<div layout="row" flex layout-align="center">
+				<md-button class="md-raised" ng-click="addTeam()">Save</md-button>
+			</div>
+		</div>
+
+
+
+
+		<div ng-show="showRegisterForm">
+
+			<div layout="row" flex layout-align="center">
+				<h5>{{team_name}}</h5>
+			</div>
+
+			<div layout="row" flex layout-align="center">
+				<md-input-container>
+					<label>First Name</label>
+					<input name="first_name" type="text" ng-model="first_name" class="validate">
+				</md-input-container>
+				<md-input-container>
+					<label>Last Name</label>
+					<input name="last_name" type="text" ng-model="last_name" class="validate">
+				</md-input-container>
+			</div>
+			<div layout="row" flex layout-align="center">
+				<md-input-container>
+					<label>email</label>
+					<input name="regEmail" type="email" ng-model="regEmail" class="validate">
+				</md-input-container>
+				<md-input-container>
+					<label>password</label>
+					<input name="regPassword" type="password" ng-model="regPassword" class="validate">
+					<!-- <p>{{errorMsg}}</p> -->
+					<p ng-show="user">User exists, please login</p>
+				</md-input-container>
+			</div>
+
+
+			<div layout="row" flex layout-align="center">
+				<md-button class="md-raised" ng-click="register()">register</md-button>
+			</div>
+
+		</div>
+
+	</form>
+
+</div>
