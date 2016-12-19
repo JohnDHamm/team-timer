@@ -55,6 +55,17 @@ h5.addNew {
 .athleteList {
   margin: 5px 10px; }
 
+#workoutSetupBG {
+  min-height: calc(100vh - 62px);
+  padding-bottom: 10px;
+  background: linear-gradient(#ffee38, #e94339); }
+
+.lapMetric {
+  margin-top: 0; }
+
+#startBtnDiv {
+  margin-top: 20px; }
+
 #workoutViewBG {
   min-height: calc(100vh - 77px);
   padding: 20px 0 5px 0;
