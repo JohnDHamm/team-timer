@@ -68,8 +68,17 @@ a {
   color: #000;
   margin: 0; }
 
-h3.titleMargin {
-  margin: 5px auto; }
+#adminBG {
+  min-height: calc(100vh - 62px);
+  padding: 20px 0 5px 0;
+  background: linear-gradient(#ffee38, #e94339); }
+
+.titleMargin {
+  margin: 5px 0; }
+
+.groupList {
+  margin: 5px 0;
+  padding: 0; }
 
 .errorMsg {
   color: red;
@@ -77,15 +86,22 @@ h3.titleMargin {
   text-align: center;
   text-shadow: 1px 1px #ddd; }
 
-.adminMargin p {
-  margin: 5px auto;
-  padding: 0 1rem; }
-
 h5.addNew {
-  margin: 5px auto; }
+  margin: 15px 0 10px 0;
+  font-style: italic; }
+
+.groupInput {
+  margin: 0; }
+
+.athleteTitles {
+  color: #666;
+  text-decoration: underline; }
 
 .athleteList {
   margin: 5px 10px; }
+
+#athleteListRow p {
+  margin: 5px 0px; }
 
 #workoutSetupBG {
   min-height: calc(100vh - 62px);
@@ -93,7 +109,8 @@ h5.addNew {
   background: linear-gradient(#ffee38, #e94339); }
 
 .lapMetric {
-  margin-top: 0; }
+  margin-top: 0;
+  font-style: italic; }
 
 #startBtnDiv {
   margin-top: 20px; }
