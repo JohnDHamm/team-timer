@@ -9,23 +9,23 @@
 		</div>
 	</div>
 
-	<div layout="row" flex="60" flex-offset="20">
+	<div layout="row" flex="60" flex-offset="20" flex-gt-sm="30" flex-offset-gt-sm="35">
 		<div flex class="dividerDiv">
 		</div>
 	</div>
 	<!-- ***********LOGIN SECTION -->
 	<form >
-		<div layout="row" flex="90" flex-offset="5">
+		<div layout="row" flex="90" flex-offset="5" flex-gt-sm="50" flex-offset-gt-sm="25">
 			<p class="instructText">existing user:</p>
 		</div>
-		<div layout="row" flex="80" flex-offset="10">
+		<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30">
 			<md-input-container flex class="inputDiv">
 				<label>email</label>
 				<input name="email" type="email" ng-model="email" class="validate">
 			</md-input-container>
 		</div>
 
-		<div layout="row" flex="80" flex-offset="10">
+		<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30">
 			<md-input-container flex class="inputDiv">
 				<label>password</label>
 				<input name="password" type="password" ng-model="password" class="validate">
@@ -39,12 +39,12 @@
 		</div>
 	</form>
 
-	<div layout="row" flex="90" flex-offset="5">
+	<div layout="row" flex="90" flex-offset="5" flex-gt-sm="50" flex-offset-gt-sm="25">
 		<div flex class="dividerDiv">
 		</div>
 	</div>
 	<!-- ************TEAM JOIN/CREATE -->
-		<div layout="row" flex="90" flex-offset="5">
+		<div layout="row" flex="90" flex-offset="5" flex-gt-sm="50" flex-offset-gt-sm="25">
 			<p class="instructText">new user:</p>
 		</div>
 
@@ -70,7 +70,7 @@
 		</div>
 
 		<div ng-show="showCreateTeam">
-			<div layout="row" flex="80" flex-offset="10">
+			<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30">
 				<md-input-container flex class="inputDiv">
 					<label>new team name</label>
 					<input name="newTeam_name" type="text" ng-model="newTeam_name" class="validate">
@@ -82,29 +82,29 @@
 		</div>
 
 		<div ng-show="showRegisterForm">
-			<div layout="column" flex="90" flex-offset="5">
+			<div layout="column" flex="90" flex-offset="5" flex-gt-sm="50" flex-offset-gt-sm="25">
 				<p class="instructText">register as a coach for team: </p>
 				<p class="teamName">{{team_name}}</p>
 			</div>
-			<div layout="row" flex="80" flex-offset="10" layout-align="center">
+			<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center">
 				<md-input-container flex class="inputDiv">
 					<label>first name</label>
 					<input name="first_name" type="text" ng-model="first_name" class="validate">
 				</md-input-container>
 			</div>
-			<div layout="row" flex="80" flex-offset="10" layout-align="center">
+			<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center">
 				<md-input-container flex class="inputDiv">
 					<label>last name</label>
 					<input name="last_name" type="text" ng-model="last_name" class="validate">
 				</md-input-container>
 			</div>
-			<div layout="row" flex="80" flex-offset="10"  layout-align="center">
+			<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center">
 				<md-input-container flex class="inputDiv">
 					<label>email</label>
 					<input name="regEmail" type="email" ng-model="regEmail" class="validate">
 				</md-input-container>
 			</div>
-			<div layout="row" flex="80" flex-offset="10"  layout-align="center">
+			<div layout="row" flex="80" flex-offset="10" flex-gt-sm="40" flex-offset-gt-sm="30" layout-align="center">
 				<md-input-container flex class="inputDiv">
 					<label>password</label>
 					<input name="regPassword" type="password" ng-model="regPassword" class="validate">

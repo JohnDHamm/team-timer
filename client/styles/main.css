@@ -25,7 +25,7 @@
 
 .dividerDiv {
   margin: 10px 0;
-  border-top: 1px solid #bbb; }
+  border-top: 1px solid rgba(0, 0, 0, 0.3); }
 
 .teamBtnDiv {
   margin-bottom: 10px; }
@@ -74,7 +74,8 @@ h3.titleMargin {
 .errorMsg {
   color: red;
   font-style: italic;
-  text-align: center; }
+  text-align: center;
+  text-shadow: 1px 1px #ddd; }
 
 .adminMargin p {
   margin: 5px auto;
