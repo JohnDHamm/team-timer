@@ -1,0 +1,228 @@
+/*NAVBAR************************/
+
+#navBar {
+	background-color: rgb(233,67,57);
+	color: rgb(255,238,56);
+}
+
+/*TIMER ************************/
+
+.gradientBG {
+	min-height: 100vh;
+	padding: 20px 0;
+  background: linear-gradient(rgb(255,238,56), rgb(233,67,57));
+}
+
+#topTimingBar {
+	background-color: #000;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+#mainReadoutDiv {
+	background-color: #000;
+	color: #fff;
+	margin: 5px;
+	text-align: center;
+}
+
+.topBarSmallDivs {
+	margin: 5px;
+	border-radius: 5px;
+	color: #fff;
+	text-align: center;
+}
+
+.topBarText {
+	margin: 0;
+	font-size: 2.5rem;
+}
+
+.topIcons {
+	margin-top: 6px;
+	font-size: 2.5rem
+}
+
+#startBtn {
+	background-color: rgb(55,179,74);
+}
+
+.icon {
+	color: #fff;
+}
+
+#stopBtn {
+	background-color: red;
+}
+
+#totalLapsDiv {
+	background-color: rgb(0,173,238);
+}
+
+.athleteBtn {
+	margin: 3px auto;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.currentLapNumDiv {
+	background-color: rgb(55,179,74);
+	border-radius: 5px;
+	color: #fff;
+	text-align: center;
+}
+
+.currentLapNumDiv h1 {
+	margin: 9px 0;
+	font-size: 2.5rem;
+}
+
+.athleteNameDiv p {
+	margin: 17px 0 0 0;
+	padding-left: .5rem;
+	font-size: 1.5rem;
+}
+
+.currentLapTime {
+	margin: 7px 0 0 0;
+	text-align: right;
+	font-size: 1.6rem;
+	padding-right: .5rem;
+}
+
+.lastLapTime {
+	margin: 5px 0;
+	text-align: right;
+	font-size: .9rem;
+	padding-right: .5rem;
+}
+
+/*WORKOUT VIEW ***********************/
+#topWorkoutBar {
+	background-color: #000;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	color: #fff;
+}
+
+#lapsTotal {
+	background-color: rgb(55,179,74);
+}
+
+#distText{
+	margin: 10px 0 0 0;
+	font-size: 2rem;
+	padding-left: .25rem;
+}
+
+.discIcon {
+	margin: 25px 0 0 0;
+	font-size: 1.25rem;
+	text-align: right;
+}
+
+.workoutViewDate {
+	margin: 40px 0 0 0;
+	font-size: .8rem;
+	text-align: right;
+	padding-right: .5rem;
+}
+
+#nameBar {
+	margin-bottom: 10px;
+}
+
+.nameBarText {
+	margin: 0;
+	text-align: center;
+	color: #fff;
+}
+
+.athleteNavBtn {
+	width: 39px;
+	height: 39px;
+}
+
+.athleteNavDiv {
+	text-align: center;
+}
+
+.lapSection {
+	margin: 3px auto;
+	background-color: rgba(0,0,0,.8);
+	border-radius: 2px;
+}
+
+.lapNum {
+	margin: 10px 0;
+	font-size: 1.5rem;
+	padding-left: 1rem;
+	color: #fff;
+}
+
+.lapTime {
+	margin: 10px 0;
+	font-size: 1.5rem;
+	text-align: right;
+	padding-right: 1rem;
+	color: #fff;
+}
+
+.lapSummary {
+	margin: 10px 0;
+	font-size: 1.2rem;
+	text-align: center;
+	color: #fff;
+}
+
+/*********** WORKOUT SELECT*/
+.workoutSection {
+	margin: 3px auto;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.selectDate {
+	margin: 5px 0;
+	padding-left: .7rem
+}
+
+.selectGroup {
+	margin: 5px 0;
+	text-align: center;
+}
+
+.selectDisc {
+	margin: 5px 0;
+	text-align: right;
+	padding-right: .7rem;
+}
+
+.selectDesc {
+	margin: 5px 0;
+}
+
+/********ADMIN*/
+h3.titleMargin {
+	margin: 5px auto;
+}
+.errorMsg {
+	color: red;
+	font-style: italic;
+	text-align: center;
+}
+
+.adminMargin p {
+	margin: 5px auto;
+	padding: 0 1rem;
+}
+
+h5.addNew {
+	margin: 5px auto;
+}
+
+.athleteList {
+	margin: 5px 10px;
+}
+
+

@@ -1,35 +1,36 @@
 <div ng-include="'partials/navbar.html'"></div>
 
-<form>
-	<div layout="row" flex layout-align="center">
-		<md-input-container>
-		  <label>Select Group</label>
-		  <md-select ng-model="group_id">
-		    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
-		  </md-select>
-		</md-input-container>
-	</div>
+<div id="workoutSetupBG">
 
-	<div layout="row" flex="100" layout-align="center">
-		<md-input-container layout="col" flex="100">
-			<label>Workout Description</label>
-	    <input name="description" type="text" class="validate" ng-model="description">
-		</md-input-container>
-	</div>
+	<form>
+		<div layout="row" flex layout-align="center">
+			<md-input-container>
+			  <label>Select Group</label>
+			  <md-select ng-model="group_id">
+			    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
+			  </md-select>
+			</md-input-container>
+		</div>
 
-	<div layout="row" flex="100" layout-align="center">
-		<md-input-container>
-		  <label>Select Discipline</label>
-		  <md-select ng-model="discipline">
-		    <md-option value="run">run</md-option>
-		    <md-option value="bike">bike</md-option>
-		    <md-option value="swim">swim</md-option>
-		  </md-select>
-		</md-input-container>
-	</div>
+		<div layout="row" flex="100" layout-align="center">
+			<md-input-container layout="col" flex="90">
+				<label>Workout Description</label>
+		    <input name="description" type="text" class="validate" ng-model="description">
+			</md-input-container>
+		</div>
 
-	<div layout="row">
-		<div layout="column">
+		<div layout="row" flex="100" layout-align="center">
+			<md-input-container>
+			  <label>Select Discipline</label>
+			  <md-select ng-model="discipline">
+			    <md-option value="run">run</md-option>
+			    <md-option value="bike">bike</md-option>
+			    <md-option value="swim">swim</md-option>
+			  </md-select>
+			</md-input-container>
+		</div>
+
+		<div layout="row" flex="80" flex-offset="10" layout-align="center">
 			<div flex>
 				<md-input-container>
 					<label>Number of Laps</label>
@@ -44,20 +45,29 @@
 			</div>
 		</div>
 
-		<div layout="row" flex layout-align="center">
-			<md-radio-group  ng-model="lap_metric">
-				<p>Lap metric</p>
-		    <md-radio-button value="mile" aria-label="Label 1">mile</md-radio-button>
-		    <md-radio-button value="meter" aria-label="Label 1">meter</md-radio-button>
-		    <md-radio-button value="km" aria-label="Label 1">km</md-radio-button>
-		    <md-radio-button value="yard" aria-label="Label 1">yard</md-radio-button>
+		<div layout="row" flex="100" layout-align="center">
+			<md-radio-group  flex="90" ng-model="lap_metric">
+				<p class="lapMetric">Lap metric</p>
+				<div layout="row">
+					<div flex>
+				    <md-radio-button value="mile" class="md-primary" aria-label="Label 1">mile</md-radio-button>
+					</div>
+					<div flex>
+				    <md-radio-button value="meter" class="md-primary" aria-label="Label 1">meter</md-radio-button>
+					</div>
+					<div flex>
+				    <md-radio-button value="km" class="md-primary" aria-label="Label 1">km</md-radio-button>
+					</div>
+					<div flex>
+				    <md-radio-button value="yard" class="md-primary" aria-label="Label 1">yard</md-radio-button>
+			    </div>
+				</div>
 			</md-radio-group>
 		</div>
 
+	</form>
+
+	<div layout="row" layout-align="center" id="startBtnDiv">
+		<md-button class="md-raised" ng-click="saveWorkoutParams()">Start Workout</md-button>
 	</div>
-
-</form>
-
-<div layout="row" layout-align="center">
-	<md-button class="md-raised" ng-click="saveWorkoutParams()">Start Workout</md-button>
 </div>
