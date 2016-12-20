@@ -3,6 +3,7 @@
 app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory){
 
 	$scope.groups === [];
+	$scope.showMsg = false;
 
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
@@ -81,12 +82,17 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	const checkForGroup = () => {
-		// console.log("$scope.groups[0]", $scope.groups[0]);
 		if ($scope.groups[0] === undefined) {
 			$scope.msg = "There must be at least one group to save athlete!"
+			$scope.showMsg = true;
 		} else {
 			$scope.msg = null;
+			$scope.showMsg = false;
 		}
+	}
+
+	$scope.editAthlete = (id) => {
+		console.log("edit id: ", id);
 	}
 
 });
