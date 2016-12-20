@@ -61,7 +61,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			avg_pace: $scope.newAthlete_avg_pace,
 			group_id: $scope.group_id
 		};
-		// console.log("newAthlete", newAthlete);
 		DbFactory.addAthlete(newAthlete)
 			.then((data) => {
 				reloadAthletes();

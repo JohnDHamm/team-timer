@@ -109,7 +109,8 @@ h5.addNew {
   background: linear-gradient(#ffee38, #e94339); }
 
 .lapMetric {
-  margin-top: 0; }
+  margin-top: 0;
+  font-style: italic; }
 
 #startBtnDiv {
   margin-top: 20px; }
