@@ -1,3 +1,5 @@
+@import 'vars';
+
 #loginBG {
 	min-height: calc(100vh);
   background: url(../img/homeBG.png);
@@ -24,7 +26,7 @@
 
 .dividerDiv {
 	margin: 10px 0;
-	border-top: 1px solid rgba(0,0,0,.3);
+	border-top: 1px solid $divider-color;
 }
 
 .teamBtnDiv {
