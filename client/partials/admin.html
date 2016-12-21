@@ -12,12 +12,15 @@
 		</div>
 
 		<div layout="row" flex flex-offset="15" layout-align="center" ng-repeat="group in groups">
-			<div flex="35">
+			<div flex="30">
 				<p class="groupList">{{group.group_name}}</p>
 			</div>
-			<div flex="65">
+			<div flex="60">
 				<p class="groupList">{{group.description}}</p>
 			</div>
+			<div flex>
+			  	<i ng-click="editAGroup(group.id)" class="material-icons editIcon">edit</i>
+			  </div>
 		</div>
 
 		<div ng-show="showMsg" layout="row" flex layout-align="center">
@@ -48,20 +51,19 @@
 		</div>
 	</div>
 
-
 	<div id="athletesDiv" layout="column" flex="80" flex-offset="10">
 		<div layout="row" flex layout-align="center">
 			<h3 class="titleMargin">Athletes: </h3>
 		</div>
 		<div layout="row" flex flex-offset="10">
+			<div class="athleteTitles displayName" flex="15">
+				display name
+			</div>
 			<div class="athleteTitles" flex="15">
 				first name
 			</div>
 			<div class="athleteTitles" flex="20">
 				last name
-			</div>
-			<div class="athleteTitles" flex="15">
-				display name
 			</div>
 			<div class="athleteTitles" flex="10">
 				age
@@ -72,21 +74,19 @@
 			<div class="athleteTitles" flex="10">
 				avg pace
 			</div>
-
 		</div>
-
 
 		<div layout="row" flex layout-align="center" ng-repeat="athlete in athletes">
 			<div id="athleteListRow" layout="row" flex flex-offset="10" layout-align="left center">
+				<div flex="15">
+				  <p class="displayName">{{athlete.display_name}}</p>
+			  </div>
 				<div flex="15">
 					<p>{{athlete.first_name}}</p>
 				</div>
 				<div flex="20">
 					<p>{{athlete.last_name}}</p>
 				</div>
-				<div flex="15">
-				  <p>{{athlete.display_name}}</p>
-			  </div>
 				<div flex="10">
 				  <p>{{athlete.age}}</p>
 			  </div>
@@ -97,8 +97,7 @@
 				  <p>{{athlete.avg_pace}}</p>
 			  </div>
 			  <div flex>
-			  	<i ng-click="editAthlete(athlete.id)" class="material-icons editAthleteIcon">edit</i>
-			  	<!-- <md-button class="md-raised" ng-click="editAthlete(athlete.id)">edit</md-button> -->
+			  	<i ng-click="editAthlete(athlete.id)" class="material-icons editIcon">edit</i>
 			  </div>
 			</div>
 		</div>
@@ -107,29 +106,29 @@
 			<h5 class="addNew">Add new athlete:</h5>
 		</div>
 		<div layout="row" flex flex-offset="10">
-			<md-input-container flex="15">
-				<label>First Name</label>
-				<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
-			</md-input-container>
-			<md-input-container flex="20">
-				<label>Last Name</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
-			</md-input-container>
-			<md-input-container flex="15">
+			<md-input-container flex="15" class="groupInput">
 				<label>Display Name</label>
 				<input name="newGroup_desc" type="text" ng-model="newAthlete_display_name" class="validate">
 			</md-input-container>
-			<md-input-container flex="10">
+			<md-input-container flex="15" class="groupInput">
+				<label>First Name</label>
+				<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
+			</md-input-container>
+			<md-input-container flex="20" class="groupInput">
+				<label>Last Name</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
+			</md-input-container>
+			<md-input-container flex="10" class="groupInput">
 				<label>Age</label>
 				<input name="newGroup_desc" type="number" ng-model="newAthlete_age" class="validate">
 			</md-input-container>
-			<md-input-container flex="15">
+			<md-input-container flex="15" class="groupInput">
 			  <label>Select Group</label>
 			  <md-select id="groupSelect" ng-model="group_id">
 			    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
 			  </md-select>
 			</md-input-container>
-			<md-input-container flex="10">
+			<md-input-container flex="10" class="groupInput">
 				<label>Avg Pace</label>
 				<input name="newGroup_desc" type="text" ng-model="newAthlete_avg_pace" class="validate" placeholder="mm:ss">
 			</md-input-container>

@@ -1,3 +1,5 @@
+@import 'vars';
+
 #adminBG {
 	min-height: calc(100vh - 62px);
 	padding: 20px 0 5px 0;
@@ -11,6 +13,10 @@
 .groupList {
 	margin: 5px 0;
 	padding: 0;
+}
+
+.editIcon {
+	color: $divider-color;
 }
 
 .errorMsg {
@@ -30,7 +36,7 @@ h5.addNew {
 }
 
 .athleteTitles {
-	color: #666;
+	color: $divider-color;
 	text-decoration: underline;
 }
 
@@ -40,5 +46,10 @@ h5.addNew {
 
 #athleteListRow p {
 	margin: 5px 0px;
-
+	border-bottom: 1px solid $divider-color;
 }
+
+.displayName {
+	font-style: italic;
+}
+

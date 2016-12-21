@@ -80,6 +80,9 @@ a {
   margin: 5px 0;
   padding: 0; }
 
+.editIcon {
+  color: rgba(0, 0, 0, 0.3); }
+
 .errorMsg {
   color: red;
   font-style: italic;
@@ -94,14 +97,18 @@ h5.addNew {
   margin: 0; }
 
 .athleteTitles {
-  color: #666;
+  color: rgba(0, 0, 0, 0.3);
   text-decoration: underline; }
 
 .athleteList {
   margin: 5px 10px; }
 
 #athleteListRow p {
-  margin: 5px 0px; }
+  margin: 5px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+
+.displayName {
+  font-style: italic; }
 
 #workoutSetupBG {
   min-height: calc(100vh - 62px);
