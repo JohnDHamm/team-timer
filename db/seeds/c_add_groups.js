@@ -14,15 +14,15 @@ exports.seed = function(knex, Promise) {
 				knex('Groups')
 					.insert({
 						id: 2,
-						group_name: 'Comp',
-						description: 'Competitive Team',
+						group_name: 'Yellow',
+						description: 'Development Team - ages 9+',
 						team_id: 1
 					}),
 				knex('Groups')
 					.insert({
 						id: 3,
-						group_name: 'Dev',
-						description: 'Development Team',
+						group_name: 'Red',
+						description: 'Development Team - ages 6-8',
 						team_id: 1
 					}),
 				knex('Groups')
