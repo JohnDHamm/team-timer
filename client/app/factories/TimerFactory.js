@@ -19,8 +19,20 @@ app.factory("TimerFactory", function($q) {
 		return minutes + ':' + seconds + '.' + milliseconds;
 	}
 
+	function timeFormatterMMSS(timeInMilliseconds) {
+		let time = new Date(timeInMilliseconds);
+		let minutes = time.getMinutes().toString();
+		let seconds = time.getSeconds().toString();
+
+		if (seconds.length < 2) {
+			seconds = '0' + seconds;
+		}
+
+		return minutes + ':' + seconds;
+	}
 
 
-	return { timeFormatter }
+
+	return { timeFormatter, timeFormatterMMSS }
 
 });

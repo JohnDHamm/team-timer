@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory){
+app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory, TimerFactory){
 
 	$scope.groups === [];
 	$scope.showMsg = false;
@@ -20,7 +20,8 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			$scope.teamName = team_name[0].team_name;
 			$scope.groups = groups;
 			checkForGroup();
-			$scope.athletes = athletes;
+			console.log("athletes: ", athletes);
+			$scope.athletes = formatPace(athletes);
 		})
 		.then(() => {
 			$scope.$apply();
@@ -90,8 +91,19 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		}
 	}
 
+	const formatPace = (athletesArray) => {
+		for ( let i = 0; i < athletesArray.length; i++) {
+			athletesArray[i].avg_pace = TimerFactory.timeFormatterMMSS(athletesArray[i].avg_pace);
+		}
+		return athletesArray;
+	}
+
 	$scope.editAthlete = (id) => {
-		console.log("edit id: ", id);
+		// console.log("edit athlete id: ", id);
+	}
+
+	$scope.editGroup = (id) => {
+		// console.log("edit group id: ", id);
 	}
 
 });
