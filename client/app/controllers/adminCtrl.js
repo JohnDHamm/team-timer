@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory){
+app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactory, DbFactory, TimerFactory){
 
 	$scope.groups === [];
 	$scope.showMsg = false;
@@ -20,7 +20,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			$scope.teamName = team_name[0].team_name;
 			$scope.groups = groups;
 			checkForGroup();
-			$scope.athletes = athletes;
+			$scope.athletes = formatPace(athletes);
 		})
 		.then(() => {
 			$scope.$apply();
@@ -58,7 +58,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			last_name: $scope.newAthlete_last_name,
 			display_name: $scope.newAthlete_display_name,
 			age: $scope.newAthlete_age,
-			avg_pace: $scope.newAthlete_avg_pace,
+			avg_pace: convertNewPace($scope.newAthlete_avg_pace),
 			group_id: $scope.group_id
 		};
 		DbFactory.addAthlete(newAthlete)
@@ -70,13 +70,13 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	const reloadAthletes = () => {
 		DbFactory.getAthletesByTeam($scope.team_id)
 			.then((athletes) => {
-				$scope.athletes = athletes;
-			$scope.newAthlete_first_name = "";
-			$scope.newAthlete_last_name = "";
-			$scope.newAthlete_display_name = "";
-			$scope.newAthlete_age = "";
-			$scope.newAthlete_avg_pace = "";
-			$scope.group_id = "";
+				$scope.athletes = formatPace(athletes);
+				$scope.newAthlete_first_name = "";
+				$scope.newAthlete_last_name = "";
+				$scope.newAthlete_display_name = "";
+				$scope.newAthlete_age = "";
+				$scope.newAthlete_avg_pace = "";
+				$scope.group_id = "";
 			})
 	}
 
@@ -90,8 +90,28 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		}
 	}
 
+	const formatPace = (athletesArray) => {
+		for ( let i = 0; i < athletesArray.length; i++) {
+			athletesArray[i].avg_pace = TimerFactory.timeFormatterMMSS(athletesArray[i].avg_pace);
+		}
+		return athletesArray;
+	}
+
+	const convertNewPace = (pace) => {
+		const paceTimeArray = pace.split(":");
+		const min = parseInt(paceTimeArray[0]);
+		const sec = parseInt(paceTimeArray[1]);
+		const avgPaceMs = Math.trunc((min * 60) + sec) * 1000;
+		return avgPaceMs;
+
+	}
+
 	$scope.editAthlete = (id) => {
-		console.log("edit id: ", id);
+		// console.log("edit athlete id: ", id);
+	}
+
+	$scope.editGroup = (id) => {
+		// console.log("edit group id: ", id);
 	}
 
 });

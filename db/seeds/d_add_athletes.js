@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Makenna',
 						age: 12,
 						group_id: 1,
-						avg_pace: '8:30'
+						avg_pace: 471000
 					}),
 				knex('Athletes')
 					.insert({
@@ -23,17 +23,17 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Lucy',
 						age: 12,
 						group_id: 1,
-						avg_pace: '8:15'
+						avg_pace: 450000
 					}),
 				knex('Athletes')
 					.insert({
 						id: 3,
-						first_name: 'Troy',
-						last_name: 'Fields',
-						display_name: 'Troy',
+						first_name: 'Trinity',
+						last_name: 'Waters',
+						display_name: 'Trinity',
 						age: 11,
 						group_id: 1,
-						avg_pace: '8:35'
+						avg_pace: 540000
 					}),
 				knex('Athletes')
 					.insert({
@@ -43,7 +43,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Wellington',
 						age: 12,
 						group_id: 1,
-						avg_pace: '8:32'
+						avg_pace: 475000
 					}),
 				knex('Athletes')
 					.insert({
@@ -52,8 +52,8 @@ exports.seed = function(knex, Promise) {
 						last_name: 'Reilly',
 						display_name: 'Maya',
 						age: 10,
-						group_id: 2,
-						avg_pace: '9:05'
+						group_id: 1,
+						avg_pace: 502000
 					}),
 				knex('Athletes')
 					.insert({
@@ -63,7 +63,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Devin',
 						age: 9,
 						group_id: 2,
-						avg_pace: '9:26'
+						avg_pace: 572000
 					}),
 				knex('Athletes')
 					.insert({
@@ -71,9 +71,9 @@ exports.seed = function(knex, Promise) {
 						first_name: 'Gus',
 						last_name: 'McGowan',
 						display_name: 'Gus',
-						age: 14,
+						age: 13,
 						group_id: 2,
-						avg_pace: '8:54'
+						avg_pace: 497000
 					}),
 				knex('Athletes')
 					.insert({
@@ -82,8 +82,8 @@ exports.seed = function(knex, Promise) {
 						last_name: 'Early',
 						display_name: 'Clara',
 						age: 12,
-						group_id: 2,
-						avg_pace: '8:46'
+						group_id: 1,
+						avg_pace: 486000
 					}),
 				knex('Athletes')
 					.insert({
@@ -93,7 +93,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Seamus',
 						age: 8,
 						group_id: 3,
-						avg_pace: '10:20'
+						avg_pace: 620000
 					}),
 				knex('Athletes')
 					.insert({
@@ -103,49 +103,99 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Emily Micah',
 						age: 6,
 						group_id: 3,
-						avg_pace: '11:45'
+						avg_pace: 695000
 					}),
 				knex('Athletes')
 					.insert({
 						id: 11,
-						first_name: 'Roxanne',
-						last_name: 'Fields',
-						display_name: 'Roxy',
+						first_name: 'Miles',
+						last_name: 'Butler',
+						display_name: 'Miles B',
 						age: 12,
 						group_id: 1,
-						avg_pace: '8:41'
+						avg_pace: 503000
+					}),
+				knex('Athletes')
+					.insert({
+						id: 12,
+						first_name: 'Ruth',
+						last_name: 'Giblin',
+						display_name: 'Ruth',
+						age: 13,
+						group_id: 1,
+						avg_pace: 563000
+					}),
+				knex('Athletes')
+					.insert({
+						id: 13,
+						first_name: 'Darby',
+						last_name: 'Mooney',
+						display_name: 'Darby',
+						age: 9,
+						group_id: 2,
+						avg_pace: 585000
+					}),
+				knex('Athletes')
+					.insert({
+						id: 14,
+						first_name: 'Searcy',
+						last_name: 'Mooney',
+						display_name: 'Searcy',
+						age: 10,
+						group_id: 2,
+						avg_pace: 570000
+					}),
+				knex('Athletes')
+					.insert({
+						id: 15,
+						first_name: 'Jackson',
+						last_name: 'Lee',
+						display_name: 'Jackson',
+						age: 13,
+						group_id: 2,
+						avg_pace: 620000
+					}),
+				knex('Athletes')
+					.insert({
+						id: 16,
+						first_name: 'Ryan',
+						last_name: 'Lee',
+						display_name: 'Ryan',
+						age: 11,
+						group_id: 2,
+						avg_pace: 595000
 					}),
 
 				// add SBR athletes
 				knex('Athletes')
 					.insert({
-						id: 12,
+						id: 17,
 						first_name: 'Bobby',
 						last_name: 'Smith',
 						display_name: 'Junior',
 						age: 11,
 						group_id: 4,
-						avg_pace: '8:12'
+						avg_pace: 492000
 					}),
 				knex('Athletes')
 					.insert({
-						id: 13,
+						id: 18,
 						first_name: 'William',
 						last_name: 'Jones',
 						display_name: 'Jonesy',
 						age: 12,
 						group_id: 4,
-						avg_pace: '8:17'
+						avg_pace: 497000
 					}),
 				knex('Athletes')
 					.insert({
-						id: 14,
+						id: 19,
 						first_name: 'Bobby',
 						last_name: 'Ford',
 						display_name: 'Bobby F.',
 						age: 10,
 						group_id: 4,
-						avg_pace: '8:41'
+						avg_pace: 545000
 					})
 
 
