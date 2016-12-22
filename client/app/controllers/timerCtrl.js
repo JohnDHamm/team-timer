@@ -21,11 +21,12 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			const newObj = athletesFromDb[i];
 			newObj.index = i;
 			newObj.lapTimesArray = [0];
-			newObj.readout =  '0:00.00';
+			newObj.readout = '0:00.00';
 			newObj.lap =  0;
 			newObj.elapsed = 0;
 			newObj.lastLapTime = '0:00.00';
-			$scope.athleteArray.push(newObj)
+			newObj.completedLaps = false;
+			$scope.athleteArray.push(newObj);
 		}
 	}
 
@@ -137,13 +138,20 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	$scope.recordLap = function(index) {
 		const thisAthlete = $scope.athleteArray[index];
-		thisAthlete.lap ++;
-		const nowLap = Date.now();
-		const elapsedTime = nowLap - lapStart;
-		thisAthlete.elapsed = elapsedTime;
-		thisAthlete.lapTimesArray.push(elapsedTime);
-		thisAthlete.lastLapTime = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
-		checkTotalLaps();
+		if (thisAthlete.completedLaps === false) {
+
+			thisAthlete.lap ++;
+			const nowLap = Date.now();
+			const elapsedTime = nowLap - lapStart;
+			thisAthlete.elapsed = elapsedTime;
+			thisAthlete.lapTimesArray.push(elapsedTime);
+			thisAthlete.lastLapTime = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
+			if (thisAthlete.lap === workoutParams.laps) {
+				thisAthlete.completedLaps = true;
+				thisAthlete.readout = "done";
+			}
+			checkTotalLaps();
+		}
 	}
 
 	function update() {
@@ -154,7 +162,9 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		$scope.$apply(function() {
 			for (let i = 0; i < $scope.athleteArray.length; i++) {
 				const newTime = time - $scope.athleteArray[i].elapsed;
-				$scope.athleteArray[i].readout = TimerFactory.timeFormatter(newTime);
+				if ($scope.athleteArray[i].completedLaps === false) {
+					$scope.athleteArray[i].readout = TimerFactory.timeFormatter(newTime);
+				}
 			}
 		});
 	}
