@@ -38,7 +38,7 @@
   margin: 0 0 10px 0; }
 
 #coachBG {
-  min-height: calc(100vh - 62px);
+  min-height: calc(100vh - 52px);
   background: url(../img/redLockers.jpg);
   background-size: cover;
   background-position: center; }
