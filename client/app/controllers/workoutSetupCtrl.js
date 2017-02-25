@@ -12,7 +12,7 @@ app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, UserFactory,
 
 	$scope.saveWorkoutParams = () => {
 		let setupObj = {
-			group_id: $scope.group_id,
+			//group_id: $scope.group_id,
 			description: $scope.description,
 			discipline: $scope.discipline,
 			laps: $scope.laps,
@@ -23,7 +23,7 @@ app.controller("workoutSetupCtrl", function($scope, WorkoutFactory, UserFactory,
 
 		WorkoutFactory.setCurrentWorkoutParams(setupObj);
 		//go to timer page
-		$location.path("/timer");
+		$location.path("/selectathletes");
 	};
 
 });

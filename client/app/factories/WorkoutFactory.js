@@ -9,13 +9,20 @@ app.factory("WorkoutFactory", function($q) {
 		currentWorkoutParams.description = setupObj.description;
 		currentWorkoutParams.discipline = setupObj.discipline;
 		currentWorkoutParams.coach_id = setupObj.coach_id;
-		currentWorkoutParams.group_id = setupObj.group_id;
+		//currentWorkoutParams.group_id = setupObj.group_id;
 		currentWorkoutParams.laps = setupObj.laps;
 		currentWorkoutParams.lap_distance = setupObj.lap_distance;
 		currentWorkoutParams.lap_metric = setupObj.lap_metric;
 	}
 
 	const getCurrentWorkoutParams = () => currentWorkoutParams;
+
+	//setSelectedAthletes
+		//used in athletesSelectCtrl
+
+	//getSelectedAthletes
+		//used in timerCtrl
+
 
 
 	const createAthletesArray = (workouts) => {

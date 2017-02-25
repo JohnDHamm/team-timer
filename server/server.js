@@ -117,7 +117,7 @@ app.get('/api/getAthletes/Group/:group_id', (req, res) => {
 	knex('Athletes')
 		.select('*')
 		.where('group_id', group_id)
-		.orderBy('Athletes.run_pace')
+		//.orderBy('Athletes.run_pace')
 		.then((data) => {
 			res.json(data)
 		})
