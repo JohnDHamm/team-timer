@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Makenna',
 						age: 12,
 						group_id: 1,
-						avg_pace: 471000
+						run_pace: 471000
 					}),
 				knex('Athletes')
 					.insert({
@@ -23,7 +23,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Lucy',
 						age: 12,
 						group_id: 1,
-						avg_pace: 450000
+						run_pace: 450000
 					}),
 				knex('Athletes')
 					.insert({
@@ -33,7 +33,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Trinity',
 						age: 11,
 						group_id: 1,
-						avg_pace: 540000
+						run_pace: 540000
 					}),
 				knex('Athletes')
 					.insert({
@@ -43,7 +43,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Wellington',
 						age: 12,
 						group_id: 1,
-						avg_pace: 475000
+						run_pace: 475000
 					}),
 				knex('Athletes')
 					.insert({
@@ -53,7 +53,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Maya',
 						age: 10,
 						group_id: 1,
-						avg_pace: 502000
+						run_pace: 502000
 					}),
 				knex('Athletes')
 					.insert({
@@ -63,7 +63,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Devin',
 						age: 9,
 						group_id: 2,
-						avg_pace: 572000
+						run_pace: 572000
 					}),
 				knex('Athletes')
 					.insert({
@@ -73,7 +73,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Gus',
 						age: 13,
 						group_id: 2,
-						avg_pace: 497000
+						run_pace: 497000
 					}),
 				knex('Athletes')
 					.insert({
@@ -83,7 +83,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Clara',
 						age: 12,
 						group_id: 1,
-						avg_pace: 486000
+						run_pace: 486000
 					}),
 				knex('Athletes')
 					.insert({
@@ -93,7 +93,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Seamus',
 						age: 8,
 						group_id: 3,
-						avg_pace: 620000
+						run_pace: 620000
 					}),
 				knex('Athletes')
 					.insert({
@@ -103,7 +103,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Emily Micah',
 						age: 6,
 						group_id: 3,
-						avg_pace: 695000
+						run_pace: 695000
 					}),
 				knex('Athletes')
 					.insert({
@@ -113,7 +113,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Miles B',
 						age: 12,
 						group_id: 1,
-						avg_pace: 503000
+						run_pace: 503000
 					}),
 				knex('Athletes')
 					.insert({
@@ -123,7 +123,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Ruth',
 						age: 13,
 						group_id: 1,
-						avg_pace: 563000
+						run_pace: 563000
 					}),
 				knex('Athletes')
 					.insert({
@@ -133,7 +133,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Darby',
 						age: 9,
 						group_id: 2,
-						avg_pace: 585000
+						run_pace: 585000
 					}),
 				knex('Athletes')
 					.insert({
@@ -143,7 +143,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Searcy',
 						age: 10,
 						group_id: 2,
-						avg_pace: 570000
+						run_pace: 570000
 					}),
 				knex('Athletes')
 					.insert({
@@ -153,7 +153,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Jackson',
 						age: 13,
 						group_id: 2,
-						avg_pace: 620000
+						run_pace: 620000
 					}),
 				knex('Athletes')
 					.insert({
@@ -163,7 +163,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Ryan',
 						age: 11,
 						group_id: 2,
-						avg_pace: 595000
+						run_pace: 595000
 					}),
 
 				// add SBR athletes
@@ -175,7 +175,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Junior',
 						age: 11,
 						group_id: 4,
-						avg_pace: 492000
+						run_pace: 492000
 					}),
 				knex('Athletes')
 					.insert({
@@ -185,7 +185,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Jonesy',
 						age: 12,
 						group_id: 4,
-						avg_pace: 497000
+						run_pace: 497000
 					}),
 				knex('Athletes')
 					.insert({
@@ -195,7 +195,7 @@ exports.seed = function(knex, Promise) {
 						display_name: 'Bobby F.',
 						age: 10,
 						group_id: 4,
-						avg_pace: 545000
+						run_pace: 545000
 					})
 
 

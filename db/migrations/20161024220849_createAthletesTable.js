@@ -5,7 +5,7 @@ module.exports.up = (knex, Promise) => {
   	table.string('last_name')
   	table.string('display_name').unique()
   	table.integer('age')
-  	table.integer('avg_pace')
+  	table.integer('run_pace')
   	table.integer('group_id').references('Groups.id')
   })
 };
