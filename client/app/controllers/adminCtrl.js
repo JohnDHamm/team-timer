@@ -58,7 +58,9 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			last_name: $scope.newAthlete_last_name,
 			display_name: $scope.newAthlete_display_name,
 			age: $scope.newAthlete_age,
-			avg_pace: convertNewPace($scope.newAthlete_avg_pace),
+			swim_pace: convertNewPace($scope.newAthlete_swim_pace),
+			bike_pace: $scope.newAthlete_bike_pace,
+			run_pace: convertNewPace($scope.newAthlete_run_pace),
 			group_id: $scope.group_id
 		};
 		DbFactory.addAthlete(newAthlete)
@@ -75,7 +77,9 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 				$scope.newAthlete_last_name = "";
 				$scope.newAthlete_display_name = "";
 				$scope.newAthlete_age = "";
-				$scope.newAthlete_avg_pace = "";
+				$scope.newAthlete_swim_pace = "";
+				$scope.newAthlete_bike_pace = "";
+				$scope.newAthlete_run_pace = "";
 				$scope.group_id = "";
 			})
 	}
@@ -92,7 +96,8 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 
 	const formatPace = (athletesArray) => {
 		for ( let i = 0; i < athletesArray.length; i++) {
-			athletesArray[i].avg_pace = TimerFactory.timeFormatterMMSS(athletesArray[i].avg_pace);
+			athletesArray[i].swim_pace = TimerFactory.timeFormatterMMSS(athletesArray[i].swim_pace);
+			athletesArray[i].run_pace = TimerFactory.timeFormatterMMSS(athletesArray[i].run_pace);
 		}
 		return athletesArray;
 	}

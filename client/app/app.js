@@ -20,6 +20,10 @@ const app = angular.module("TeamTimerApp", ["ngRoute", "ngMaterial", "ngStorage"
 			templateUrl: 'partials/workoutSetup.html',
 			controller: 'workoutSetupCtrl'
 		})
+		.when('/selectathletes', {
+			templateUrl: 'partials/athletesSelect.html',
+			controller: 'athletesSelectCtrl'
+		})
 		.when('/workoutselect', {
 			templateUrl: 'partials/workoutSelect.html',
 			controller: 'workoutSelectCtrl'

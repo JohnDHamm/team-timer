@@ -6,15 +6,19 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const totalLapsReadout = document.getElementById('totalLaps');
 
-	//get athletes from specified group - DbFactory
+	//get athletes from selectedAthletes
 	$scope.athleteArray = []
 	$scope.timerOn = false;
 
-	DbFactory
-		.getAthletesByGroup(workoutParams.group_id)
-		.then((data) => {
-			createAthleteArray(data)
-		})
+	// DbFactory
+	// 	.getAthletesByGroup(workoutParams.group_id)
+	// 	.then((data) => {
+	// 		createAthleteArray(data)
+	// 	})
+
+	//x = WorkoutFactory.getSelectedAthletes()
+		// reorder per pace
+		// createAthleteArray(x)
 
 	const createAthleteArray = (athletesFromDb) => {
 		for (let i = 0; i < athletesFromDb.length; i++) {

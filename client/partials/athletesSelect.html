@@ -1,0 +1,45 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<div id="workoutSetupBG">
+
+	<div ng-hide="groupsSelected">
+
+		<div ng-repeat="group in allGroups">
+			<md-checkbox ng-click="toggle(group, selectedGroups)">{{ group.group_name }}</md-checkbox>
+		</div>
+
+		<div layout="row" layout-align="center" id="selectGroupsBtnDiv">
+			<md-button class="md-raised" ng-click="selectGroups()">Select Group(s)</md-button>
+		</div>
+
+	</div>
+
+	<div ng-show="groupsSelected">
+		<div ng-repeat="athlete in selectedAthletes" layout="row" flex layout-align="center">
+			<div layout="row" flex flex-offset="10" layout-align="left center">
+				<div flex="80">
+					{{athlete.display_name}}
+				</div>
+				<div flex>
+				  <i ng-click="deselectAthlete(athlete, selectedAthletes)" class="material-icons removeIcon">remove_circle_outline</i>
+				</div>
+			</div>
+		</div>
+
+		<div layout="row" layout-align="center" id="saveAthletesBtnDiv">
+			<md-button class="md-raised" ng-click="saveSelectedAthletes()">Start Timer</md-button>
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>

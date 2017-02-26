@@ -62,17 +62,23 @@
 			<div class="athleteTitles" flex="15">
 				first name
 			</div>
-			<div class="athleteTitles" flex="20">
+			<div class="athleteTitles" flex="15">
 				last name
 			</div>
-			<div class="athleteTitles" flex="10">
+			<div class="athleteTitles" flex="5">
 				age
 			</div>
-			<div class="athleteTitles" flex="15">
+			<div class="athleteTitles" flex="10">
 				group
 			</div>
 			<div class="athleteTitles" flex="10">
-				avg pace
+				swim pace
+			</div>
+			<div class="athleteTitles" flex="10">
+				bike pace
+			</div>
+			<div class="athleteTitles" flex="10">
+				run pace
 			</div>
 		</div>
 
@@ -84,17 +90,23 @@
 				<div flex="15">
 					<p>{{athlete.first_name}}</p>
 				</div>
-				<div flex="20">
+				<div flex="15">
 					<p>{{athlete.last_name}}</p>
 				</div>
-				<div flex="10">
+				<div flex="5">
 				  <p>{{athlete.age}}</p>
 			  </div>
-				<div flex="15">
+				<div flex="10">
 				  <p>{{athlete.group_name}}</p>
 			  </div>
 				<div flex="10">
-				  <p>{{athlete.avg_pace}}</p>
+				  <p>{{athlete.swim_pace}}</p>
+			  </div>
+				<div flex="10">
+				  <p>{{athlete.bike_pace}}</p>
+			  </div>
+				<div flex="10">
+				  <p>{{athlete.run_pace}}</p>
 			  </div>
 			  <div flex>
 			  	<i ng-click="editAthlete(athlete.id)" class="material-icons editIcon">edit</i>
@@ -114,23 +126,31 @@
 				<label>First Name</label>
 				<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
 			</md-input-container>
-			<md-input-container flex="20" class="groupInput">
+			<md-input-container flex="15" class="groupInput">
 				<label>Last Name</label>
 				<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
 			</md-input-container>
-			<md-input-container flex="10" class="groupInput">
+			<md-input-container flex="5" class="groupInput">
 				<label>Age</label>
 				<input name="newGroup_desc" type="number" ng-model="newAthlete_age" class="validate">
 			</md-input-container>
-			<md-input-container flex="15" class="groupInput">
-			  <label>Select Group</label>
+			<md-input-container flex="10" class="groupInput">
+			  <label>Group</label>
 			  <md-select id="groupSelect" ng-model="group_id">
 			    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
 			  </md-select>
 			</md-input-container>
 			<md-input-container flex="10" class="groupInput">
-				<label>Avg Pace</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_avg_pace" class="validate" placeholder="mm:ss">
+				<label>Swim Pace</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_swim_pace" class="validate" placeholder="mm:ss">
+			</md-input-container>
+			<md-input-container flex="10" class="groupInput">
+				<label>Bike Pace</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_bike_pace" class="validate" placeholder="mph">
+			</md-input-container>
+			<md-input-container flex="10" class="groupInput">
+				<label>Run Pace</label>
+				<input name="newGroup_desc" type="text" ng-model="newAthlete_run_pace" class="validate" placeholder="mm:ss">
 			</md-input-container>
 		</div>
 
