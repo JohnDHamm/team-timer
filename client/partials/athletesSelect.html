@@ -1,7 +1,31 @@
 <div ng-include="'partials/navbar.html'"></div>
 
 <div id="workoutSetupBG">
-	<h2>Select Athletes for Workout</h2>
+
+	<!-- <md-checkbox ng-model="isChecked" aria-label="Finished?">
+	Finished ?
+	</md-checkbox> -->
+	<div ng-hide="groupsSelected">
+
+		<div ng-repeat="group in allGroups">
+			<md-checkbox ng-checked="exists(group, selectedGroups)" ng-click="toggle(group, selectedGroups)">{{ group.group_name }}</md-checkbox>
+		</div>
+
+		<div layout="row" layout-align="center" id="selectGroupsBtnDiv">
+			<md-button class="md-raised" ng-click="selectGroups()">Select Group(s)</md-button>
+		</div>
+
+	</div>
+
+	<div ng-show="groupsSelected">
+		<div ng-repeat="athlete in selectedAthletes">
+			<div>{{athlete.display_name}}
+
+			</div>
+		</div>
+	</div>
+
+
 
 
 
