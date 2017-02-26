@@ -12,19 +12,14 @@ app.controller("athletesSelectCtrl", function($scope, WorkoutFactory, UserFactor
 	$scope.selectedGroups = [];
 	$scope.selectedAthletes = [];
 
-	$scope.toggle = function (group, list) {
-		var idx = list.indexOf(group);
+	$scope.toggle = function (group, selGroupsArray) {
+		var idx = selGroupsArray.indexOf(group);
 		if (idx > -1) {
-			list.splice(idx, 1);
+			selGroupsArray.splice(idx, 1);
 		}
 		else {
-			list.push(group);
+			selGroupsArray.push(group);
 		}
-		console.log("selectedGroups", $scope.selectedGroups);
-	};
-
-	$scope.exists = function (group, list) {
-		return list.indexOf(group) > -1;
 	};
 
 	$scope.selectGroups = () => {
@@ -32,29 +27,35 @@ app.controller("athletesSelectCtrl", function($scope, WorkoutFactory, UserFactor
 
 		//loop through selectedGroups, get athletes, add to array
 		for (let i = 0; i < $scope.selectedGroups.length; i++) {
-			console.log("group id", $scope.selectedGroups[i].id);
+
 			let groupId = $scope.selectedGroups[i].id;
 
 			DbFactory
-				.getAthletesByGroup(groupId)
+				.getAthletesByGroup($scope.selectedGroups[i].id)
 				.then((athletes) => {
-					console.log("athletes", athletes);
 					athletes.forEach((athlete) => $scope.selectedAthletes.push(athlete));
 					$scope.apply;
 				})
 		}
-		console.log("selectedAthletes final", $scope.selectedAthletes);
 	}
 
 
-
-	//deselectAthlete from array
-		//show current list (updated)
+	$scope.deselectAthlete = (athlete, athleteArr) => {
+		let index = athleteArr.indexOf(athlete);
+		$scope.selectedAthletes.splice(index, 1);
+		$scope.apply;
+	}
 
 
 	//remove all/reset list?
 
+
 	//save selected athletes array to WorkoutFactory
 		//go to timer
+	$scope.saveSelectedAthletes = () => {
+		console.log("final list", $scope.selectedAthletes);
+		//WorkoutFactory.setSelectedAthletes($scope.selectedAthletes);
+		$location.path("/timer");
+	}
 
 });
