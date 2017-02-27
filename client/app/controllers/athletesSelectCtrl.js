@@ -27,9 +27,6 @@ app.controller("athletesSelectCtrl", function($scope, WorkoutFactory, UserFactor
 
 		//loop through selectedGroups, get athletes, add to array
 		for (let i = 0; i < $scope.selectedGroups.length; i++) {
-
-			let groupId = $scope.selectedGroups[i].id;
-
 			DbFactory
 				.getAthletesByGroup($scope.selectedGroups[i].id)
 				.then((athletes) => {
@@ -47,11 +44,7 @@ app.controller("athletesSelectCtrl", function($scope, WorkoutFactory, UserFactor
 	}
 
 
-	//remove all/reset list?
-
-
 	$scope.saveSelectedAthletes = () => {
-		console.log("final list", $scope.selectedAthletes);
 		WorkoutFactory.setSelectedAthletes($scope.selectedAthletes);
 		$location.path("/timer");
 	}
