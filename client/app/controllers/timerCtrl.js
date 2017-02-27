@@ -3,7 +3,6 @@
 app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory, TimerFactory){
 
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
-	console.log("disc", workoutParams.discipline);
 	const selectedAthletes = WorkoutFactory.getSelectedAthletes();
 	let sortedAthletesArray = [];
 
@@ -12,21 +11,14 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	$scope.athleteArray = []
 	$scope.timerOn = false;
 
-	//check discipline - resort athletes by speed
+	//check discipline - sort athletes by speed
 	if (workoutParams.discipline === 'bike') {
-		console.log("disc = bike");
 		sortedAthletesArray = selectedAthletes.sort((a, b) => b.bike_pace - a.bike_pace);
-		console.log("sorted", sortedAthletesArray);
 	} else if (workoutParams.discipline === 'run') {
-		console.log("disc = run");
 		sortedAthletesArray = selectedAthletes.sort((a, b) => a.run_pace - b.run_pace);
-		console.log("sorted", sortedAthletesArray);
 	} else if (workoutParams.discipline === 'swim') {
-		console.log("disc = swim");
 		sortedAthletesArray = selectedAthletes.sort((a, b) => a.swim_pace - b.swim_pace);
-		console.log("sorted", sortedAthletesArray);
 	}
-
 
 	const createAthleteArray = (sortedAthletesArray) => {
 		for (let i = 0; i < sortedAthletesArray.length; i++) {
@@ -43,7 +35,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	}
 
 	createAthleteArray(sortedAthletesArray);
-
 
 
 	const checkTotalLaps = () => {

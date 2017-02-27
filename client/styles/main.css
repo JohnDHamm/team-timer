@@ -115,12 +115,38 @@ h5.addNew {
   padding-bottom: 10px;
   background: linear-gradient(#ffee38, #e94339); }
 
+h3.setupTitle {
+  margin-bottom: 10px; }
+
 .lapMetric {
   margin-top: 0;
   font-style: italic; }
 
-#startBtnDiv {
-  margin-top: 20px; }
+#athletesSelectBG {
+  min-height: calc(100vh - 62px);
+  padding-bottom: 10px;
+  background: linear-gradient(#ffee38, #e94339); }
+
+#groupCheckboxes {
+  padding: 20px 0; }
+
+#selectAthletesBtnDiv {
+  padding-top: 20px; }
+
+#selectedAthletesContainer {
+  padding: 20px 0 20px 0; }
+
+.selAthleteName {
+  font-size: 1.5rem;
+  padding: 7px 0; }
+
+.removeIcon {
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.4); }
+
+div.sepLine {
+  height: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
 
 #workoutViewBG {
   min-height: calc(100vh - 77px);
