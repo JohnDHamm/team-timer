@@ -115,12 +115,15 @@ h5.addNew {
   padding-bottom: 10px;
   background: linear-gradient(#ffee38, #e94339); }
 
+#workoutSetupTitle {
+  margin-bottom: 10px; }
+
 .lapMetric {
   margin-top: 0;
   font-style: italic; }
 
-#startBtnDiv {
-  margin-top: 20px; }
+#selectAthletesBtnDiv {
+  padding-top: 20px; }
 
 #workoutViewBG {
   min-height: calc(100vh - 77px);
