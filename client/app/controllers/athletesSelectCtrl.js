@@ -50,11 +50,9 @@ app.controller("athletesSelectCtrl", function($scope, WorkoutFactory, UserFactor
 	//remove all/reset list?
 
 
-	//save selected athletes array to WorkoutFactory
-		//go to timer
 	$scope.saveSelectedAthletes = () => {
 		console.log("final list", $scope.selectedAthletes);
-		//WorkoutFactory.setSelectedAthletes($scope.selectedAthletes);
+		WorkoutFactory.setSelectedAthletes($scope.selectedAthletes);
 		$location.path("/timer");
 	}
 
