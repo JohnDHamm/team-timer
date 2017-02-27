@@ -2,7 +2,8 @@
 
 app.factory("WorkoutFactory", function($q) {
 
-	const currentWorkoutParams = {}
+	const currentWorkoutParams = {};
+	let selectedAthletes = [];
 
 	const setCurrentWorkoutParams = (setupObj) => {
 		currentWorkoutParams.date = Date.now().toFixed();
@@ -17,12 +18,11 @@ app.factory("WorkoutFactory", function($q) {
 
 	const getCurrentWorkoutParams = () => currentWorkoutParams;
 
-	//setSelectedAthletes
-		//used in athletesSelectCtrl
+	const setSelectedAthletes = (athleteArray) => {
+		selectedAthletes = athleteArray;
+	}
 
-	//getSelectedAthletes
-		//used in timerCtrl
-
+	const getSelectedAthletes = () => selectedAthletes;
 
 
 	const createAthletesArray = (workouts) => {
@@ -52,7 +52,7 @@ app.factory("WorkoutFactory", function($q) {
 	}
 
 
-	return { setCurrentWorkoutParams, getCurrentWorkoutParams, createAthletesArray };
+	return { setCurrentWorkoutParams, getCurrentWorkoutParams, setSelectedAthletes, getSelectedAthletes, createAthletesArray };
 
 
 });

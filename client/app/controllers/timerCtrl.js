@@ -3,26 +3,34 @@
 app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory, TimerFactory){
 
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
+	console.log("disc", workoutParams.discipline);
+	const selectedAthletes = WorkoutFactory.getSelectedAthletes();
+	let sortedAthletesArray = [];
 
 	const totalLapsReadout = document.getElementById('totalLaps');
 
-	//get athletes from selectedAthletes
 	$scope.athleteArray = []
 	$scope.timerOn = false;
 
-	// DbFactory
-	// 	.getAthletesByGroup(workoutParams.group_id)
-	// 	.then((data) => {
-	// 		createAthleteArray(data)
-	// 	})
+	//check discipline - resort athletes by speed
+	if (workoutParams.discipline === 'bike') {
+		console.log("disc = bike");
+		sortedAthletesArray = selectedAthletes.sort((a, b) => b.bike_pace - a.bike_pace);
+		console.log("sorted", sortedAthletesArray);
+	} else if (workoutParams.discipline === 'run') {
+		console.log("disc = run");
+		sortedAthletesArray = selectedAthletes.sort((a, b) => a.run_pace - b.run_pace);
+		console.log("sorted", sortedAthletesArray);
+	} else if (workoutParams.discipline === 'swim') {
+		console.log("disc = swim");
+		sortedAthletesArray = selectedAthletes.sort((a, b) => a.swim_pace - b.swim_pace);
+		console.log("sorted", sortedAthletesArray);
+	}
 
-	//x = WorkoutFactory.getSelectedAthletes()
-		// reorder per pace
-		// createAthleteArray(x)
 
-	const createAthleteArray = (athletesFromDb) => {
-		for (let i = 0; i < athletesFromDb.length; i++) {
-			const newObj = athletesFromDb[i];
+	const createAthleteArray = (sortedAthletesArray) => {
+		for (let i = 0; i < sortedAthletesArray.length; i++) {
+			const newObj = sortedAthletesArray[i];
 			newObj.index = i;
 			newObj.lapTimesArray = [0];
 			newObj.readout = '0:00.00';
@@ -33,6 +41,10 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			$scope.athleteArray.push(newObj);
 		}
 	}
+
+	createAthleteArray(sortedAthletesArray);
+
+
 
 	const checkTotalLaps = () => {
 		const currentLaps = [];
@@ -141,20 +153,21 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	}
 
 	$scope.recordLap = function(index) {
-		const thisAthlete = $scope.athleteArray[index];
-		if (thisAthlete.completedLaps === false) {
-
-			thisAthlete.lap ++;
-			const nowLap = Date.now();
-			const elapsedTime = nowLap - lapStart;
-			thisAthlete.elapsed = elapsedTime;
-			thisAthlete.lapTimesArray.push(elapsedTime);
-			thisAthlete.lastLapTime = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
-			if (thisAthlete.lap === workoutParams.laps) {
-				thisAthlete.completedLaps = true;
-				thisAthlete.readout = "done";
+		if ($scope.timerOn) {
+			const thisAthlete = $scope.athleteArray[index];
+			if (thisAthlete.completedLaps === false) {
+				thisAthlete.lap ++;
+				const nowLap = Date.now();
+				const elapsedTime = nowLap - lapStart;
+				thisAthlete.elapsed = elapsedTime;
+				thisAthlete.lapTimesArray.push(elapsedTime);
+				thisAthlete.lastLapTime = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
+				if (thisAthlete.lap === workoutParams.laps) {
+					thisAthlete.completedLaps = true;
+					thisAthlete.readout = "done";
+				}
+				checkTotalLaps();
 			}
-			checkTotalLaps();
 		}
 	}
 
