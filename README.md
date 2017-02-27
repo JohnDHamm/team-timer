@@ -15,9 +15,9 @@ My NSS back-end capstone project, Team Timer is an app developed from necessity.
 More details and screen captures found here:  http://johndhammcodes.com/timer
 
 ###### _Features recently added:_
-1. Athletes are listed in timer module by average pace to help the coach predict next athlete to complete lap
+1. Athletes are listed in timer module by average pace (per workout discipline) to help the coach predict next athlete to complete lap.
+2. Ability for coach to select athletes across different groups for a workout, as well as remove athletes from a workout during setup if they are not partaking in the training.
 
 
 ###### _Features to be implemented soon:_
-1. Ability for coach to select athletes across different groups for a workout, as well as remove athletes from a workout during setup if they are not partaking in the training.
-2. Addition of swim/bike average pace info for athletes to be used during swim and bike timing.
+1. Ability for coach to delete saved workouts that are no longer needed.
