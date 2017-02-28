@@ -65,6 +65,13 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const deleteGroup = id =>
+		$q((resolve, reject) =>
+			$http
+				.delete(`/api/deleteGroup/${id}`)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
 	const getAthletesByGroup = group_id =>
 		$q((resolve, reject) =>
 			$http
@@ -108,6 +115,6 @@ app.factory("DbFactory", function($q, $http) {
 		)
 
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, deleteGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });

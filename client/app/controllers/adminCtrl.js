@@ -6,6 +6,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	$scope.showMsg = false;
 	$scope.showEditGroupModal = false;
 	$scope.editGroup = {};
+	let notEmptyGroup = false;
 
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
@@ -50,6 +51,9 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 				$scope.newGroup_desc = "";
 				$scope.newGroup_name = "";
 				checkForGroup();
+			})
+			.then(() => {
+				$scope.apply;
 			})
 	}
 
@@ -120,7 +124,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 
 	$scope.editGroup = (id) => {
 		$scope.showEditGroupModal = true;
-		// console.log("edit group id: ", id);
+		console.log("edit group id: ", id);
 		for (let i = 0; i < $scope.groups.length; i++) {
 			if ($scope.groups[i].id === id) {
 				$scope.editGroup = $scope.groups[i];
@@ -132,8 +136,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	$scope.saveEditedGroup = () => {
 		$scope.showEditGroupModal = false;
 		DbFactory.saveEditedGroup($scope.editGroup)
-			.then((res) => {
-				console.log("res", res);
+			.then(() => {
 				reloadGroups();
 			})
 	}
@@ -144,10 +147,27 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	$scope.deleteGroup = (id) => {
-		console.log("delete group id: ", id);
+		// console.log("delete group id: ", id);
 		// check if group has no athletes
-
-
+		for (let i = 0; i < $scope.athletes.length; i++) {
+			if ($scope.athletes[i].group_id === id) {
+				notEmptyGroup = true;
+				break;
+			}
+		}
+		if (notEmptyGroup) {
+			$scope.msg = "Cannot delete group because at least one athlete belongs to the group!"
+			$scope.showMsg = true;
+		} else {
+			$scope.msg = "";
+			$scope.showMsg = false;
+			console.log("can delete group!");
+			DbFactory.deleteGroup(id)
+				.then(() => {
+					reloadGroups();
+				})
+		}
+		notEmptyGroup = false;
 	}
 
 });
