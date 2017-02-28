@@ -23,10 +23,10 @@
 
 .removeIcon {
 	font-size: 1.5rem;
-	color: rgba(0,0,0,0.4);
+	color: $divider-color;
 }
 
 div.sepLine {
 	height: 1px;
-	border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-bottom: 1px solid $divider-color;
 }

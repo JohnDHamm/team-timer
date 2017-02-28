@@ -53,3 +53,16 @@ h5.addNew {
 	font-style: italic;
 }
 
+.editGroupModal {
+	background-color: rgba(255,255,255,0.3);
+	border: 1px solid $divider-color;
+}
+
+p.modalTitle {
+	padding-left: 15px;
+	font-style: italic;
+	color: rgba(0,0,0,.5);
+	font-size: .85rem;
+	margin: 5px 0;
+}
+

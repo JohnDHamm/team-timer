@@ -111,6 +111,17 @@ h5.addNew {
 .displayName {
   font-style: italic; }
 
+.editGroupModal {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3); }
+
+p.modalTitle {
+  padding-left: 15px;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: .85rem;
+  margin: 5px 0; }
+
 #workoutSetupBG {
   min-height: calc(100vh - 62px);
   padding-bottom: 10px;
@@ -143,11 +154,11 @@ h3.setupTitle {
 
 .removeIcon {
   font-size: 1.5rem;
-  color: rgba(0, 0, 0, 0.4); }
+  color: rgba(0, 0, 0, 0.3); }
 
 div.sepLine {
   height: 1px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
 
 #workoutViewBG {
   min-height: calc(100vh - 77px);

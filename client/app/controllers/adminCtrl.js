@@ -4,6 +4,8 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 
 	$scope.groups === [];
 	$scope.showMsg = false;
+	$scope.showEditGroupModal = false;
+	$scope.editGroup = {};
 
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
@@ -19,6 +21,7 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		.then(([team_name, groups, athletes]) => {
 			$scope.teamName = team_name[0].team_name;
 			$scope.groups = groups;
+			console.log("$scope.groups", $scope.groups);
 			checkForGroup();
 			$scope.athletes = formatPace(athletes);
 		})
@@ -116,7 +119,35 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	$scope.editGroup = (id) => {
+		$scope.showEditGroupModal = true;
 		// console.log("edit group id: ", id);
+		for (let i = 0; i < $scope.groups.length; i++) {
+			if ($scope.groups[i].id === id) {
+				$scope.editGroup = $scope.groups[i];
+				// console.log("editGroup", $scope.editGroup);
+			}
+		}
+	}
+
+	$scope.saveEditedGroup = () => {
+		$scope.showEditGroupModal = false;
+		DbFactory.saveEditedGroup($scope.editGroup)
+			.then((res) => {
+				console.log("res", res);
+				reloadGroups();
+			})
+	}
+
+	$scope.cancelEditGroup = () => {
+		$scope.showEditGroupModal = false;
+		reloadGroups();
+	}
+
+	$scope.deleteGroup = (id) => {
+		console.log("delete group id: ", id);
+		// check if group has no athletes
+
+
 	}
 
 });

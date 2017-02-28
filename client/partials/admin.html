@@ -11,20 +11,43 @@
 			<h3 class="titleMargin">Groups:</h3>
 		</div>
 
-		<div layout="row" flex flex-offset="15" layout-align="center" ng-repeat="group in groups">
+		<div layout="row" flex flex-offset="10" layout-align="center" ng-repeat="group in groups">
 			<div flex="30">
 				<p class="groupList">{{group.group_name}}</p>
 			</div>
 			<div flex="60">
 				<p class="groupList">{{group.description}}</p>
 			</div>
+			<div flex="10">
+		  	<i ng-click="editGroup(group.id)" class="material-icons editIcon">edit</i>
+		  </div>
 			<div flex>
-			  	<i ng-click="editGroup(group.id)" class="material-icons editIcon">edit</i>
-			  </div>
+			  <i ng-click="deleteGroup(group.id)" class="material-icons removeIcon">remove_circle_outline</i>
+			</div>
 		</div>
 
 		<div ng-show="showMsg" layout="row" flex layout-align="center">
 			<h4 class="errorMsg">{{msg}}</h4>
+		</div>
+
+		<div ng-show="showEditGroupModal" class="editGroupModal">
+			<div layout="row" flex="100">
+				<p class="modalTitle">edit name and/or description:</p>
+			</div>
+			<div layout="row" flex layout-align="center">
+				<md-input-container flex="35" class="groupInput">
+					<input name="editGroup_name" type="text" ng-model="editGroup.group_name" class="validate">
+				</md-input-container>
+				<md-input-container flex="65" class="groupInput">
+					<input name="editGroup_desc" type="text" ng-model="editGroup.description" class="validate">
+				</md-input-container>
+			</div>
+			<div layout="row" flex layout-align="center">
+				<md-button class="md-raised" ng-click="saveEditedGroup()">save change(s)</md-button>
+				<md-button class="md-raised" ng-click="cancelEditGroup()">cancel</md-button>
+			</div>
+
+
 		</div>
 
 		<div layout="row" flex>

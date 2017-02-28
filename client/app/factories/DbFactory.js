@@ -58,6 +58,13 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const saveEditedGroup = groupObj =>
+		$q((resolve, reject) =>
+			$http
+				.put(`/api/editGroup/${groupObj.id}`, groupObj)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
 	const getAthletesByGroup = group_id =>
 		$q((resolve, reject) =>
 			$http
@@ -101,6 +108,6 @@ app.factory("DbFactory", function($q, $http) {
 		)
 
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });
