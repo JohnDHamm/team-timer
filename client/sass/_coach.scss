@@ -24,14 +24,16 @@
 	border: 3px solid rgb(255,238,56);
 	border-radius: 5px;
 	background-color: #fff;
-	padding: 10px;
 }
 
-a {
+a.coachLink {
 	text-decoration: none;
+	padding: 10px;
+
 }
 
 .coachBtnText {
+	text-align: center;
 	color: #000;
 	margin: 0;
 }

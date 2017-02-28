@@ -58,13 +58,14 @@
 .coachButton {
   border: 3px solid #ffee38;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #fff; }
+
+a.coachLink {
+  text-decoration: none;
   padding: 10px; }
 
-a {
-  text-decoration: none; }
-
 .coachBtnText {
+  text-align: center;
   color: #000;
   margin: 0; }
 
