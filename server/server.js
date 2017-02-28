@@ -99,6 +99,28 @@ app.post('/api/addGroup', (req, res) => {
 		})
 })
 
+app.put('/api/editGroup/:group_id', (req, res) => {
+	const group_id = req.params.group_id;
+	knex('Groups')
+		.where('id', group_id)
+		.update(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.delete('/api/deleteGroup/:group_id', (req, res) => {
+	const group_id = req.params.group_id;
+	console.log("group_id", group_id);
+	knex('Groups')
+		.where('id', group_id)
+		.del(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+
+})
+
 app.get('/api/getAthletes/Team/:team_id', (req, res) => {
 	const team_id = req.params.team_id
 	knex('Athletes')
