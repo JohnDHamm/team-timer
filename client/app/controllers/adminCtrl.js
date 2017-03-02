@@ -165,7 +165,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		for (let i = 0; i < $scope.athletes.length; i++) {
 			if ($scope.athletes[i].id === id) {
 				$scope.editAthlete = $scope.athletes[i];
-				console.log("$scope.editAthlete", $scope.editAthlete);
 			}
 		}
 		$scope.showEditAthleteModal = true;

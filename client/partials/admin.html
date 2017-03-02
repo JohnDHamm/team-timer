@@ -105,7 +105,7 @@
 			</div>
 		</div>
 
-		<div layout="row" flex layout-align="center" ng-repeat="athlete in athletes">
+		<div layout="row" flex layout-align="center" ng-repeat="athlete in athletes" ng-hide="showEditAthleteModal">
 			<div id="athleteListRow{{athlete.id}}" class="athleteListRow" layout="row" flex flex-offset="10" layout-align="left center">
 				<div flex="15">
 				  <p class="displayName">{{athlete.display_name}}</p>
@@ -140,11 +140,11 @@
 			</div>
 		</div>
 
-		<div ng-show="showEditAthleteModal" class="editAthleteModal">
-			<div layout="row" flex="100">
+		<div ng-show="showEditAthleteModal" class="editAthleteModal" layout="column" flex flex-offset="10">
+			<div layout="row" flex>
 				<p class="modalTitle">edit athlete's information:</p>
 			</div>
-			<div layout="row" flex flex-offset="10">
+			<div layout="row" flex>
 				<md-input-container flex="15" class="groupInput">
 					<input name="newGroup_desc" type="text" ng-model="editAthlete.display_name" class="validate">
 				</md-input-container>
