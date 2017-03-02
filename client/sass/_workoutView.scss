@@ -56,13 +56,13 @@
 	margin: 3px auto;
 	background-color: rgba(0,0,0,.8);
 	border-radius: 2px;
+	color: #fff;
+	font-size: 1.5rem;
 }
 
 .lapNum {
 	margin: 10px 0;
-	font-size: 1.5rem;
 	padding-left: 1rem;
-	color: #fff;
 }
 
 .timeRight {
@@ -71,35 +71,35 @@
 	margin: 10px 0;
 }
 
-.lapTime {
-	margin: 10px 0;
-	font-size: 1.5rem;
-	color: #fff;
-}
-
 .lapMS {
-	margin: 10px 0;
 	font-size: 1.25rem;
-	color: #fff;
 }
 
 .summaryContainer {
-	margin-top: 10px;
-}
-
-.centerText {
-	margin: 10px 0;
-	text-align: center;
-}
-
-.lapSummary {
-	margin: 10px 0;
+	margin: 10px auto;
+	background-color: rgba(0,0,0,.5);
+	border-radius: 2px;
+	color: #fff;
 	font-size: 1.2rem;
-	color: #fff;
 }
 
-.lapSummaryMs {
-	margin: 10px 0;
+.sumTitle {
+	padding-left: 1rem;
+}
+
+.sumTopRow {
+	margin: 7px 0 2px 0;
+}
+
+.sumBtmRow {
+	margin: 2px 0 7px 0;
+}
+
+.rightAlign {
+	text-align: right;
+	padding-right: 1rem;
+}
+
+.summaryMs {
 	font-size: 1rem;
-	color: #fff;
 }

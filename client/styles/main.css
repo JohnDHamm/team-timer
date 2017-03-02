@@ -211,45 +211,44 @@ div.sepLine {
 .lapSection {
   margin: 3px auto;
   background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 2px; }
+  border-radius: 2px;
+  color: #fff;
+  font-size: 1.5rem; }
 
 .lapNum {
   margin: 10px 0;
-  font-size: 1.5rem;
-  padding-left: 1rem;
-  color: #fff; }
+  padding-left: 1rem; }
 
 .timeRight {
   text-align: right;
   padding-right: 1rem;
   margin: 10px 0; }
 
-.lapTime {
-  margin: 10px 0;
-  font-size: 1.5rem;
-  color: #fff; }
-
 .lapMS {
-  margin: 10px 0;
-  font-size: 1.25rem;
-  color: #fff; }
+  font-size: 1.25rem; }
 
 .summaryContainer {
-  margin-top: 10px; }
+  margin: 10px auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  color: #fff;
+  font-size: 1.2rem; }
 
-.centerText {
-  margin: 10px 0;
-  text-align: center; }
+.sumTitle {
+  padding-left: 1rem; }
 
-.lapSummary {
-  margin: 10px 0;
-  font-size: 1.2rem;
-  color: #fff; }
+.sumTopRow {
+  margin: 7px 0 2px 0; }
 
-.lapSummaryMs {
-  margin: 10px 0;
-  font-size: 1rem;
-  color: #fff; }
+.sumBtmRow {
+  margin: 2px 0 7px 0; }
+
+.rightAlign {
+  text-align: right;
+  padding-right: 1rem; }
+
+.summaryMs {
+  font-size: 1rem; }
 
 #workoutSelectBG {
   min-height: calc(100vh - 62px);
@@ -278,7 +277,9 @@ div.sepLine {
   padding-right: 0.7rem; }
 
 .selectDesc {
-  margin: 5px 0; }
+  font-size: .85rem;
+  margin: 0 auto 5px auto;
+  padding: 0 1rem; }
 
 #timerBG {
   min-height: calc(100vh - 77px);
