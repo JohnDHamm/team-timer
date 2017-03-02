@@ -44,7 +44,7 @@ h5.addNew {
 	margin: 5px 10px;
 }
 
-#athleteListRow p {
+.athleteListRow p {
 	margin: 5px 0px;
 	border-bottom: 1px solid $divider-color;
 }
@@ -64,5 +64,10 @@ p.modalTitle {
 	color: rgba(0,0,0,.5);
 	font-size: .85rem;
 	margin: 5px 0;
+}
+
+.editAthleteModal {
+	background-color: rgba(255,255,255,0.3);
+	border: 1px solid $divider-color;
 }
 

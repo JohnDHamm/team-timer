@@ -7,6 +7,8 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	$scope.showEditGroupModal = false;
 	$scope.editGroup = {};
 	let notEmptyGroup = false;
+	$scope.showEditAthleteModal = false;
+	$scope.editAthlete = {};
 
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
@@ -114,10 +116,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 
 	}
 
-	$scope.editAthlete = (id) => {
-		// console.log("edit athlete id: ", id);
-	}
-
 	$scope.groupEdit = (id) => {
 		$scope.showEditGroupModal = true;
 		for (let i = 0; i < $scope.groups.length; i++) {
@@ -161,5 +159,47 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		}
 		notEmptyGroup = false;
 	}
+
+	$scope.athleteEdit = (id) => {
+		console.log("edit athlete id: ", id);
+		for (let i = 0; i < $scope.athletes.length; i++) {
+			if ($scope.athletes[i].id === id) {
+				$scope.editAthlete = $scope.athletes[i];
+				console.log("$scope.editAthlete", $scope.editAthlete);
+			}
+		}
+		$scope.showEditAthleteModal = true;
+
+		// let currentRow = document.getElementById(`athleteListRow${id}`);
+		// console.log("currentRow", currentRow);
+
+	}
+
+	$scope.saveEditedAthlete = () => {
+		delete $scope.editAthlete.group_name;
+		$scope.editAthlete.swim_pace = convertNewPace($scope.editAthlete.swim_pace);
+		$scope.editAthlete.run_pace = convertNewPace($scope.editAthlete.run_pace);
+
+		$scope.showEditAthleteModal = false;
+		DbFactory.saveEditedAthlete($scope.editAthlete)
+			.then(() => {
+				reloadAthletes();
+			})
+	}
+
+	$scope.cancelEditAthlete = () => {
+		$scope.showEditAthleteModal = false;
+		reloadAthletes();
+	}
+
+
+
+
+	$scope.deleteAthlete = (id) => {
+		console.log("delete athlete id: ", id);
+	}
+
+
+
 
 });

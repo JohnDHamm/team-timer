@@ -104,7 +104,7 @@ h5.addNew {
 .athleteList {
   margin: 5px 10px; }
 
-#athleteListRow p {
+.athleteListRow p {
   margin: 5px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
 
@@ -121,6 +121,10 @@ p.modalTitle {
   color: rgba(0, 0, 0, 0.5);
   font-size: .85rem;
   margin: 5px 0; }
+
+.editAthleteModal {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3); }
 
 #workoutSetupBG {
   min-height: calc(100vh - 62px);
