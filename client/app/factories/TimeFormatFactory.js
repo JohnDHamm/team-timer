@@ -100,9 +100,6 @@ app.factory("TimeFormatFactory", function($q) {
 		}
 
 		let msString = Math.round(sss / 10).toString();
-		// if (sss === 0) {
-		// 	msString = "00";
-		// }
 		if (msString.length < 2) {
 			msString += '0';
 		}
