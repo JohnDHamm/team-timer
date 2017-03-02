@@ -277,7 +277,9 @@ div.sepLine {
   padding-right: 0.7rem; }
 
 .selectDesc {
-  margin: 5px 0; }
+  font-size: .85rem;
+  margin: 5px auto;
+  padding: 0 1rem; }
 
 #timerBG {
   min-height: calc(100vh - 77px);
