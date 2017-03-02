@@ -111,6 +111,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	//------STOPWATCH----------
 
 	const mainReadout = document.getElementById('mainReadout');
+	const mainReadoutMs = document.getElementById('mainReadoutMs');
 	let time = 0;
 	let interval;
 	let offset;
@@ -166,7 +167,9 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		const timePassed = delta();
 		time += timePassed;
 		const formattedTime = TimerFactory.timeFormatter(time);
-		mainReadout.textContent = formattedTime;
+		const mainReadoutArray = formattedTime.split('.');
+		mainReadout.textContent = mainReadoutArray[0] + '.';
+		mainReadoutMs.textContent = mainReadoutArray[1];
 		$scope.$apply(function() {
 			for (let i = 0; i < $scope.athleteArray.length; i++) {
 				const newTime = time - $scope.athleteArray[i].elapsed;
