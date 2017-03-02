@@ -47,12 +47,18 @@
 			<p class="lapNum">Lap {{time.lapNum}}</p>
 		</div>
 		<div flex>
-			<p class="lapTime">{{time.lapTime}}</p>
+			<p class="timeRight"><span class="lapTime">{{time.lapTime}}.</span><span class="lapMS">{{time.lapMS}}</span></p>
 		</div>
 	</div>
-	<div layout="row" flex="80" flex-offset="10" flex-gt-sm="30" flex-offset-gt-sm="35" class="lapSection">
+	<div layout="row" flex="80" flex-offset="10" flex-gt-sm="30" flex-offset-gt-sm="35" class="lapSection summaryContainer">
 		<div flex>
-			<p class="lapSummary">{{calcTimes.totalTime}} total / {{calcTimes.avgTime}} avg</p>
+			<p class="centerText">
+				<span class="lapSummary">{{calcTimes.totalTime}}.</span>
+				<span class="lapSummaryMs">{{calcTimes.totalTimeMs}}</span>
+				<span class="lapSummary">total / {{calcTimes.avgTime}}.</span>
+				<span class="lapSummaryMs">{{calcTimes.avgTimeMs}}</span>
+				<span class="lapSummary"> avg</span>
+			</p>
 		</div>
 	</div>
 

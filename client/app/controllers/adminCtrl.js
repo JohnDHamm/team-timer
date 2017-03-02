@@ -7,6 +7,8 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	$scope.showEditGroupModal = false;
 	$scope.editGroup = {};
 	let notEmptyGroup = false;
+	$scope.showEditAthleteModal = false;
+	$scope.editAthlete = {};
 
 	Promise.resolve()
 		.then(() => UserFactory.getCurrentCoach())
@@ -114,10 +116,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 
 	}
 
-	$scope.editAthlete = (id) => {
-		// console.log("edit athlete id: ", id);
-	}
-
 	$scope.groupEdit = (id) => {
 		$scope.showEditGroupModal = true;
 		for (let i = 0; i < $scope.groups.length; i++) {
@@ -161,5 +159,48 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		}
 		notEmptyGroup = false;
 	}
+
+	$scope.athleteEdit = (id) => {
+		console.log("edit athlete id: ", id);
+		for (let i = 0; i < $scope.athletes.length; i++) {
+			if ($scope.athletes[i].id === id) {
+				$scope.editAthlete = $scope.athletes[i];
+			}
+		}
+		$scope.showEditAthleteModal = true;
+	}
+
+	$scope.saveEditedAthlete = () => {
+		delete $scope.editAthlete.group_name;
+		$scope.editAthlete.swim_pace = convertNewPace($scope.editAthlete.swim_pace);
+		$scope.editAthlete.run_pace = convertNewPace($scope.editAthlete.run_pace);
+
+		$scope.showEditAthleteModal = false;
+		DbFactory.saveEditedAthlete($scope.editAthlete)
+			.then(() => {
+				reloadAthletes();
+			})
+	}
+
+	$scope.cancelEditAthlete = () => {
+		$scope.showEditAthleteModal = false;
+		reloadAthletes();
+	}
+
+	$scope.deleteAthlete = (id) => {
+		console.log("delete athlete id: ", id);
+		//modal: r u sure? deleting an athlete will also delet all of that athlete's past workout data
+		//if yes:
+			DbFactory.deleteWorkoutsByAthlete(id)
+				.then(() => {
+					DbFactory.deleteAthlete(id)
+						.then(() => {
+							reloadAthletes();
+						})
+				})
+	}
+
+
+
 
 });

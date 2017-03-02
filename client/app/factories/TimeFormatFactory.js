@@ -17,10 +17,10 @@ app.factory("TimeFormatFactory", function($q) {
 		let hours = Math.floor(absMs / HOUR)
 		let minutes = Math.floor(absMs % HOUR / MINUTE)
 		let seconds = Math.floor(absMs % MINUTE / SECOND)
-		let miliseconds = Math.floor(absMs % SECOND)
+		let milliseconds = Math.floor(absMs % SECOND)
 
 		return formatTime({
-			negative, hours, minutes, seconds, miliseconds
+			negative, hours, minutes, seconds, milliseconds
 		}, format)
 	}
 
@@ -44,14 +44,14 @@ app.factory("TimeFormatFactory", function($q) {
 		let hours = result[2] | 0
 		let minutes = result[3] | 0
 		let seconds = result[4] | 0
-		let miliseconds = Math.floor(1000 * result[5] | 0)
+		let milliseconds = Math.floor(1000 * result[5] | 0)
 
 		if (minutes > 60 || seconds > 60) {
 			throw new Error()
 		}
 
 		return (negative ? -1 : 1) * (
-			hours * HOUR + minutes * MINUTE + seconds * SECOND + miliseconds
+			hours * HOUR + minutes * MINUTE + seconds * SECOND + milliseconds
 		)
 	}
 
@@ -71,11 +71,11 @@ app.factory("TimeFormatFactory", function($q) {
 				break
 			case 'hh:mm:ss':
 				showHr = true
-				showMs = !(!time.miliseconds)
+				showMs = !(!time.milliseconds)
 				break
 			case 'mm:ss':
 				showHr = !(!time.hours)
-				showMs = !(!time.miliseconds)
+				showMs = !(!time.milliseconds)
 				break
 			case 'mm:ss.sss':
 				showHr = !(!time.hours)
@@ -88,7 +88,7 @@ app.factory("TimeFormatFactory", function($q) {
 		let hh = time.hours
 		let mm = time.minutes
 		let ss = time.seconds
-		let sss = time.miliseconds
+		let sss = time.milliseconds
 
 		let ssString = ss.toString();
 		if (ssString.length < 2) {
@@ -100,8 +100,8 @@ app.factory("TimeFormatFactory", function($q) {
 		}
 
 		let msString = Math.round(sss / 10).toString();
-		if (sss === 0) {
-			msString = "00"
+		if (msString.length < 2) {
+			msString += '0';
 		}
 
 		return (time.negative ? '-' : '') + (showHr ? (

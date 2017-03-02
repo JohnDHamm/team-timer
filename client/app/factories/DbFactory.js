@@ -93,6 +93,27 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const saveEditedAthlete = athleteObj =>
+		$q((resolve, reject) =>
+			$http
+				.put(`/api/editAthlete/${athleteObj.id}`, athleteObj)
+				.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
+	const deleteWorkoutsByAthlete = athlete_id =>
+	$q((resolve, reject) =>
+		$http
+			.delete(`/api/deleteWorkoutsByAthlete/${athlete_id}`)
+			.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
+	const deleteAthlete = athlete_id =>
+	$q((resolve, reject) =>
+		$http
+			.delete(`/api/deleteAthlete/${athlete_id}`)
+			.then(({data}) => data ? resolve(data) : reject(null))
+		)
+
 	const saveWorkout = workoutObj =>
 		$q((resolve, reject) =>
 			$http
@@ -115,6 +136,6 @@ app.factory("DbFactory", function($q, $http) {
 		)
 
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, deleteGroup, getAthletesByGroup, getAthletesByTeam, addAthlete,saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, deleteGroup, getAthletesByGroup, getAthletesByTeam, addAthlete, saveEditedAthlete, deleteWorkoutsByAthlete, deleteAthlete, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach }
 
 });
