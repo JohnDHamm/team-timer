@@ -2,7 +2,6 @@
 
 app.controller("navCtrl", function($scope, $location, UserFactory, $sessionStorage){
 
-	// console.log("session", $sessionStorage);
 	$scope.coachName = $sessionStorage.first_name;
 
 	$scope.logout = function(){
