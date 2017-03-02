@@ -111,7 +111,6 @@ app.put('/api/editGroup/:group_id', (req, res) => {
 
 app.delete('/api/deleteGroup/:group_id', (req, res) => {
 	const group_id = req.params.group_id;
-	console.log("group_id", group_id);
 	knex('Groups')
 		.where('id', group_id)
 		.del(req.body)
@@ -162,6 +161,27 @@ app.put('/api/editAthlete/:athlete_id', (req, res) => {
 			res.json(data)
 		})
 })
+
+app.delete('/api/deleteWorkoutsByAthlete/:athlete_id', (req, res) => {
+	const athlete_id = req.params.athlete_id;
+	knex('Workouts')
+		.where('athlete_id', athlete_id)
+		.del(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
+app.delete('/api/deleteAthlete/:athlete_id', (req, res) => {
+	const athlete_id = req.params.athlete_id;
+	knex('Athletes')
+		.where('id', athlete_id)
+		.del(req.body)
+		.then((data) => {
+			res.json(data)
+		})
+})
+
 
 app.get('/api/getWorkouts/Date/:date', (req, res) => {
 	const date = req.params.date

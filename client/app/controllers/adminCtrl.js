@@ -168,10 +168,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 			}
 		}
 		$scope.showEditAthleteModal = true;
-
-		// let currentRow = document.getElementById(`athleteListRow${id}`);
-		// console.log("currentRow", currentRow);
-
 	}
 
 	$scope.saveEditedAthlete = () => {
@@ -191,11 +187,17 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		reloadAthletes();
 	}
 
-
-
-
 	$scope.deleteAthlete = (id) => {
 		console.log("delete athlete id: ", id);
+		//modal: r u sure? deleting an athlete will also delet all of that athlete's past workout data
+		//if yes:
+			DbFactory.deleteWorkoutsByAthlete(id)
+				.then(() => {
+					DbFactory.deleteAthlete(id)
+						.then(() => {
+							reloadAthletes();
+						})
+				})
 	}
 
 
