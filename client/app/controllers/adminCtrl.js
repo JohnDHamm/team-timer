@@ -128,9 +128,8 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	$scope.saveEditedGroup = () => {
 		$scope.showEditGroupModal = false;
 		DbFactory.saveEditedGroup($scope.editGroup)
-			.then(() => {
-				reloadGroups();
-			})
+			.then(() => reloadGroups())
+			.then(() => reloadAthletes())
 	}
 
 	$scope.cancelEditGroup = () => {
@@ -161,7 +160,6 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	$scope.athleteEdit = (id) => {
-		console.log("edit athlete id: ", id);
 		for (let i = 0; i < $scope.athletes.length; i++) {
 			if ($scope.athletes[i].id === id) {
 				$scope.editAthlete = $scope.athletes[i];

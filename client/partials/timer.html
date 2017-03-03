@@ -2,8 +2,7 @@
 
 <div id="timerBG">
 
-	<!-- *************** top timing bar -->
-	<div layout="row" flex="90" flex-offset="5" id="topTimingBar">
+	<div id="topTimingBar" layout="row" flex="90" flex-offset="5">
 		<div flex="20" id="startBtn" ng-click="start()" ng-show="!timerOn" class="topBarSmallDivs">
 			<i class="material-icons topIcons">timer</i>
 		</div>
@@ -15,31 +14,28 @@
 			<span id="mainReadout" class="topBarText">0:00.</span><span id="mainReadoutMs">00</span>
 		</div>
 
-		<div flex="20" id="totalLapsDiv" class="topBarSmallDivs">
+		<div id="totalLapsDiv" flex="20" class="topBarSmallDivs">
 			<h1 id="totalLaps" class="topBarText">0</h1>
 		</div>
 	</div>
 
-		<!-- *************** athlete buttons -->
-		<div layout="row" flex="90" flex-offset="5" ng-repeat="athlete in athleteArray">
-			<div layout="row" flex class="athleteBtn" ng-click="recordLap(athlete.index)">
-				<div flex="20" class="currentLapNumDiv">
-						<h1>{{athlete.lap}}</h1>
+	<div ng-repeat="athlete in athleteArray" layout="row" flex="90" flex-offset="5">
+		<div class="athleteBtn" layout="row" flex ng-click="recordLap(athlete.index)">
+			<div flex="20" class="currentLapNumDiv">
+					<h1>{{athlete.lap}}</h1>
+			</div>
+			<div flex class="athleteNameDiv">
+				<p>{{athlete.display_name}}</p>
+			</div>
+			<div flex="40" layout="column">
+				<div flex class="lapTimeDiv">
+					<span class="currentLapTime">{{athlete.readout}}.</span><span class="currentLapTimeMs">{{athlete.readoutMs}}</span>
 				</div>
-				<div flex class="athleteNameDiv">
-					<p>{{athlete.display_name}}</p>
-				</div>
-				<div flex="35">
-					<div layout="column">
-						<div flex>
-							<p class="currentLapTime">{{athlete.readout}}</p>
-						</div>
-						<div flex>
-							<p class="lastLapTime">last lap: {{athlete.lastLapTime}}</p>
-						</div>
-					</div>
+				<div flex class="lastLapTimeDiv">
+					<span class="lastLapTime">last lap: {{athlete.lastLapTime}}.</span><span class="lastLapTimeMs">{{athlete.lastLapTimeMs}}</span>
 				</div>
 			</div>
 		</div>
+	</div>
 
 </div>

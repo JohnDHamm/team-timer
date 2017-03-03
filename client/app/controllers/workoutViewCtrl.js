@@ -45,7 +45,6 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			const newObj = {};
 			newObj.lapNum = i;
 			const timeSplit = array[i - 1].split('.')
-			console.log("timeSplit", timeSplit);
 			newObj.lapTime = timeSplit[0];
 			newObj.lapMS = timeSplit[1];
 			displayArray.push(newObj)
@@ -84,7 +83,6 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		const formatArray = formatTimes([totalTime, avgTime])
 		const calcObj = {};
 		const totalTimeSplit = formatArray[0].split('.');
-		console.log("totalTimeSplit", totalTimeSplit);
 		calcObj.totalTime = totalTimeSplit[0];
 		calcObj.totalTimeMs = totalTimeSplit[1];
 
@@ -92,16 +90,6 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		calcObj.avgTime = avgTimeSplit[0];
 		calcObj.avgTimeMs = avgTimeSplit[1];
 
-		// const calcArr = [];
-		// calcArr.push(calcObj);
-		// const dummyObj = {
-		// 	totalTime: "66:66",
-		// 	totalTimeMs: "66",
-		// 	avgTime: "33:33",
-		// 	avgTimeMs: "33"
-		// };
-		// calcArr.push(dummyObj);
-		// console.log("calcArr", calcArr);
 		return calcObj
 	}
 
