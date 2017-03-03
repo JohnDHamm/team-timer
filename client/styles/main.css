@@ -305,7 +305,12 @@ div.sepLine {
 
 .topBarText {
   margin: 0;
-  font-size: 2.5rem; }
+  font-size: 2.5rem;
+  font-weight: 500; }
+
+#mainReadoutMs {
+  font-weight: 500;
+  font-size: 2rem; }
 
 .topIcons {
   margin-top: 6px;
@@ -335,24 +340,34 @@ div.sepLine {
   text-align: center; }
 
 .currentLapNumDiv h1 {
-  margin: 9px 0;
+  margin: 7px 0;
   font-size: 2.5rem; }
 
 .athleteNameDiv p {
   margin: 17px 0 0 0;
   padding-left: .5rem;
-  font-size: 1.5rem; }
+  font-size: 1.3rem; }
+
+.lapTimeDiv {
+  text-align: right;
+  margin: 5px 0 5px 0; }
 
 .currentLapTime {
-  margin: 7px 0 0 0;
-  text-align: right;
-  font-size: 1.6rem;
+  font-size: 1.6rem; }
+
+.currentLapTimeMs {
+  font-size: 1.2rem;
   padding-right: .5rem; }
 
-.lastLapTime {
-  margin: 5px 0;
+.lastLapTimeDiv {
   text-align: right;
-  font-size: .9rem;
-  padding-right: .5rem; }
+  margin: 5px 0 0 0; }
+
+.lastLapTime {
+  font-size: .9rem; }
+
+.lastLapTimeMs {
+  padding-right: .5rem;
+  font-size: .7rem; }
 
 /*# sourceMappingURL=main.css.map */

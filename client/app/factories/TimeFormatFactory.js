@@ -99,7 +99,7 @@ app.factory("TimeFormatFactory", function($q) {
 			ss = '0' + ss;
 		}
 
-		let msString = Math.round(sss / 10).toString();
+		let msString = Math.floor(sss / 10).toString();
 		if (msString.length < 2) {
 			msString += '0';
 		}
