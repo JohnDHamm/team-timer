@@ -27,10 +27,16 @@
 }
 
 .workoutViewDate {
-	margin: 40px 0 0 0;
+	margin: 25px 0 0 0;
 	font-size: .8rem;
 	text-align: right;
 	padding-right: .5rem;
+}
+
+.workoutViewDesc {
+	margin: 0 auto;
+	padding: 0 10px 5px 10px;
+	color: #aaa;
 }
 
 #nameBar {
@@ -41,6 +47,7 @@
 	margin: 0;
 	text-align: center;
 	color: #fff;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 
 .athleteNavBtn {
