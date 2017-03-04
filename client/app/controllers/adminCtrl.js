@@ -189,13 +189,17 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 		console.log("delete athlete id: ", id);
 		//modal: r u sure? deleting an athlete will also delet all of that athlete's past workout data
 		//if yes:
-			DbFactory.deleteWorkoutsByAthlete(id)
-				.then(() => {
-					DbFactory.deleteAthlete(id)
-						.then(() => {
-							reloadAthletes();
-						})
-				})
+
+		DbFactory.deleteWorkoutsByAthlete(id)
+		//bug: if no workouts, fails to delete athlete!
+			.then((data) => {
+				console.log("test1", data);
+				DbFactory.deleteAthlete(id)
+					.then((data2) => {
+					console.log("test2", data2);
+						reloadAthletes();
+					})
+			})
 	}
 
 

@@ -84,6 +84,29 @@ a.coachLink {
 .editIcon {
   color: rgba(0, 0, 0, 0.3); }
 
+.editIcon:hover {
+  color: rgba(50, 50, 200, 0.7);
+  transform: scale(1.25);
+  cursor: pointer; }
+
+.removeIcon {
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.3); }
+
+.removeIcon:hover {
+  color: rgba(175, 50, 50, 0.7);
+  transform: scale(1.25);
+  cursor: pointer; }
+
+.addIcon {
+  color: rgba(0, 0, 0, 0.3);
+  padding-top: 5px; }
+
+.addIcon:hover {
+  color: rgba(50, 100, 50, 0.7);
+  transform: scale(1.25);
+  cursor: pointer; }
+
 .errorMsg {
   color: red;
   font-style: italic;
@@ -156,10 +179,6 @@ h3.setupTitle {
   font-size: 1.5rem;
   padding: 7px 0; }
 
-.removeIcon {
-  font-size: 1.5rem;
-  color: rgba(0, 0, 0, 0.3); }
-
 div.sepLine {
   height: 1px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
@@ -188,10 +207,15 @@ div.sepLine {
   font-size: 1.75rem; }
 
 .workoutViewDate {
-  margin: 40px 0 0 0;
+  margin: 25px 0 0 0;
   font-size: .8rem;
   text-align: right;
   padding-right: .5rem; }
+
+.workoutViewDesc {
+  margin: 0 auto;
+  padding: 0 10px 5px 10px;
+  color: #aaa; }
 
 #nameBar {
   margin-bottom: 10px; }
@@ -199,7 +223,17 @@ div.sepLine {
 .nameBarText {
   margin: 0;
   text-align: center;
-  color: #fff; }
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); }
+
+.nameBarArrow {
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
+
+.nameBarArrow:hover {
+  cursor: pointer; }
 
 .athleteNavBtn {
   width: 39px;
@@ -259,6 +293,9 @@ div.sepLine {
   margin: 3px auto;
   background-color: #fff;
   border-radius: 5px; }
+
+.workoutSelectPanel {
+  cursor: pointer; }
 
 .selectDate {
   margin: 5px 0;
