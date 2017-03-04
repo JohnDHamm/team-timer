@@ -38,10 +38,7 @@
 			<h4 class="errorMsg">{{msg}}</h4>
 		</div>
 
-		<div ng-show="showEditGroupModal" class="editGroupModal">
-<!-- 			<div layout="row" flex="100">
-				<p class="modalTitle">edit name and/or description:</p>
-			</div> -->
+		<div class="editGroupModal" ng-show="showEditGroupModal">
 			<div layout="row" flex flex-offset="5" layout-align="center">
 				<md-input-container flex="30" class="groupInput">
 					<input name="editGroup_name" type="text" ng-model="editGroup.group_name" class="validate">
@@ -54,8 +51,6 @@
 				<md-button class="md-raised" ng-click="saveEditedGroup()">save change(s)</md-button>
 				<md-button class="md-raised" ng-click="cancelEditGroup()">cancel</md-button>
 			</div>
-
-
 		</div>
 
 		<div layout="row" flex>
@@ -70,11 +65,10 @@
 				<label>Group Description</label>
 				<input name="newGroup_desc" type="text" ng-model="newGroup_desc" class="validate">
 			</md-input-container>
+			<div flex>
+			  <i ng-click="addGroup()" class="material-icons addIcon">add_circle_outline</i>
+			</div>
 		</div>
-		<div layout="row" flex layout-align="center">
-			<md-button class="md-raised" ng-click="addGroup()">add group</md-button>
-		</div>
-
 	</div>
 
 	<div layout="row" flex="90" flex-offset="5" flex-gt-sm="60" flex-offset-gt-sm="20">
@@ -149,9 +143,6 @@
 		</div>
 
 		<div ng-show="showEditAthleteModal" class="editAthleteModal" layout="column" flex flex-offset="10">
-<!-- 			<div layout="row" flex>
-				<p class="modalTitle">edit athlete's information:</p>
-			</div> -->
 			<div layout="row" flex>
 				<md-input-container flex="15" class="groupInput">
 					<input name="newGroup_desc" type="text" ng-model="editAthlete.display_name" class="validate">
@@ -184,9 +175,7 @@
 				<md-button class="md-raised" ng-click="saveEditedAthlete()">save change(s)</md-button>
 				<md-button class="md-raised" ng-click="cancelEditAthlete()">cancel</md-button>
 			</div>
-
 		</div>
-
 
 		<div layout="row" flex flex-offset="10">
 			<h5 class="addNew">Add new athlete:</h5>
@@ -226,11 +215,12 @@
 				<label>Run Pace</label>
 				<input name="newGroup_desc" type="text" ng-model="newAthlete_run_pace" class="validate" placeholder="mm:ss">
 			</md-input-container>
+			<div flex>
+			  <i ng-click="addAthlete()" class="material-icons addIcon">add_circle_outline</i>
+			</div>
+
 		</div>
 
-		<div ng-hide="showMsg" layout="row" flex="100" layout-align="center">
-			<md-button class="md-raised" ng-click="addAthlete()">add athlete</md-button>
-		</div>
 		<div ng-show="showMsg" layout="row" flex="100" layout-align="center">
 			<h4 class="errorMsg">{{msg}}</h4>
 		</div>

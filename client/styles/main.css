@@ -85,7 +85,7 @@ a.coachLink {
   color: rgba(0, 0, 0, 0.3); }
 
 .editIcon:hover {
-  color: rgba(50, 100, 50, 0.7);
+  color: rgba(50, 50, 200, 0.7);
   transform: scale(1.25);
   cursor: pointer; }
 
@@ -95,6 +95,15 @@ a.coachLink {
 
 .removeIcon:hover {
   color: rgba(175, 50, 50, 0.7);
+  transform: scale(1.25);
+  cursor: pointer; }
+
+.addIcon {
+  color: rgba(0, 0, 0, 0.3);
+  padding-top: 5px; }
+
+.addIcon:hover {
+  color: rgba(50, 100, 50, 0.7);
   transform: scale(1.25);
   cursor: pointer; }
 
