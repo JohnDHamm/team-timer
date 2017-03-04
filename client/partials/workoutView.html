@@ -24,19 +24,19 @@
 
 	<div id="nameBar" layout="row" flex="90" flex-offset="5" flex-gt-sm="30" flex-offset-gt-sm="35">
 		<div flex="25" ng-hide="firstAthlete" ng-click="prevAthlete()" class="athleteNavDiv">
-			<img src="./img/prevAthlete_button.png" alt="previous athlete" class="athleteNavBtn">
+			<h1 class="nameBarArrow">&#10094;</h1>
 		</div>
 		<div flex="25" ng-show="firstAthlete" class="athleteNavDiv">
-			<img src="./img/blank_button.png" class="athleteNavBtn">
+			<h1 class="nameBarArrow"></h1>
 		</div>
 		<div flex="50">
 			<h1 class="nameBarText">{{displayName}}</h1>
 		</div>
 		<div flex="25" ng-hide="lastAthlete" ng-click="nextAthlete()" class="athleteNavDiv">
-			<img src="img/nextAthlete_button.png" alt="next athlete" class="athleteNavBtn">
+			<h1 class="nameBarArrow">&#10095;</h1>
 		</div>
 		<div flex="25" ng-show="lastAthlete" class="athleteNavDiv">
-			<img src="img/blank_button.png" class="athleteNavBtn">
+			<h1 class="nameBarArrow"></h1>
 		</div>
 	</div>
 
