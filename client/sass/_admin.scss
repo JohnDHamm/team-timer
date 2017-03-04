@@ -19,6 +19,23 @@
 	color: $divider-color;
 }
 
+.editIcon:hover {
+	color: rgba(50, 100, 50, 0.7);
+	transform: scale(1.25);
+	cursor: pointer;
+}
+
+.removeIcon {
+	font-size: 1.5rem;
+	color: $divider-color;
+}
+
+.removeIcon:hover {
+	color: rgba(175, 50, 50, 0.7);
+	transform: scale(1.25);
+	cursor: pointer;
+}
+
 .errorMsg {
 	color: red;
 	font-style: italic;
