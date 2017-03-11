@@ -142,7 +142,14 @@ app.factory("DbFactory", function($q, $http) {
 				.then(({data}) => data ? resolve(data) : reject(null))
 		)
 
+	const deleteWorkoutsByDate = date =>
+	$q((resolve, reject) =>
+		$http
+			.delete(`/api/deleteWorkoutsByDate/${date}`)
+			.then(({data}) => data ? resolve(data) : reject(null))
+		)
 
-	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, deleteGroup, getAthletesByGroup, getAthletesByTeam, addAthlete, saveEditedAthlete, deleteWorkoutsByAthlete, deleteAthlete, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach, getWorkoutsByAthlete }
+
+	return { getAllCoaches, getCoach, addCoach, getTeams, getTeamName, addTeam, getGroupsByTeam, addGroup, saveEditedGroup, deleteGroup, getAthletesByGroup, getAthletesByTeam, addAthlete, saveEditedAthlete, deleteWorkoutsByAthlete, deleteAthlete, saveWorkout, getWorkoutsByDate, getWorkoutsByCoach, getWorkoutsByAthlete, deleteWorkoutsByDate }
 
 });

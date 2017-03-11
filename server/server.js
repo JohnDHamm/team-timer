@@ -197,14 +197,15 @@ app.get('/api/getWorkouts/Date/:date', (req, res) => {
 app.get('/api/getWorkouts/Coach/:coach_id', (req, res) => {
 	const coach_id = req.params.coach_id
 	knex('Workouts')
-		.join('Athletes', 'Workouts.athlete_id', 'Athletes.id')
-		.join('Groups', 'Athletes.group_id', 'Groups.id')
-		.select('Workouts.description', 'Workouts.discipline', 'Workouts.date', 'Groups.group_name')
+		// .join('Athletes', 'Workouts.athlete_id', 'Athletes.id')
+		// .join('Groups', 'Athletes.group_id', 'Groups.id')
+		.select('Workouts.description', 'Workouts.discipline', 'Workouts.date')
 		.where('coach_id', coach_id)
 		.then((data) => {
 			res.json(data)
 		})
 })
+
 
 app.get('/api/getWorkouts/Athlete/:athlete_id', (req, res) => {
 	const athlete_id = req.params.athlete_id
@@ -235,7 +236,7 @@ app.post('/api/saveWorkout', (req, res) => {
 		})
 })
 
-app.delete('/api/deleteWorkouts/:date', (req, res) => {
+app.delete('/api/deleteWorkoutsByDate/:date', (req, res) => {
 	const date = req.params.date
 	knex('Workouts')
 		.where('date', date)
@@ -244,8 +245,6 @@ app.delete('/api/deleteWorkouts/:date', (req, res) => {
 			res.json(data)  //returns # of deleted workouts
 		})
 })
-
-
 
 
 
