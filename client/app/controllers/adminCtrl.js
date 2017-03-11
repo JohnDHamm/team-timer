@@ -5,11 +5,9 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	const athletesDiv = document.getElementById('athletesDiv');
 	let deleteAthleteModal = document.getElementById('deleteAthleteModal');
 	athletesDiv.addEventListener('click', function(e) {
-		console.log("e.target.offsetTop", e.target.offsetTop);
 		let modalOffsetTop = e.target.offsetTop - 40;
 		deleteAthleteModal.style.top = modalOffsetTop + 'px';
 	});
-
 
 	$scope.groups === [];
 	$scope.showMsg = false;
@@ -196,35 +194,33 @@ app.controller("adminCtrl", function($scope, $routeParams, $location, UserFactor
 	}
 
 	$scope.deleteAthlete = (id) => {
-		console.log("delete athlete id: ", id);
 		$scope.showDeleteAthleteModal = true;
 		$scope.athleteToDeleteId = id;
-		//modal: r u sure? deleting an athlete will also delet all of that athlete's past workout data
-
 	}
 
 	$scope.removeAthlete = () => {
 		$scope.showDeleteAthleteModal = false;
-		//check if any workouts
-		console.log("$scope.athleteToDeleteId", $scope.athleteToDeleteId);
-
-		// DbFactory.deleteWorkoutsByAthlete($scope.athleteToDeleteId)
-		// //bug: if no workouts, fails to delete athlete!
-		// 	.then((data) => {
-		// 		console.log("test1", data);
-		// 		DbFactory.deleteAthlete(id)
-		// 			.then((data2) => {
-		// 			console.log("test2", data2);
-		// 				reloadAthletes();
-		// 			})
-		// 	})
+		DbFactory.getWorkoutsByAthlete($scope.athleteToDeleteId)
+			.then((data) => {
+				if (data[0]) {
+					DbFactory.deleteWorkoutsByAthlete($scope.athleteToDeleteId)
+						.then(() => {
+							DbFactory.deleteAthlete($scope.athleteToDeleteId)
+								.then(() => {
+									reloadAthletes();
+								})
+						})
+				} else {
+					DbFactory.deleteAthlete($scope.athleteToDeleteId)
+								.then(() => {
+									reloadAthletes();
+								})
+				}
+			})
 	}
 
 	$scope.cancelDeleteAthlete = () => {
 		$scope.showDeleteAthleteModal = false;
 	}
-
-
-
 
 });

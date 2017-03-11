@@ -41,10 +41,10 @@
 		<div class="editGroupModal" ng-show="showEditGroupModal">
 			<div layout="row" flex flex-offset="5" layout-align="center">
 				<md-input-container flex="30" class="groupInput">
-					<input name="editGroup_name" type="text" ng-model="editGroup.group_name" class="validate">
+					<input name="editGroup_name" type="text" ng-model="editGroup.group_name" class="validate" aria-label="edit group name">
 				</md-input-container>
 				<md-input-container flex="60" class="groupInput">
-					<input name="editGroup_desc" type="text" ng-model="editGroup.description" class="validate">
+					<input name="editGroup_desc" type="text" ng-model="editGroup.description" class="validate" aria-label="edit group description">
 				</md-input-container>
 			</div>
 			<div layout="row" flex layout-align="center">
@@ -59,11 +59,11 @@
 		<div layout="row" flex layout-align="center">
 			<md-input-container flex="35" class="groupInput">
 				<label>Group Name</label>
-				<input name="newGroup_name" type="text" ng-model="newGroup_name" class="validate">
+				<input name="newGroup_name" type="text" ng-model="newGroup_name" class="validate" aria-label="new group name">
 			</md-input-container>
 			<md-input-container flex="65" class="groupInput">
 				<label>Group Description</label>
-				<input name="newGroup_desc" type="text" ng-model="newGroup_desc" class="validate">
+				<input name="newGroup_desc" type="text" ng-model="newGroup_desc" class="validate" aria-label="new group description">
 			</md-input-container>
 			<div flex>
 			  <i ng-click="addGroup()" class="material-icons addIcon">add_circle_outline</i>
@@ -145,30 +145,30 @@
 		<div ng-show="showEditAthleteModal" class="editAthleteModal" layout="column" flex flex-offset="10">
 			<div layout="row" flex>
 				<md-input-container flex="15" class="groupInput">
-					<input name="newGroup_desc" type="text" ng-model="editAthlete.display_name" class="validate">
+					<input name="editAthlete_displayName" type="text" ng-model="editAthlete.display_name" class="validate" aria-label="edit athlete display name">
 				</md-input-container>
 				<md-input-container flex="15" class="groupInput">
-					<input name="newGroup_name" type="text" ng-model="editAthlete.first_name" class="validate">
+					<input name="editAthlete_firstName" type="text" ng-model="editAthlete.first_name" class="validate" aria-label="edit athlete first name">
 				</md-input-container>
 				<md-input-container flex="15" class="groupInput">
-					<input name="newGroup_desc" type="text" ng-model="editAthlete.last_name" class="validate">
+					<input name="editAthlete_lastName" type="text" ng-model="editAthlete.last_name" class="validate" aria-label="edit athlete last name">
 				</md-input-container>
 				<md-input-container flex="5" class="groupInput">
-					<input name="newGroup_desc" type="number" ng-model="editAthlete.age" class="validate">
+					<input name="editAthlete_age" type="number" ng-model="editAthlete.age" class="validate" aria-label="edit athlete age">
 				</md-input-container>
 				<md-input-container flex="10" class="groupInput">
-				  <md-select id="groupSelect" ng-model="editAthlete.group_id">
+				  <md-select id="groupSelect" ng-model="editAthlete.group_id" aria-label="edit athlete group">
 				    <md-option ng-value="group.id" ng-repeat="group in groups">{{ group.group_name }}</md-option>
 				  </md-select>
 				</md-input-container>
 				<md-input-container flex="10" class="groupInput">
-					<input name="newGroup_desc" type="text" ng-model="editAthlete.swim_pace" class="validate">
+					<input name="editAthlete_swim" type="text" ng-model="editAthlete.swim_pace" class="validate" aria-label="edit athlete swim pace">
 				</md-input-container>
 				<md-input-container flex="10" class="groupInput">
-					<input name="newGroup_desc" type="text" ng-model="editAthlete.bike_pace" class="validate">
+					<input name="editAthlete_bike" type="text" ng-model="editAthlete.bike_pace" class="validate" aria-label="edit athlete bike pace">
 				</md-input-container>
 				<md-input-container flex="10" class="groupInput">
-					<input name="newGroup_desc" type="text" ng-model="editAthlete.run_pace" class="validate">
+					<input name="editAthlete_run" type="text" ng-model="editAthlete.run_pace" class="validate" aria-label="edit athlete run pace">
 				</md-input-container>
 			</div>
 			<div layout="row" flex layout-align="center">
@@ -183,19 +183,19 @@
 		<div layout="row" flex flex-offset="10">
 			<md-input-container flex="15" class="groupInput">
 				<label>Display Name</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_display_name" class="validate">
+				<input name="newAthlete_displayName" type="text" ng-model="newAthlete_display_name" class="validate">
 			</md-input-container>
 			<md-input-container flex="15" class="groupInput">
 				<label>First Name</label>
-				<input name="newGroup_name" type="text" ng-model="newAthlete_first_name" class="validate">
+				<input name="newAthlete_firstName" type="text" ng-model="newAthlete_first_name" class="validate">
 			</md-input-container>
 			<md-input-container flex="15" class="groupInput">
 				<label>Last Name</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_last_name" class="validate">
+				<input name="newAthlete_lastName" type="text" ng-model="newAthlete_last_name" class="validate">
 			</md-input-container>
 			<md-input-container flex="5" class="groupInput">
 				<label>Age</label>
-				<input name="newGroup_desc" type="number" ng-model="newAthlete_age" class="validate">
+				<input name="newAthlete_age" type="number" ng-model="newAthlete_age" class="validate">
 			</md-input-container>
 			<md-input-container flex="10" class="groupInput">
 			  <label>Group</label>
@@ -205,15 +205,15 @@
 			</md-input-container>
 			<md-input-container flex="10" class="groupInput">
 				<label>Swim Pace</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_swim_pace" class="validate" placeholder="mm:ss">
+				<input name="newAthlete_swim" type="text" ng-model="newAthlete_swim_pace" class="validate" placeholder="mm:ss">
 			</md-input-container>
 			<md-input-container flex="10" class="groupInput">
 				<label>Bike Pace</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_bike_pace" class="validate" placeholder="mph">
+				<input name="newAthlete_bike type="text" ng-model="newAthlete_bike_pace" class="validate" placeholder="mph">
 			</md-input-container>
 			<md-input-container flex="10" class="groupInput">
 				<label>Run Pace</label>
-				<input name="newGroup_desc" type="text" ng-model="newAthlete_run_pace" class="validate" placeholder="mm:ss">
+				<input name="newAthlete_run" type="text" ng-model="newAthlete_run_pace" class="validate" placeholder="mm:ss">
 			</md-input-container>
 			<div flex>
 			  <i ng-click="addAthlete()" class="material-icons addIcon">add_circle_outline</i>
