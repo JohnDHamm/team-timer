@@ -120,6 +120,9 @@ h5.addNew {
 .groupInput {
   margin: 0; }
 
+#athletesDiv {
+  position: relative; }
+
 .athleteTitles {
   color: rgba(0, 0, 0, 0.3);
   text-decoration: underline; }
@@ -148,6 +151,19 @@ p.modalTitle {
 .editAthleteModal {
   background-color: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.3); }
+
+#deleteAthleteModal {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ccc;
+  border: 3px solid #af3232;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 4;
+  right: 10%;
+  padding: 10px; }
+
+.delAthModalText {
+  margin: 3px 0; }
 
 #workoutSetupBG {
   min-height: calc(100vh - 62px);

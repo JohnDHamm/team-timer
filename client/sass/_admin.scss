@@ -64,6 +64,10 @@ h5.addNew {
 	margin: 0;
 }
 
+#athletesDiv {
+	position: relative;
+}
+
 .athleteTitles {
 	color: $divider-color;
 	text-decoration: underline;
@@ -98,5 +102,20 @@ p.modalTitle {
 .editAthleteModal {
 	background-color: rgba(255,255,255,0.3);
 	border: 1px solid $divider-color;
+}
+
+#deleteAthleteModal {
+	background-color: rgba(0,0,0,0.8);
+	color: #ccc;
+	border: 3px solid rgb(175, 50, 50);
+	border-radius: 4px;
+	position: absolute;
+	z-index: 4;
+	right: 10%;
+	padding: 10px;
+}
+
+.delAthModalText {
+	margin: 3px 0;
 }
 
