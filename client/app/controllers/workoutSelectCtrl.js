@@ -30,7 +30,7 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 				if (workouts[j].date === filteredDates[i]) {
 					newObj.description = workouts[j].description;
 					newObj.discIcon = DisplayFactory.getDiscIcon(workouts[j].discipline);
-					newObj.group_name = workouts[j].group_name;
+					// newObj.group_name = workouts[j].group_name;
 					newObj.date = workouts[j].date;
 					newObj.formattedDate = TimeFormatFactory.dateFormatter(workouts[j].date);
 				}
@@ -44,6 +44,22 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 
 	$scope.goToWorkout = (workoutDate) => {
 		$location.path(`/workoutview/${workoutDate}`)
+	}
+
+	$scope.deleteWorkout = (date) => {
+		DbFactory.deleteWorkoutsByDate(date)
+			.then((num) => {
+				removeWorkoutFromArray(date);
+
+			})
+	}
+
+	const removeWorkoutFromArray = (date) => {
+		for (let i = 0; i < $scope.workouts.length; i++) {
+			if ($scope.workouts[i].date == date) {
+				$scope.workouts.splice(i, 1);
+			}
+		}
 	}
 
 });
