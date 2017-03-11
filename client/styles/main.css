@@ -305,6 +305,9 @@ div.sepLine {
   padding-bottom: 10px;
   background: linear-gradient(#ffee38, #e94339); }
 
+#workoutsList {
+  position: relative; }
+
 .workoutSection {
   margin: 3px auto;
   background-color: #fff;
@@ -336,7 +339,17 @@ div.sepLine {
 
 .workoutDeleteIcon {
   padding-left: 5px;
-  padding-top: 15px; }
+  padding-top: 17px; }
+
+#deleteWorkoutModal {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ccc;
+  border: 3px solid #af3232;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 4;
+  right: 5px;
+  padding: 10px; }
 
 #timerBG {
   min-height: calc(100vh - 77px);

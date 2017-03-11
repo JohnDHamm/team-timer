@@ -5,6 +5,14 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 	const currentCoach = UserFactory.getCurrentCoach();
 	$scope.coach = currentCoach.first_name;
 
+	$scope.showDeleteWorkoutModal = false;
+	const workoutsListDiv = document.getElementById('workoutsList');
+	let delWorkoutsModal = document.getElementById('deleteWorkoutModal');
+	workoutsListDiv.addEventListener('click', function(e) {
+		let modalOffsetTop = e.target.offsetTop - 20;
+		delWorkoutsModal.style.top = modalOffsetTop + "px";
+	})
+
 	DbFactory.getWorkoutsByCoach(currentCoach.coach_id)
 		.then((workouts) => {
 			$scope.workouts = filterWorkouts(workouts);
@@ -47,11 +55,8 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 	}
 
 	$scope.deleteWorkout = (date) => {
-		DbFactory.deleteWorkoutsByDate(date)
-			.then((num) => {
-				removeWorkoutFromArray(date);
-
-			})
+		$scope.showDeleteWorkoutModal = true;
+		$scope.workoutToDeleteDate = date;
 	}
 
 	const removeWorkoutFromArray = (date) => {
@@ -60,6 +65,18 @@ app.controller("workoutSelectCtrl", function($scope, UserFactory, DbFactory, Tim
 				$scope.workouts.splice(i, 1);
 			}
 		}
+	}
+
+	$scope.removeWorkout = () => {
+		$scope.showDeleteWorkoutModal = false;
+		DbFactory.deleteWorkoutsByDate($scope.workoutToDeleteDate)
+			.then(() => {
+				removeWorkoutFromArray($scope.workoutToDeleteDate);
+			})
+	}
+
+	$scope.cancelDeleteWorkout = () => {
+		$scope.showDeleteWorkoutModal = false;
 	}
 
 });
