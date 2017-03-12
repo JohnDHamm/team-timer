@@ -116,10 +116,19 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const mainReadout = document.getElementById('mainReadout');
 	const mainReadoutMs = document.getElementById('mainReadoutMs');
-	let time = 0;
-	let interval;
-	let offset;
-	let lapStart;
+	let time = 0, interval, offset, lapStart;
+
+	const makeInitialOrderArray = (athArr) => {
+		let orderArray =[];
+		for (let i = 0; i < athArr.length; i++) {
+			orderArray.push(athArr[i].index);
+		}
+		return orderArray;
+	}
+
+	let currentAthleteOrder = makeInitialOrderArray($scope.athleteArray),
+			athleteBtnHeight = 66,
+			numAthletes = $scope.athleteArray.length;
 
 	$scope.start = function() {
 		$scope.timerOn = true;
@@ -168,6 +177,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 					thisAthlete.readoutMs = "";
 				}
 				checkTotalLaps();
+				animateButtons(index);
 			}
 		}
 	}
@@ -198,5 +208,41 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		return timePassed;
 	}
 
+	const animateButtons = (index) => {
+		let currentOrderIndex = currentAthleteOrder.indexOf(index);
+		let distanceToBottom = (numAthletes - currentOrderIndex - 1) * athleteBtnHeight;
+		let btnsToAnimateUp = makeNextButtonsArray(currentOrderIndex);
+
+		TweenLite.to(`#athleteBtn${index}`, .25, {
+			top: `+=${distanceToBottom}px`,
+			opacity: 0.4,
+			ease: Power2.easeInOut,
+			onComplete: function() {
+				TweenLite.to(`#athleteBtn${index}`, .25, {
+					opacity: 1,
+					ease:Power2.easeInOut
+					})
+				}
+		});
+		TweenLite.to(btnsToAnimateUp, .25, {
+			top: `-=${athleteBtnHeight}`,
+			ease:Power2.easeInOut
+		});
+		updateOrder(index, currentOrderIndex);
+	}
+
+	const updateOrder = (index, currentOrderIndex) => {
+		currentAthleteOrder.splice(currentOrderIndex, 1);
+		currentAthleteOrder.push(index);
+	}
+
+	const makeNextButtonsArray = (currentOrderIndex) => {
+		let nextArray = [];
+		for (let i = currentOrderIndex + 1 ; i < currentAthleteOrder.length; i++) {
+			let nextString = `#athleteBtn${currentAthleteOrder[i]}`;
+			nextArray.push(nextString);
+		}
+		return nextArray;
+	}
 
 });
