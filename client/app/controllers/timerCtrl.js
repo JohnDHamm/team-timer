@@ -12,6 +12,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	$scope.timerOn = false;
 
 	const sortAthletes = (discipline) => {
+		console.log("sortingAthletes");
 		if (discipline === 'bike') {
 			sortedAthletesArray = selectedAthletes.sort((a, b) => b.bike_pace - a.bike_pace);
 		} else if (discipline === 'run') {
@@ -35,6 +36,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newObj.completedLaps = false;
 			$scope.athleteArray.push(newObj);
 		}
+		console.log("athleteArray created", $scope.athleteArray);
 	}
 
 	sortAthletes(workoutParams.discipline);
@@ -91,22 +93,28 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const saveWorkouts = (workoutsArray) => {
 		const promiseArray = [];
-			workoutsArray.forEach(workout => {
-				promiseArray.push(DbFactory.saveWorkout(JSON.stringify(workout)))
-			})
+		workoutsArray.forEach(workout => {
+			promiseArray.push(DbFactory.saveWorkout(JSON.stringify(workout)))
+		})
 		return Promise.all(promiseArray)
 	}
 
-	const clearAll = () => {
-		for (let i = 0; i < $scope.athleteArray.length; i++) {
-			$scope.athleteArray[i].lapTimesArray = [0];
-			$scope.athleteArray[i].readout =  '0:00';
-			$scope.athleteArray[i].readoutMs =  '00';
-			$scope.athleteArray[i].lap =  0;
-			$scope.athleteArray[i].elapsed = 0;
-			$scope.athleteArray[i].lastLapTime = '0:00';
-			$scope.athleteArray[i].lastLapTimeMs = '00';
-		}
+	const resetTimer = () => {
+		$scope.athleteArray = [];
+		// createAthleteArray(sortedAthletesArray);
+		console.log("$scope.athleteArray reset", $scope.athleteArray);
+		// for (let i = 0; i < $scope.athleteArray.length; i++) {
+		// 	$scope.athleteArray[i].lapTimesArray = [0];
+		// 	$scope.athleteArray[i].readout =  '0:00';
+		// 	$scope.athleteArray[i].readoutMs =  '00';
+		// 	$scope.athleteArray[i].lap =  0;
+		// 	$scope.athleteArray[i].elapsed = 0;
+		// 	$scope.athleteArray[i].lastLapTime = '0:00';
+		// 	$scope.athleteArray[i].lastLapTimeMs = '00';
+		// }
+		currentAthleteOrder = makeInitialOrderArray($scope.athleteArray);
+		console.log("reset order", currentAthleteOrder);
+		time = 0;
 		totalLapsReadout.textContent = 0;
 		mainReadout.textContent = '0:00.';
 		mainReadoutMs.textContent = '00';
@@ -123,6 +131,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		for (let i = 0; i < athArr.length; i++) {
 			orderArray.push(athArr[i].index);
 		}
+		console.log("initial order", orderArray);
 		return orderArray;
 	}
 
@@ -154,7 +163,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		clearInterval(interval);
 		interval = null;
 		$scope.timerOn = false;
-		clearAll();
+		resetTimer();
 	}
 
 	$scope.recordLap = function(index) {
@@ -234,6 +243,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	const updateOrder = (index, currentOrderIndex) => {
 		currentAthleteOrder.splice(currentOrderIndex, 1);
 		currentAthleteOrder.push(index);
+		console.log("update order", currentAthleteOrder);
 	}
 
 	const makeNextButtonsArray = (currentOrderIndex) => {
