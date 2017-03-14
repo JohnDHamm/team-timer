@@ -19,21 +19,19 @@
 		</div>
 	</div>
 
-	<div ng-repeat="athlete in athleteArray" layout="row" flex="90" flex-offset="5">
-		<div class="athleteBtn" layout="row" flex ng-click="recordLap(athlete.index)">
-			<div flex="20" class="currentLapNumDiv">
-					<h1>{{athlete.lap}}</h1>
+	<div id="athleteBtn{{athlete.index}}" class="athleteBtn" ng-repeat="athlete in athleteArray" layout="row" flex="90" flex-offset="5" ng-click="recordLap(athlete.index)">
+		<div flex="20" class="currentLapNumDiv">
+				<h1>{{athlete.lap}}</h1>
+		</div>
+		<div flex class="athleteNameDiv">
+			<p>{{athlete.display_name}}</p>
+		</div>
+		<div flex="40" layout="column">
+			<div flex class="lapTimeDiv">
+				<span class="currentLapTime">{{athlete.readout}}.</span><span class="currentLapTimeMs">{{athlete.readoutMs}}</span>
 			</div>
-			<div flex class="athleteNameDiv">
-				<p>{{athlete.display_name}}</p>
-			</div>
-			<div flex="40" layout="column">
-				<div flex class="lapTimeDiv">
-					<span class="currentLapTime">{{athlete.readout}}.</span><span class="currentLapTimeMs">{{athlete.readoutMs}}</span>
-				</div>
-				<div flex class="lastLapTimeDiv">
-					<span class="lastLapTime">last lap: {{athlete.lastLapTime}}.</span><span class="lastLapTimeMs">{{athlete.lastLapTimeMs}}</span>
-				</div>
+			<div flex class="lastLapTimeDiv">
+				<span class="lastLapTime">last lap: {{athlete.lastLapTime}}.</span><span class="lastLapTimeMs">{{athlete.lastLapTimeMs}}</span>
 			</div>
 		</div>
 	</div>

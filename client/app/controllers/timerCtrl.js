@@ -54,7 +54,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const createWorkouts = (athleteArray) => {
 		var newWorkoutsArray = [];
-
 		for (let i = 0; i < athleteArray.length; i++) {
 			var newWorkoutObj = {};
 			newWorkoutObj.athlete_id = athleteArray[i].id;
@@ -62,9 +61,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newWorkoutObj.data = trueLapTimeArray;
 			newWorkoutsArray.push(newWorkoutObj)
 		}
-
 		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
-
 		return finalWorkouts;
 	}
 
@@ -91,13 +88,13 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const saveWorkouts = (workoutsArray) => {
 		const promiseArray = [];
-			workoutsArray.forEach(workout => {
-				promiseArray.push(DbFactory.saveWorkout(JSON.stringify(workout)))
-			})
+		workoutsArray.forEach(workout => {
+			promiseArray.push(DbFactory.saveWorkout(JSON.stringify(workout)))
+		})
 		return Promise.all(promiseArray)
 	}
 
-	const clearAll = () => {
+	const resetTimer = () => {
 		for (let i = 0; i < $scope.athleteArray.length; i++) {
 			$scope.athleteArray[i].lapTimesArray = [0];
 			$scope.athleteArray[i].readout =  '0:00';
@@ -107,6 +104,9 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			$scope.athleteArray[i].lastLapTime = '0:00';
 			$scope.athleteArray[i].lastLapTimeMs = '00';
 		}
+		resetBtnPositions();
+		currentAthleteOrder = makeInitialOrderArray($scope.athleteArray);
+		time = 0;
 		totalLapsReadout.textContent = 0;
 		mainReadout.textContent = '0:00.';
 		mainReadoutMs.textContent = '00';
@@ -116,10 +116,19 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const mainReadout = document.getElementById('mainReadout');
 	const mainReadoutMs = document.getElementById('mainReadoutMs');
-	let time = 0;
-	let interval;
-	let offset;
-	let lapStart;
+	let time = 0, interval, offset, lapStart;
+
+	const makeInitialOrderArray = (athArr) => {
+		let orderArray =[];
+		for (let i = 0; i < athArr.length; i++) {
+			orderArray.push(athArr[i].index);
+		}
+		return orderArray;
+	}
+
+	let currentAthleteOrder = makeInitialOrderArray($scope.athleteArray),
+			athleteBtnHeight = 66,
+			numAthletes = $scope.athleteArray.length;
 
 	$scope.start = function() {
 		$scope.timerOn = true;
@@ -145,7 +154,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		clearInterval(interval);
 		interval = null;
 		$scope.timerOn = false;
-		clearAll();
+		resetTimer();
 	}
 
 	$scope.recordLap = function(index) {
@@ -168,6 +177,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 					thisAthlete.readoutMs = "";
 				}
 				checkTotalLaps();
+				animateButtons(index);
 			}
 		}
 	}
@@ -198,5 +208,60 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		return timePassed;
 	}
 
+	const animateButtons = (index) => {
+		let currentOrderIndex = currentAthleteOrder.indexOf(index);
+		let distanceToBottom = (numAthletes - currentOrderIndex - 1) * athleteBtnHeight;
+		let btnsToAnimateUp = makeNextButtonsArray(currentOrderIndex);
+
+		TweenLite.to(`#athleteBtn${index}`, .25, {
+			top: `+=${distanceToBottom}px`,
+			opacity: 0.4,
+			ease: Power2.easeInOut,
+			onComplete: function() {
+				TweenLite.to(`#athleteBtn${index}`, .25, {
+					opacity: 1,
+					ease:Power2.easeInOut
+					})
+				}
+		});
+		TweenLite.to(btnsToAnimateUp, .25, {
+			top: `-=${athleteBtnHeight}`,
+			ease:Power2.easeInOut
+		});
+		updateOrder(index, currentOrderIndex);
+	}
+
+	const updateOrder = (index, currentOrderIndex) => {
+		currentAthleteOrder.splice(currentOrderIndex, 1);
+		currentAthleteOrder.push(index);
+	}
+
+	const makeNextButtonsArray = (currentOrderIndex) => {
+		let nextArray = [];
+		for (let i = currentOrderIndex + 1 ; i < currentAthleteOrder.length; i++) {
+			let nextString = `#athleteBtn${currentAthleteOrder[i]}`;
+			nextArray.push(nextString);
+		}
+		return nextArray;
+	}
+
+	const resetBtnPositions = () => {
+		for (let i = 0; i < $scope.athleteArray.length; i++) {
+			let index = currentAthleteOrder[i];
+			if (index > i) {
+				let topResetDistance = (index - i) * athleteBtnHeight;
+				TweenLite.to(`#athleteBtn${index}`, .25, {
+					top: `+=${topResetDistance}px`,
+					ease: Power2.easeInOut
+				});
+			} else if (index < i) {
+				let topResetDistance = (i - index) * athleteBtnHeight;
+				TweenLite.to(`#athleteBtn${index}`, .25, {
+					top: `-=${topResetDistance}px`,
+					ease: Power2.easeInOut
+				});
+			}
+		}
+	}
 
 });
