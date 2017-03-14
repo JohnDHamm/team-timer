@@ -12,7 +12,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	$scope.timerOn = false;
 
 	const sortAthletes = (discipline) => {
-		console.log("sortingAthletes");
 		if (discipline === 'bike') {
 			sortedAthletesArray = selectedAthletes.sort((a, b) => b.bike_pace - a.bike_pace);
 		} else if (discipline === 'run') {
@@ -36,7 +35,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newObj.completedLaps = false;
 			$scope.athleteArray.push(newObj);
 		}
-		console.log("athleteArray created", $scope.athleteArray);
 	}
 
 	sortAthletes(workoutParams.discipline);
@@ -56,7 +54,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const createWorkouts = (athleteArray) => {
 		var newWorkoutsArray = [];
-
 		for (let i = 0; i < athleteArray.length; i++) {
 			var newWorkoutObj = {};
 			newWorkoutObj.athlete_id = athleteArray[i].id;
@@ -64,9 +61,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newWorkoutObj.data = trueLapTimeArray;
 			newWorkoutsArray.push(newWorkoutObj)
 		}
-
 		const finalWorkouts = addCommonWorkoutData(newWorkoutsArray)
-
 		return finalWorkouts;
 	}
 
@@ -100,20 +95,17 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	}
 
 	const resetTimer = () => {
-		$scope.athleteArray = [];
-		// createAthleteArray(sortedAthletesArray);
-		console.log("$scope.athleteArray reset", $scope.athleteArray);
-		// for (let i = 0; i < $scope.athleteArray.length; i++) {
-		// 	$scope.athleteArray[i].lapTimesArray = [0];
-		// 	$scope.athleteArray[i].readout =  '0:00';
-		// 	$scope.athleteArray[i].readoutMs =  '00';
-		// 	$scope.athleteArray[i].lap =  0;
-		// 	$scope.athleteArray[i].elapsed = 0;
-		// 	$scope.athleteArray[i].lastLapTime = '0:00';
-		// 	$scope.athleteArray[i].lastLapTimeMs = '00';
-		// }
+		for (let i = 0; i < $scope.athleteArray.length; i++) {
+			$scope.athleteArray[i].lapTimesArray = [0];
+			$scope.athleteArray[i].readout =  '0:00';
+			$scope.athleteArray[i].readoutMs =  '00';
+			$scope.athleteArray[i].lap =  0;
+			$scope.athleteArray[i].elapsed = 0;
+			$scope.athleteArray[i].lastLapTime = '0:00';
+			$scope.athleteArray[i].lastLapTimeMs = '00';
+		}
+		resetBtnPositions();
 		currentAthleteOrder = makeInitialOrderArray($scope.athleteArray);
-		console.log("reset order", currentAthleteOrder);
 		time = 0;
 		totalLapsReadout.textContent = 0;
 		mainReadout.textContent = '0:00.';
@@ -131,7 +123,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		for (let i = 0; i < athArr.length; i++) {
 			orderArray.push(athArr[i].index);
 		}
-		console.log("initial order", orderArray);
 		return orderArray;
 	}
 
@@ -243,7 +234,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	const updateOrder = (index, currentOrderIndex) => {
 		currentAthleteOrder.splice(currentOrderIndex, 1);
 		currentAthleteOrder.push(index);
-		console.log("update order", currentAthleteOrder);
 	}
 
 	const makeNextButtonsArray = (currentOrderIndex) => {
@@ -253,6 +243,25 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			nextArray.push(nextString);
 		}
 		return nextArray;
+	}
+
+	const resetBtnPositions = () => {
+		for (let i = 0; i < $scope.athleteArray.length; i++) {
+			let index = currentAthleteOrder[i];
+			if (index > i) {
+				let topResetDistance = (index - i) * athleteBtnHeight;
+				TweenLite.to(`#athleteBtn${index}`, .25, {
+					top: `+=${topResetDistance}px`,
+					ease: Power2.easeInOut
+				});
+			} else if (index < i) {
+				let topResetDistance = (i - index) * athleteBtnHeight;
+				TweenLite.to(`#athleteBtn${index}`, .25, {
+					top: `-=${topResetDistance}px`,
+					ease: Power2.easeInOut
+				});
+			}
+		}
 	}
 
 });
