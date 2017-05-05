@@ -1,6 +1,5 @@
 "use strict";
 
-
 app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory, DisplayFactory){
 
 	const date = parseInt($routeParams.date);
@@ -17,6 +16,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			totalAthletes = workoutsArray.length;
 			$scope.totalLaps = workoutsArray[0].laps;
 			$scope.lap_distance = workoutsArray[0].lap_distance;
+			console.log("$scope.lap_distance", $scope.lap_distance);
 			$scope.lap_metric = workoutsArray[0].lap_metric;
 			makeMetricAbrv($scope.lap_metric);
 			$scope.discIcon = DisplayFactory.getDiscIcon(workoutsArray[0].discipline);
@@ -29,7 +29,8 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
 
 			const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
+			console.log("athletesArray", athletesArray);
+			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray, athletesArray[currentAthlete].lapTimes)
 
 		})
 
@@ -40,16 +41,21 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		return formattedArray;
 	}
 
-	const makeDisplayArray = (laps, array) => {
+	const makeDisplayArray = (laps, timesArray, lapSecondsArray) => {
 		const displayArray = [];
 		for (let i = 1; i < laps + 1; i ++) {
 			const newObj = {};
 			newObj.lapNum = i;
-			const timeSplit = array[i - 1].split('.')
+			const timeSplit = timesArray[i - 1].split('.')
 			newObj.lapTime = timeSplit[0];
 			newObj.lapMS = timeSplit[1];
+
+			const lapPace = TimeFormatFactory.fromMs(lapSecondsArray[i - 1] * 100 / $scope.lap_distance);
+			newObj.lapPace = lapPace;
+
 			displayArray.push(newObj)
 		}
+		console.log("displayArray", displayArray);
 		return displayArray;
 	}
 
@@ -106,6 +112,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 				$scope.metricAbrv = 'yd';
 				break;
 		}
+	}
 
 	const setPaceMetric = (discipline) => {
 		switch (discipline) {
@@ -120,6 +127,5 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 				break;
 		}
 	}
-
 
 });
