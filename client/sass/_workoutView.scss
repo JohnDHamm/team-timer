@@ -78,9 +78,22 @@
 	font-size: 1.5rem;
 }
 
+.lapNumDiv {
+	margin: 5px;
+	// border: 1px solid #888;
+	border-radius: 5px;
+	text-align: center;
+	background-color: rgba(0,0,0,.8);
+}
+
 .lapNum {
-	margin: 10px 0;
+	margin: 5px 0;
+	// padding-left: 1rem;
+}
+
+.lapTime {
 	padding-left: 1rem;
+	margin: 10px 0;
 }
 
 .timeRight {
@@ -91,6 +104,11 @@
 
 .lapMS {
 	font-size: 1.25rem;
+}
+
+.paceMetric {
+	font-size: 1rem;
+	color: #bbb;
 }
 
 .summaryContainer {

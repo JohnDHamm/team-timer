@@ -20,6 +20,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.lap_metric = workoutsArray[0].lap_metric;
 			makeMetricAbrv($scope.lap_metric);
 			$scope.discIcon = DisplayFactory.getDiscIcon(workoutsArray[0].discipline);
+			setPaceMetric(workoutsArray[0].discipline);
 			$scope.description = workoutsArray[0].description;
 
 			athletesArray = WorkoutFactory.createAthletesArray(workouts);
@@ -94,13 +95,30 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	}
 
 	const makeMetricAbrv = (metric) => {
-		if (metric === 'mile') {
-			$scope.metricAbrv = 'mi';
-		} else if (metric === 'meter') {
-			$scope.metricAbrv = 'm';
-		} else if (metric === 'yard') {
-			$scope.metricAbrv = 'yd';
-		} else $scope.metricAbrv = 'km';
+		switch (metric) {
+			case 'mile':
+				$scope.metricAbrv = 'mi';
+				break;
+			case 'meter':
+				$scope.metricAbrv = 'm';
+				break;
+			case 'yard':
+				$scope.metricAbrv = 'yd';
+				break;
+		}
+
+	const setPaceMetric = (discipline) => {
+		switch (discipline) {
+			case 'swim':
+				$scope.paceMetric = '/100y';
+				break;
+			case 'bike':
+				$scope.paceMetric = 'mph';
+				break;
+			case 'run':
+				$scope.paceMetric = 'mile';
+				break;
+		}
 	}
 
 
