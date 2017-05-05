@@ -20,21 +20,16 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.lap_metric = workoutsArray[0].lap_metric;
 			$scope.discipline = workoutsArray[0].discipline;
 			convertLapDist();
-			console.log("lapDistConv", lapDistConv);
 			makeMetricAbrv($scope.lap_metric);
 			$scope.discIcon = DisplayFactory.getDiscIcon($scope.discipline);
 			setPaceMetric($scope.discipline);
 			$scope.description = workoutsArray[0].description;
 
 			athletesArray = WorkoutFactory.createAthletesArray(workouts);
-
 			$scope.displayName = athletesArray[currentAthlete].name;
 			$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
-
 			const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-			console.log("athletesArray", athletesArray);
 			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray, athletesArray[currentAthlete].lapTimes)
-
 		})
 
 	const formatTimes = (timesArray) => {
@@ -44,18 +39,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		return formattedArray;
 	}
 
-	const formatPace = (pace) => {
-		if ($scope.discipline == 'bike') {
-			return pace;
-		} else {
-			const paceNoMs = pace.split('.');
-			console.log("paceNoMs", paceNoMs);
-			return paceNoMs[0];
-		}
-	}
-
 	const makeDisplayArray = (laps, timesArray, lapSecondsArray) => {
-		console.log("lapSecondsArray", lapSecondsArray);
 		const displayArray = [];
 		for (let i = 1; i < laps + 1; i ++) {
 			const newObj = {};
@@ -63,13 +47,11 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			const timeSplit = timesArray[i - 1].split('.')
 			newObj.lapTime = timeSplit[0];
 			newObj.lapMS = timeSplit[1];
-
-			newObj.lapPace = formatPace(calcLapPace(lapSecondsArray[i - 1]));
-			console.log("newObj.lapPace", newObj.lapPace);
-
+			const lapPaceObj = calcLapPace(lapSecondsArray[i - 1]);
+			newObj.lapPaceMain = lapPaceObj.lapPaceMain;
+			newObj.lapPaceDec = lapPaceObj.lapPaceDec;
 			displayArray.push(newObj)
 		}
-		console.log("displayArray", displayArray);
 		return displayArray;
 	}
 
@@ -182,18 +164,22 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	}
 
 	const calcLapPace = (lapTime) => {
-		let newPace;
+		let pace;
+		let newPace = {};
 		switch ($scope.discipline) {
 			case 'swim':
-				newPace = TimeFormatFactory.fromMs(lapTime * 100 / lapDistConv);
+				pace = TimeFormatFactory.fromMs(lapTime * 100 / lapDistConv);
 				break;
 			case 'bike':
-				newPace = (lapDistConv / lapTime * 3600000).toFixed(1);
+				pace = (lapDistConv / lapTime * 3600000).toFixed(1);
 				break;
 			case 'run':
-				newPace = TimeFormatFactory.fromMs(lapTime / lapDistConv);
+				pace = TimeFormatFactory.fromMs(lapTime / lapDistConv);
 				break;
 		}
+		newPace.lapPaceMain = pace.split('.')[0];
+		newPace.lapPaceDec = pace.split('.')[1];
+		console.log("newPace", newPace);
 		return newPace;
 	}
 
