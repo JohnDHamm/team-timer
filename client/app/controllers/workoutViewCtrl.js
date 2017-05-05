@@ -44,7 +44,18 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		return formattedArray;
 	}
 
+	const formatPace = (pace) => {
+		if ($scope.discipline == 'bike') {
+			return pace;
+		} else {
+			const paceNoMs = pace.split('.');
+			console.log("paceNoMs", paceNoMs);
+			return paceNoMs[0];
+		}
+	}
+
 	const makeDisplayArray = (laps, timesArray, lapSecondsArray) => {
+		console.log("lapSecondsArray", lapSecondsArray);
 		const displayArray = [];
 		for (let i = 1; i < laps + 1; i ++) {
 			const newObj = {};
@@ -53,8 +64,8 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			newObj.lapTime = timeSplit[0];
 			newObj.lapMS = timeSplit[1];
 
-			const lapPace = TimeFormatFactory.fromMs(lapSecondsArray[i - 1] * 100 / $scope.lap_distance);
-			newObj.lapPace = lapPace;
+			newObj.lapPace = formatPace(calcLapPace(lapSecondsArray[i - 1]));
+			console.log("newObj.lapPace", newObj.lapPace);
 
 			displayArray.push(newObj)
 		}
@@ -83,7 +94,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	const updateDisplay = (currentAthlete) => {
 		$scope.displayName = athletesArray[currentAthlete].name;
 		const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray);
+		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray, athletesArray[currentAthlete].lapTimes);
 		$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
 	}
 
@@ -168,6 +179,22 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 				$scope.paceMetricLabel = 'mile';
 				break;
 		}
+	}
+
+	const calcLapPace = (lapTime) => {
+		let newPace;
+		switch ($scope.discipline) {
+			case 'swim':
+				newPace = TimeFormatFactory.fromMs(lapTime * 100 / lapDistConv);
+				break;
+			case 'bike':
+				newPace = (lapDistConv / lapTime * 3600000).toFixed(1);
+				break;
+			case 'run':
+				newPace = TimeFormatFactory.fromMs(lapTime / lapDistConv);
+				break;
+		}
+		return newPace;
 	}
 
 });
