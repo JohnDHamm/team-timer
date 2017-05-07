@@ -298,10 +298,15 @@ div.sepLine {
   font-size: 1.2rem; }
 
 .sumTitle {
-  padding-left: 1rem; }
+  padding-left: .8rem;
+  color: #ddd; }
 
 .sumTopRow {
   margin: 7px 0 2px 0; }
+
+.sumDivider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 3px auto; }
 
 .sumBtmRow {
   margin: 2px 0 7px 0; }
@@ -312,6 +317,10 @@ div.sepLine {
 
 .summaryMs {
   font-size: 1rem; }
+
+.sumLabel {
+  font-size: .8rem;
+  color: #bbb; }
 
 #workoutSelectBG {
   min-height: calc(100vh - 62px);

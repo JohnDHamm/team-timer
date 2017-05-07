@@ -55,22 +55,34 @@
 	<div class="summaryContainer" layout="row" flex="80" flex-offset="10" flex-gt-sm="30" flex-offset-gt-sm="35">
 		<div layout="column" flex>
 			<div layout="row" flex>
-				<div flex>
+				<div flex="25">
 					<p class="sumTitle sumTopRow">total:</p>
 				</div>
 				<div flex>
-					<p class="sumTopRow rightAlign">
+					<p class="sumTopRow">
 						<span>{{calcTimes.totalTime}}.</span><span class="summaryMs">{{calcTimes.totalTimeMs}}</span>
 					</p>
 				</div>
+				<div flex>
+					<p class="sumTopRow rightAlign">{{calcTimes.totalDist}}{{metricAbrv}}</p>
+				</div>
+			</div>
+			<div layout="row flex">
+				<div flex="90" flex-offset="5" class="sumDivider">
+				</div>
 			</div>
 			<div layout="row" flex>
-				<div flex>
+				<div flex="25">
 					<p class="sumTitle sumBtmRow">avg:</p>
 				</div>
 				<div flex>
+					<p class="sumBtmRow">
+						<span>{{calcTimes.avgTime}}.</span><span class="summaryMs">{{calcTimes.avgTimeMs}}</span><span class="sumLabel"> lap</span>
+					</p>
+				</div>
+				<div flex>
 					<p class="sumBtmRow rightAlign">
-						<span>{{calcTimes.avgTime}}.</span><span class="summaryMs">{{calcTimes.avgTimeMs}}</span>
+						<span>0:45.</span><span class="summaryMs">16</span><span class="sumLabel">{{paceMetricLabel}}</span>
 					</p>
 				</div>
 			</div>

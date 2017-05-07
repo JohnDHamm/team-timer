@@ -80,7 +80,6 @@
 
 .lapNumDiv {
 	margin: 5px;
-	// border: 1px solid #888;
 	border-radius: 5px;
 	text-align: center;
 	background-color: rgba(0,0,0,.8);
@@ -88,7 +87,6 @@
 
 .lapNum {
 	margin: 5px 0;
-	// padding-left: 1rem;
 }
 
 .lapTime {
@@ -120,11 +118,17 @@
 }
 
 .sumTitle {
-	padding-left: 1rem;
+	padding-left: .8rem;
+	color: #ddd;
 }
 
 .sumTopRow {
 	margin: 7px 0 2px 0;
+}
+
+.sumDivider {
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+	margin: 3px auto;
 }
 
 .sumBtmRow {
@@ -138,4 +142,9 @@
 
 .summaryMs {
 	font-size: 1rem;
+}
+
+.sumLabel {
+	font-size: .8rem;
+	color: #bbb;
 }
