@@ -1,7 +1,6 @@
 "use strict";
 
-
-app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, WorkoutFactory, TimeFormatFactory, DisplayFactory){
+app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, TimeFormatFactory, DisplayFactory, WorkoutViewFactory){
 
 	const date = parseInt($routeParams.date);
 	$scope.displayDate = TimeFormatFactory.dateFormatter(date);
@@ -10,27 +9,32 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	$scope.lastAthlete = false;
 	let athletesArray = [];
 	let totalAthletes = 1;
+	let lapDistConv;
 
 	DbFactory.getWorkoutsByDate(date)
 		.then((workouts) => {
-			const workoutsArray = workouts;
-			totalAthletes = workoutsArray.length;
-			$scope.totalLaps = workoutsArray[0].laps;
-			$scope.lap_distance = workoutsArray[0].lap_distance;
-			$scope.lap_metric = workoutsArray[0].lap_metric;
-			makeMetricAbrv($scope.lap_metric);
-			$scope.discIcon = DisplayFactory.getDiscIcon(workoutsArray[0].discipline);
-			$scope.description = workoutsArray[0].description;
-
-			athletesArray = WorkoutFactory.createAthletesArray(workouts);
-
-			$scope.displayName = athletesArray[currentAthlete].name;
-			$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
-
-			const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-			$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray)
-
+			setWorkoutData(workouts);
+			setAthleteData(workouts);
 		})
+
+
+	const setWorkoutData = (workouts) => {
+		totalAthletes = workouts.length;
+		$scope.totalLaps = workouts[0].laps;
+		$scope.discipline = workouts[0].discipline;
+		$scope.discIcon = DisplayFactory.getDiscIcon($scope.discipline);
+		$scope.description = workouts[0].description;
+		$scope.lap_metric = workouts[0].lap_metric;
+		$scope.metricAbrv = WorkoutViewFactory.makeMetricAbrv($scope.lap_metric);
+		$scope.lap_distance = workouts[0].lap_distance;
+		lapDistConv = WorkoutViewFactory.convertDistance($scope.lap_distance, $scope.discipline, $scope.lap_metric);
+		$scope.paceMetricLabel = WorkoutViewFactory.setPaceMetric($scope.discipline);
+	}
+
+	const setAthleteData = (workouts) => {
+		athletesArray = WorkoutViewFactory.createAthletesArray(workouts);
+		updateDisplay(currentAthlete);
+	}
 
 	const formatTimes = (timesArray) => {
 		const formattedArray = timesArray.map((each) => {
@@ -39,17 +43,27 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		return formattedArray;
 	}
 
-	const makeDisplayArray = (laps, array) => {
+	const makeDisplayArray = (laps, timesArray, lapSecondsArray) => {
 		const displayArray = [];
 		for (let i = 1; i < laps + 1; i ++) {
 			const newObj = {};
 			newObj.lapNum = i;
-			const timeSplit = array[i - 1].split('.')
+			const timeSplit = timesArray[i - 1].split('.')
 			newObj.lapTime = timeSplit[0];
 			newObj.lapMS = timeSplit[1];
+			const lapPaceObj = calcLapPace(lapSecondsArray[i - 1]);
+			newObj.lapPaceMain = lapPaceObj.lapPaceMain;
+			newObj.lapPaceDec = lapPaceObj.lapPaceDec;
 			displayArray.push(newObj)
 		}
 		return displayArray;
+	}
+
+	const updateDisplay = (currentAthlete) => {
+		$scope.displayName = athletesArray[currentAthlete].name;
+		const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
+		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray, athletesArray[currentAthlete].lapTimes);
+		$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
 	}
 
 	$scope.nextAthlete = () => {
@@ -70,19 +84,14 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		updateDisplay(currentAthlete);
 	}
 
-	const updateDisplay = (currentAthlete) => {
-		$scope.displayName = athletesArray[currentAthlete].name;
-		const timesArray = formatTimes(athletesArray[currentAthlete].lapTimes);
-		$scope.displayTimes = makeDisplayArray($scope.totalLaps, timesArray);
-		$scope.calcTimes = calcTimes($scope.totalLaps, athletesArray[currentAthlete].lapTimes);
-	}
-
 	const calcTimes = (laps, array) => {
-		const totalTime = array.reduce((a, b) => a + b)
+		const totalTime = array.reduce((a, b) => a + b);
+		const totalDist = laps * $scope.lap_distance;
 		const avgTime = totalTime / laps;
 		const formatArray = formatTimes([totalTime, avgTime])
 		const calcObj = {};
 		const totalTimeSplit = formatArray[0].split('.');
+		calcObj.totalDist = totalDist;
 		calcObj.totalTime = totalTimeSplit[0];
 		calcObj.totalTimeMs = totalTimeSplit[1];
 
@@ -90,18 +99,50 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		calcObj.avgTime = avgTimeSplit[0];
 		calcObj.avgTimeMs = avgTimeSplit[1];
 
-		return calcObj
+		const newSumPace = calcSumPace(totalTime, totalDist);
+		calcObj.sumPaceMain = newSumPace.sumPaceMain;
+		calcObj.sumPaceDec = newSumPace.sumPaceDec;
+
+		return calcObj;
 	}
 
-	const makeMetricAbrv = (metric) => {
-		if (metric === 'mile') {
-			$scope.metricAbrv = 'mi';
-		} else if (metric === 'meter') {
-			$scope.metricAbrv = 'm';
-		} else if (metric === 'yard') {
-			$scope.metricAbrv = 'yd';
-		} else $scope.metricAbrv = 'km';
+	const calcLapPace = (lapTime) => {
+		let pace;
+		let newPace = {};
+		switch ($scope.discipline) {
+			case 'swim':
+				pace = TimeFormatFactory.fromMs(lapTime * 100 / lapDistConv);
+				break;
+			case 'bike':
+				pace = (lapDistConv / lapTime * 3600000).toFixed(1);
+				break;
+			case 'run':
+				pace = TimeFormatFactory.fromMs(lapTime / lapDistConv);
+				break;
+		}
+		newPace.lapPaceMain = pace.split('.')[0];
+		newPace.lapPaceDec = pace.split('.')[1];
+		return newPace;
 	}
 
+	const calcSumPace = (totalTime, totalDist) => {
+		let pace;
+		let paceSum = {};
+		const totalDistConv = WorkoutViewFactory.convertDistance(totalDist, $scope.discipline, $scope.lap_metric);
+		switch ($scope.discipline) {
+			case 'swim':
+				pace = TimeFormatFactory.fromMs(totalTime * 100 / totalDistConv);
+				break;
+			case 'bike':
+				pace = (totalDistConv / totalTime * 3600000).toFixed(1);
+				break;
+			case 'run':
+				pace = TimeFormatFactory.fromMs(totalTime / totalDistConv);
+				break;
+		}
+		paceSum.sumPaceMain = pace.split('.')[0];
+		paceSum.sumPaceDec = pace.split('.')[1];
+		return paceSum;
+	}
 
 });

@@ -40,34 +40,49 @@
 		</div>
 	</div>
 
-	<div class="lapSection" layout="row" flex="80" flex-offset="10" flex-gt-sm="30" flex-offset-gt-sm="35" ng-repeat="time in displayTimes">
-		<div flex>
-			<p class="lapNum">Lap {{time.lapNum}}</p>
+	<div class="lapSection" layout="row" flex="90" flex-offset="5" flex-gt-sm="30" flex-offset-gt-sm="35" ng-repeat="time in displayTimes">
+		<div flex="15" class="lapNumDiv">
+			<p class="lapNum">{{time.lapNum}}</p>
 		</div>
 		<div flex>
-			<p class="timeRight"><span>{{time.lapTime}}.</span><span class="lapMS">{{time.lapMS}}</span></p>
+			<p class="lapTime"><span>{{time.lapTime}}.</span><span class="lapMS">{{time.lapMS}}</span></p>
+		</div>
+		<div flex>
+			<p class="timeRight"><span>{{time.lapPaceMain}}.</span><span class="lapMS">{{time.lapPaceDec}}</span><span class="paceMetric">{{paceMetricLabel}}</span></p>
 		</div>
 	</div>
 
 	<div class="summaryContainer" layout="row" flex="80" flex-offset="10" flex-gt-sm="30" flex-offset-gt-sm="35">
 		<div layout="column" flex>
 			<div layout="row" flex>
-				<div flex>
-					<p class="sumTitle sumTopRow">total:</p>
+				<div flex="25">
+					<p class="sumTitle sumTopRow"><span class="sumTitleSpan">total:</span></p>
 				</div>
 				<div flex>
-					<p class="sumTopRow rightAlign">
+					<p class="sumTopRow">
 						<span>{{calcTimes.totalTime}}.</span><span class="summaryMs">{{calcTimes.totalTimeMs}}</span>
 					</p>
 				</div>
+				<div flex>
+					<p class="sumTopRow rightAlign">{{calcTimes.totalDist}}{{metricAbrv}}</p>
+				</div>
+			</div>
+			<div layout="row flex">
+				<div flex="90" flex-offset="5" class="sumDivider">
+				</div>
 			</div>
 			<div layout="row" flex>
+				<div flex="25">
+					<p class="sumTitle sumBtmRow"><span class="sumTitleSpan">avg:</span></p>
+				</div>
 				<div flex>
-					<p class="sumTitle sumBtmRow">avg:</p>
+					<p class="sumBtmRow">
+						<span>{{calcTimes.avgTime}}.</span><span class="summaryMs">{{calcTimes.avgTimeMs}}</span><span class="sumLabel"> lap</span>
+					</p>
 				</div>
 				<div flex>
 					<p class="sumBtmRow rightAlign">
-						<span>{{calcTimes.avgTime}}.</span><span class="summaryMs">{{calcTimes.avgTimeMs}}</span>
+						<span>{{calcTimes.sumPaceMain}}.</span><span class="summaryMs">{{calcTimes.sumPaceDec}}</span><span class="sumLabel">{{paceMetricLabel}}</span>
 					</p>
 				</div>
 			</div>

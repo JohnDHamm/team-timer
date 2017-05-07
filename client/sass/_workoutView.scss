@@ -78,9 +78,20 @@
 	font-size: 1.5rem;
 }
 
+.lapNumDiv {
+	margin: 5px;
+	border-radius: 5px;
+	text-align: center;
+	background-color: rgba(0,0,0,.8);
+}
+
 .lapNum {
-	margin: 10px 0;
+	margin: 5px 0;
+}
+
+.lapTime {
 	padding-left: 1rem;
+	margin: 10px 0;
 }
 
 .timeRight {
@@ -93,6 +104,11 @@
 	font-size: 1.25rem;
 }
 
+.paceMetric {
+	font-size: 1rem;
+	color: #bbb;
+}
+
 .summaryContainer {
 	margin: 10px auto;
 	background-color: rgba(0,0,0,.5);
@@ -102,11 +118,21 @@
 }
 
 .sumTitle {
-	padding-left: 1rem;
+	padding-left: .8rem;
+	color: #ddd;
+}
+
+.sumTitleSpan {
+	font-size: 1rem;
 }
 
 .sumTopRow {
 	margin: 7px 0 2px 0;
+}
+
+.sumDivider {
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+	margin: 3px auto;
 }
 
 .sumBtmRow {
@@ -120,4 +146,9 @@
 
 .summaryMs {
 	font-size: 1rem;
+}
+
+.sumLabel {
+	font-size: .8rem;
+	color: #bbb;
 }

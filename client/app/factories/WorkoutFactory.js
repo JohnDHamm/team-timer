@@ -24,34 +24,7 @@ app.factory("WorkoutFactory", function($q) {
 	const getSelectedAthletes = () => selectedAthletes;
 
 
-	const createAthletesArray = (workouts) => {
-		const athletesArray = [];
-		workouts.forEach(workout => {
-			let buildObj = {};
-			const lapTimesArray = buildLapTimesArray(workout);
-			buildObj.lapTimes = lapTimesArray;
-			buildObj.name = workout.display_name;
-			// console.log("buildObj", buildObj);
-			athletesArray.push(buildObj);
-
-		})
-
-		return athletesArray;
-
-	}
-
-	const buildLapTimesArray = (workout) => {
-		const newArray = workout.data.split(",");
-		const parsedArray = newArray.map((each) => {
-			return parseInt(each);
-		})
-		// console.log("parsedArray", parsedArray);
-		return parsedArray;
-
-	}
-
-
-	return { setCurrentWorkoutParams, getCurrentWorkoutParams, setSelectedAthletes, getSelectedAthletes, createAthletesArray };
+	return { setCurrentWorkoutParams, getCurrentWorkoutParams, setSelectedAthletes, getSelectedAthletes };
 
 
 });
