@@ -456,15 +456,19 @@ div.sepLine {
   font-size: 1.2rem;
   padding-right: .5rem; }
 
-.lastLapTimeDiv {
+.lastLapPaceDiv {
   text-align: right;
   margin: 5px 0 0 0; }
 
-.lastLapTime {
+.lastLapPace {
   font-size: .9rem; }
 
-.lastLapTimeMs {
-  padding-right: .5rem;
+.lastLapPaceDec {
   font-size: .7rem; }
+
+.lastLapPaceMetric {
+  padding-right: .5rem;
+  font-size: .7rem;
+  color: #666; }
 
 /*# sourceMappingURL=main.css.map */

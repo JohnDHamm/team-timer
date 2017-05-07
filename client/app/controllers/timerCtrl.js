@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory, TimerFactory){
+app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFactory, TimerFactory, WorkoutViewFactory, TimeFormatFactory){
 
 	const workoutParams = WorkoutFactory.getCurrentWorkoutParams();
 	const selectedAthletes = WorkoutFactory.getSelectedAthletes();
@@ -10,6 +10,10 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	$scope.athleteArray = [];
 	$scope.timerOn = false;
+
+	$scope.paceMetricLabel = WorkoutViewFactory.setPaceMetric(workoutParams.discipline);
+	const lapDistConv = WorkoutViewFactory.convertDistance(workoutParams.lap_distance, workoutParams.discipline, workoutParams.lap_metric);
+
 
 	const sortAthletes = (discipline) => {
 		if (discipline === 'bike') {
@@ -30,8 +34,11 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newObj.readoutMs = '00';
 			newObj.lap =  0;
 			newObj.elapsed = 0;
-			newObj.lastLapTime = '0:00';
-			newObj.lastLapTimeMs = '00';
+			// newObj.lastLapTime = '0:00';
+			// newObj.lastLapTimeMs = '00';
+			newObj.lastLapPaceMain = '--';
+			newObj.lastLapPaceDec = '';
+
 			newObj.completedLaps = false;
 			$scope.athleteArray.push(newObj);
 		}
@@ -101,8 +108,11 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			$scope.athleteArray[i].readoutMs =  '00';
 			$scope.athleteArray[i].lap =  0;
 			$scope.athleteArray[i].elapsed = 0;
-			$scope.athleteArray[i].lastLapTime = '0:00';
-			$scope.athleteArray[i].lastLapTimeMs = '00';
+			// $scope.athleteArray[i].lastLapTime = '0:00';
+			// $scope.athleteArray[i].lastLapTimeMs = '00';
+			$scope.athleteArray[i].lastLapPaceMain = '--';
+			$scope.athleteArray[i].lastLapPaceDec = '';
+
 		}
 		resetBtnPositions();
 		currentAthleteOrder = makeInitialOrderArray($scope.athleteArray);
@@ -160,6 +170,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	$scope.recordLap = function(index) {
 		if ($scope.timerOn) {
 			const thisAthlete = $scope.athleteArray[index];
+			console.log("thisAthlete", thisAthlete);
 			if (thisAthlete.completedLaps === false) {
 				thisAthlete.lap ++;
 				const nowLap = Date.now();
@@ -167,9 +178,14 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 				thisAthlete.elapsed = elapsedTime;
 				thisAthlete.lapTimesArray.push(elapsedTime);
 
-				const lastLapTimeFormattedArray = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]).split('.');
-				thisAthlete.lastLapTime = lastLapTimeFormattedArray[0];
-				thisAthlete.lastLapTimeMs = lastLapTimeFormattedArray[1];
+				// const lastLapTimeFormattedArray = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]).split('.');
+				// thisAthlete.lastLapTime = lastLapTimeFormattedArray[0];
+				// thisAthlete.lastLapTimeMs = lastLapTimeFormattedArray[1];
+
+				const lastLapPace = calcLapPace(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
+				console.log("lastLapPace", lastLapPace, $scope.paceMetricLabel);
+				thisAthlete.lastLapPaceMain = lastLapPace.lapPaceMain + '.';
+				thisAthlete.lastLapPaceDec = lastLapPace.lapPaceDec;
 
 				if (thisAthlete.lap === workoutParams.laps) {
 					thisAthlete.completedLaps = true;
@@ -262,6 +278,25 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 				});
 			}
 		}
+	}
+
+	const calcLapPace = (lapTime) => {
+		let pace;
+		let newPace = {};
+		switch (workoutParams.discipline) {
+			case 'swim':
+				pace = TimeFormatFactory.fromMs(lapTime * 100 / lapDistConv);
+				break;
+			case 'bike':
+				pace = (lapDistConv / lapTime * 3600000).toFixed(1);
+				break;
+			case 'run':
+				pace = TimeFormatFactory.fromMs(lapTime / lapDistConv);
+				break;
+		}
+		newPace.lapPaceMain = pace.split('.')[0];
+		newPace.lapPaceDec = pace.split('.')[1];
+		return newPace;
 	}
 
 });
