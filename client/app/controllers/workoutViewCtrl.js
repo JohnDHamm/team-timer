@@ -9,7 +9,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 	$scope.lastAthlete = false;
 	let athletesArray = [];
 	let totalAthletes = 1;
-	let lapDistConv = 0;
+	let lapDistConv;
 
 	DbFactory.getWorkoutsByDate(date)
 		.then((workouts) => {
@@ -19,7 +19,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 			$scope.lap_distance = workoutsArray[0].lap_distance;
 			$scope.lap_metric = workoutsArray[0].lap_metric;
 			$scope.discipline = workoutsArray[0].discipline;
-			convertLapDist();
+			lapDistConv = convertDist($scope.lap_distance);
 			makeMetricAbrv($scope.lap_metric);
 			$scope.discIcon = DisplayFactory.getDiscIcon($scope.discipline);
 			setPaceMetric($scope.discipline);
@@ -95,43 +95,11 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		calcObj.avgTime = avgTimeSplit[0];
 		calcObj.avgTimeMs = avgTimeSplit[1];
 
-		return calcObj
-	}
+		const newSumPace = calcSumPace(totalTime, totalDist);
+		calcObj.sumPaceMain = newSumPace.sumPaceMain;
+		calcObj.sumPaceDec = newSumPace.sumPaceDec;
 
-	const convertLapDist = () => {
-		console.log("converting", $scope.lap_metric, $scope.discipline);
-		switch ($scope.discipline) {
-			case 'swim':
-				switch ($scope.lap_metric) {
-					case 'mile':
-						lapDistConv = $scope.lap_distance * 1760;
-						break;
-					case 'meter':
-						lapDistConv = $scope.lap_distance * 1.0936;
-						break;
-					case 'km':
-						lapDistConv = $scope.lap_distance * 1093.61;
-						break;
-					default:
-						lapDistConv = $scope.lap_distance;
-				}
-				break;
-			default:
-				switch ($scope.lap_metric) {
-					case 'yard':
-						lapDistConv = $scope.lap_distance / 1760;
-						break;
-					case 'meter':
-						lapDistConv = $scope.lap_distance / 1609.34;
-						break;
-					case 'km':
-						lapDistConv = $scope.lap_distance / 1.6093;
-						break;
-					default:
-						lapDistConv = $scope.lap_distance;
-				}
-				break;
-		}
+		return calcObj;
 	}
 
 	const makeMetricAbrv = (metric) => {
@@ -181,8 +149,64 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Work
 		}
 		newPace.lapPaceMain = pace.split('.')[0];
 		newPace.lapPaceDec = pace.split('.')[1];
-		console.log("newPace", newPace);
 		return newPace;
+	}
+
+	const calcSumPace = (totalTime, totalDist) => {
+		let pace;
+		let paceSum = {};
+		const totalDistConv = convertDist(totalDist);
+		switch ($scope.discipline) {
+			case 'swim':
+				pace = TimeFormatFactory.fromMs(totalTime * 100 / totalDistConv);
+				break;
+			case 'bike':
+				pace = (totalDistConv / totalTime * 3600000).toFixed(1);
+				break;
+			case 'run':
+				pace = TimeFormatFactory.fromMs(totalTime / totalDistConv);
+				break;
+		}
+		paceSum.sumPaceMain = pace.split('.')[0];
+		paceSum.sumPaceDec = pace.split('.')[1];
+		return paceSum;
+	}
+
+	const convertDist = (dist) => {
+		let distConv;
+		switch ($scope.discipline) {
+			case 'swim':
+				switch ($scope.lap_metric) {
+					case 'mile':
+						distConv = dist * 1760;
+						break;
+					case 'meter':
+						distConv = dist * 1.0936;
+						break;
+					case 'km':
+						distConv = dist * 1093.61;
+						break;
+					default:
+						distConv = dist;
+				}
+				break;
+			default:
+				switch ($scope.lap_metric) {
+					case 'yard':
+						distConv = dist / 1760;
+						break;
+					case 'meter':
+						distConv = dist / 1609.34;
+						break;
+					case 'km':
+						distConv = dist / 1.6093;
+						break;
+					default:
+						distConv = dist;
+				}
+				break;
+		}
+		return distConv;
 	}
 
 });

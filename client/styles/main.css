@@ -301,6 +301,9 @@ div.sepLine {
   padding-left: .8rem;
   color: #ddd; }
 
+.sumTitleSpan {
+  font-size: 1rem; }
+
 .sumTopRow {
   margin: 7px 0 2px 0; }
 
