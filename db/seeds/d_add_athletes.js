@@ -68,7 +68,7 @@ exports.seed = function(knex, Promise) {
 				knex('Athletes')
 					.insert({
 						id: 6,
-						first_name: 'Devin',
+						first_name: 'Devan',
 						last_name: 'Reilly',
 						display_name: 'Devin',
 						age: 9,
