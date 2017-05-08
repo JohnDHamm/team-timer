@@ -26,12 +26,12 @@
 		<div flex class="athleteNameDiv">
 			<p>{{athlete.display_name}}</p>
 		</div>
-		<div flex="40" layout="column">
+		<div flex="50" layout="column">
 			<div flex class="lapTimeDiv">
 				<span class="currentLapTime">{{athlete.readout}}.</span><span class="currentLapTimeMs">{{athlete.readoutMs}}</span>
 			</div>
-			<div flex class="lastLapTimeDiv">
-				<span class="lastLapTime">last lap: {{athlete.lastLapTime}}.</span><span class="lastLapTimeMs">{{athlete.lastLapTimeMs}}</span>
+			<div flex class="lastLapPaceDiv">
+				<span class="lastLapPace">{{athlete.lastLapPaceMain}}</span><span class="lastLapPaceDec">{{athlete.lastLapPaceDec}}</span><span class="lastLapPaceMetric">{{paceMetricLabel}}</span> <span id="paceDiffSpan--{{athlete.index}}"><span class="lapPaceDiff">{{athlete.paceArrow}}{{athlete.paceDiffMain}}</span><span class="lapPaceDiffDec">{{athlete.paceDiffDec}}</span></span>
 			</div>
 		</div>
 	</div>
