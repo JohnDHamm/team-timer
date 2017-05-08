@@ -86,7 +86,7 @@ app.controller("workoutViewCtrl", function($scope, $routeParams, DbFactory, Time
 
 	const calcTimes = (laps, array) => {
 		const totalTime = array.reduce((a, b) => a + b);
-		const totalDist = laps * $scope.lap_distance;
+		const totalDist = (laps * $scope.lap_distance).toFixed(2);
 		const avgTime = totalTime / laps;
 		const formatArray = formatTimes([totalTime, avgTime])
 		const calcObj = {};
