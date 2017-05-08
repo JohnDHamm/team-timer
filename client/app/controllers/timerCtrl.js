@@ -34,8 +34,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			newObj.readoutMs = '00';
 			newObj.lap =  0;
 			newObj.elapsed = 0;
-			// newObj.lastLapTime = '0:00';
-			// newObj.lastLapTimeMs = '00';
 			newObj.lastLapPaceMain = '--';
 			newObj.lastLapPaceDec = '';
 
@@ -108,8 +106,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			$scope.athleteArray[i].readoutMs =  '00';
 			$scope.athleteArray[i].lap =  0;
 			$scope.athleteArray[i].elapsed = 0;
-			// $scope.athleteArray[i].lastLapTime = '0:00';
-			// $scope.athleteArray[i].lastLapTimeMs = '00';
 			$scope.athleteArray[i].lastLapPaceMain = '--';
 			$scope.athleteArray[i].lastLapPaceDec = '';
 			$scope.athleteArray[i].paceDiffMain = '';
@@ -172,7 +168,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	$scope.recordLap = function(index) {
 		if ($scope.timerOn) {
 			const thisAthlete = $scope.athleteArray[index];
-			// console.log("thisAthlete", thisAthlete);
 			if (thisAthlete.completedLaps === false) {
 				thisAthlete.lap ++;
 				const nowLap = Date.now();
@@ -182,7 +177,6 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 				const lastLapTime = elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1];
 				const lastLapPace = calcLapPace(lastLapTime);
-				// console.log("lastLapPace", lastLapPace, $scope.paceMetricLabel);
 				thisAthlete.lastLapPaceMain = lastLapPace.lapPaceMain + '.';
 				thisAthlete.lastLapPaceDec = lastLapPace.lapPaceDec;
 
@@ -195,15 +189,12 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 						const prevPaceObj = calcLapPace(thisAthlete.lapTimesArray[currentLap - 1] - thisAthlete.lapTimesArray[currentLap - 2]);
 						const prevPace = parseInt(prevPaceObj.lapPaceMain) + (parseInt(prevPaceObj.lapPaceDec) / 10);
 						lapPaceDiff = (currentPace - prevPace).toFixed(1);
-						// console.log("bike paceDiff", lapPaceDiff);
 						thisAthlete.paceDiffMain = lapPaceDiff.split('.')[0] + '.';
 						thisAthlete.paceDiffDec = lapPaceDiff.split('.')[1];
 						thisAthlete.paceArrow = setPaceDiffColor(lapPaceDiff, thisAthlete.index, workoutParams.discipline);
 					} else {
 						const lapDiffTime = (thisAthlete.lapTimesArray[currentLap] - thisAthlete.lapTimesArray[currentLap - 1]) - (thisAthlete.lapTimesArray[currentLap - 1] - thisAthlete.lapTimesArray[currentLap - 2]);
-						// console.log("lapDiffTime", lapDiffTime);
 						lapPaceDiff = calcLapPace(lapDiffTime);
-						// console.log("swim/run PaceDiff", lapPaceDiff);
 						thisAthlete.paceDiffMain = lapPaceDiff.lapPaceMain + '.';
 						thisAthlete.paceDiffDec = lapPaceDiff.lapPaceDec;
 						thisAthlete.paceArrow = setPaceDiffColor(thisAthlete.paceDiffMain, thisAthlete.index, workoutParams.discipline);
@@ -324,21 +315,17 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 
 	const setPaceDiffColor = (diffMain, index, disc) => {
 		const paceSpan = document.getElementById(`paceDiffSpan--${index}`);
-		// console.log("diffMain", diffMain);
 		const firstChar = diffMain.charAt(0);
-		// console.log("firstChar", firstChar);
 		let arrow;
 		switch (disc) {
 			case 'bike':
 				switch (firstChar) {
 					case '-':
-						// console.log("bike -");
 						paceSpan.classList.remove('lapPaceFaster');
 						paceSpan.classList.add('lapPaceSlower');
-						arrow = '\u2193';
+						arrow = '\u2193'; //down arrow
 						break;
 					default:
-						// console.log("bike +");
 						paceSpan.classList.remove('lapPaceSlower');
 						paceSpan.classList.add('lapPaceFaster');
 						arrow = '\u2191'; //up arrow
@@ -347,16 +334,14 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			default:
 				switch (firstChar) {
 					case '-':
-						// console.log("diff is -: make green");
 						paceSpan.classList.remove('lapPaceSlower');
 						paceSpan.classList.add('lapPaceFaster');
 						arrow = '\u2191'; //up arrow
 						break;
 					default:
-						// console.log("diff is +: make red");
 						paceSpan.classList.remove('lapPaceFaster');
 						paceSpan.classList.add('lapPaceSlower');
-						arrow = '\u2193';
+						arrow = '\u2193'; //down arrow
 				}
 				break;
 		}
