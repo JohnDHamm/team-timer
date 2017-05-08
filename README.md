@@ -20,6 +20,7 @@ More details and screen captures found here:  http://johndhammcodes.com/timer
 2. Ability for a coach to select athletes across different groups for a workout, as well as remove athletes from a workout during setup if they are not partaking in the training.
 3. Ability for a coach to delete saved workouts that are no longer needed.
 4. Timer buttons are now animated to drop down to the bottom of the list each time they are pressed at the end of a lap. This will help coaches when dealing with a large number of athletes participating in the workout as they will not have to search/scroll through timer buttons to find the next athlete completing a lap.
+5. Last lap times on timer buttons now changed to reflect pace with standard metric for that discipline. Pace differentials from lap to lap also shown to help coaches gauge an athlete's progress during the workout.
 
 
 ###### _Features to be implemented soon:_
