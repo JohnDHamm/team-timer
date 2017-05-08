@@ -114,6 +114,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 			$scope.athleteArray[i].lastLapPaceDec = '';
 			$scope.athleteArray[i].paceDiffMain = '';
 			$scope.athleteArray[i].paceDiffDec = '';
+			$scope.athleteArray[i].paceArrow = '';
 		}
 		resetBtnPositions();
 		currentAthleteOrder = makeInitialOrderArray($scope.athleteArray);
@@ -197,7 +198,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 						// console.log("bike paceDiff", lapPaceDiff);
 						thisAthlete.paceDiffMain = lapPaceDiff.split('.')[0] + '.';
 						thisAthlete.paceDiffDec = lapPaceDiff.split('.')[1];
-						setPaceDiffColor(lapPaceDiff, thisAthlete.index, workoutParams.discipline);
+						thisAthlete.paceArrow = setPaceDiffColor(lapPaceDiff, thisAthlete.index, workoutParams.discipline);
 					} else {
 						const lapDiffTime = (thisAthlete.lapTimesArray[currentLap] - thisAthlete.lapTimesArray[currentLap - 1]) - (thisAthlete.lapTimesArray[currentLap - 1] - thisAthlete.lapTimesArray[currentLap - 2]);
 						// console.log("lapDiffTime", lapDiffTime);
@@ -205,7 +206,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 						// console.log("swim/run PaceDiff", lapPaceDiff);
 						thisAthlete.paceDiffMain = lapPaceDiff.lapPaceMain + '.';
 						thisAthlete.paceDiffDec = lapPaceDiff.lapPaceDec;
-						setPaceDiffColor(thisAthlete.paceDiffMain, thisAthlete.index, workoutParams.discipline);
+						thisAthlete.paceArrow = setPaceDiffColor(thisAthlete.paceDiffMain, thisAthlete.index, workoutParams.discipline);
 					}
 				}
 
@@ -326,6 +327,7 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		// console.log("diffMain", diffMain);
 		const firstChar = diffMain.charAt(0);
 		// console.log("firstChar", firstChar);
+		let arrow;
 		switch (disc) {
 			case 'bike':
 				switch (firstChar) {
@@ -333,11 +335,13 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 						// console.log("bike -");
 						paceSpan.classList.remove('lapPaceFaster');
 						paceSpan.classList.add('lapPaceSlower');
+						arrow = '\u2193';
 						break;
 					default:
 						// console.log("bike +");
 						paceSpan.classList.remove('lapPaceSlower');
 						paceSpan.classList.add('lapPaceFaster');
+						arrow = '\u2191'; //up arrow
 				}
 				break;
 			default:
@@ -346,14 +350,17 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 						// console.log("diff is -: make green");
 						paceSpan.classList.remove('lapPaceSlower');
 						paceSpan.classList.add('lapPaceFaster');
+						arrow = '\u2191'; //up arrow
 						break;
 					default:
 						// console.log("diff is +: make red");
 						paceSpan.classList.remove('lapPaceFaster');
 						paceSpan.classList.add('lapPaceSlower');
+						arrow = '\u2193';
 				}
 				break;
 		}
+		return arrow;
 	}
 
 });
