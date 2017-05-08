@@ -111,7 +111,26 @@
 }
 
 .lastLapPaceMetric {
-	padding-right: .5rem;
+	// padding-right: .5rem;
 	font-size: .7rem;
 	color: #666;
+}
+
+.lapPaceDiff {
+	// color: red;
+	font-size: .9rem;
+}
+
+.lapPaceDiffDec {
+	padding-right: .5rem;
+	font-size: .7rem;
+	// color: red;
+}
+
+.lapPaceFaster {
+	color: green;
+}
+
+.lapPaceSlower {
+	color: red;
 }

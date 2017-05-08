@@ -170,22 +170,45 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 	$scope.recordLap = function(index) {
 		if ($scope.timerOn) {
 			const thisAthlete = $scope.athleteArray[index];
-			console.log("thisAthlete", thisAthlete);
+			// console.log("thisAthlete", thisAthlete);
 			if (thisAthlete.completedLaps === false) {
 				thisAthlete.lap ++;
 				const nowLap = Date.now();
 				const elapsedTime = nowLap - lapStart;
 				thisAthlete.elapsed = elapsedTime;
 				thisAthlete.lapTimesArray.push(elapsedTime);
+				// console.log("thisAthlete.lapTimesArray", thisAthlete.lapTimesArray);
+
 
 				// const lastLapTimeFormattedArray = TimerFactory.timeFormatter(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]).split('.');
 				// thisAthlete.lastLapTime = lastLapTimeFormattedArray[0];
 				// thisAthlete.lastLapTimeMs = lastLapTimeFormattedArray[1];
-
-				const lastLapPace = calcLapPace(elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1]);
-				console.log("lastLapPace", lastLapPace, $scope.paceMetricLabel);
+				const lastLapTime = elapsedTime - thisAthlete.lapTimesArray[thisAthlete.lap - 1];
+				const lastLapPace = calcLapPace(lastLapTime);
+				// console.log("lastLapPace", lastLapPace, $scope.paceMetricLabel);
 				thisAthlete.lastLapPaceMain = lastLapPace.lapPaceMain + '.';
 				thisAthlete.lastLapPaceDec = lastLapPace.lapPaceDec;
+
+				if (thisAthlete.lap > 1) {
+					const currentLap = thisAthlete.lap;
+					let lapPaceDiff;
+					if (workoutParams.discipline === 'bike') {
+						const currentPaceObj = calcLapPace(thisAthlete.lapTimesArray[currentLap] - thisAthlete.lapTimesArray[currentLap - 1]);
+						const currentPace = parseInt(currentPaceObj.lapPaceMain) + (parseInt(currentPaceObj.lapPaceDec) / 10);
+						const prevPaceObj = calcLapPace(thisAthlete.lapTimesArray[currentLap - 1] - thisAthlete.lapTimesArray[currentLap - 2]);
+						const prevPace = parseInt(prevPaceObj.lapPaceMain) + (parseInt(prevPaceObj.lapPaceDec) / 10);
+						lapPaceDiff = (currentPace - prevPace).toFixed(1);
+						console.log("bike paceDiff", lapPaceDiff);
+					} else {
+						const lapDiffTime = (thisAthlete.lapTimesArray[currentLap] - thisAthlete.lapTimesArray[currentLap - 1]) - (thisAthlete.lapTimesArray[currentLap - 1] - thisAthlete.lapTimesArray[currentLap - 2]);
+						// console.log("lapDiffTime", lapDiffTime);
+						lapPaceDiff = calcLapPace(lapDiffTime);
+						console.log("swim/run PaceDiff", lapPaceDiff);
+					}
+					thisAthlete.paceDiffMain = lapPaceDiff.lapPaceMain + '.';
+					thisAthlete.paceDiffDec = lapPaceDiff.lapPaceDec;
+					setPaceDiffColor(thisAthlete.paceDiffMain, thisAthlete.index, workoutParams.discipline);
+				}
 
 				if (thisAthlete.lap === workoutParams.laps) {
 					thisAthlete.completedLaps = true;
@@ -297,6 +320,40 @@ app.controller("timerCtrl", function($q, $scope, $location, DbFactory, WorkoutFa
 		newPace.lapPaceMain = pace.split('.')[0];
 		newPace.lapPaceDec = pace.split('.')[1];
 		return newPace;
+	}
+
+	const setPaceDiffColor = (diffMain, index, disc) => {
+		const paceSpan = document.getElementById(`paceDiffSpan--${index}`);
+		console.log("paceSpan", paceSpan);
+		console.log("diffMain", diffMain);
+		const firstChar = diffMain.charAt(0);
+		console.log("firstChar", firstChar);
+		switch (disc) {
+			case 'bike':
+				switch (firstChar) {
+					case '-':
+						console.log("bike -");
+						paceSpan.classList.remove('lapPaceFaster');
+						paceSpan.classList.add('lapPaceSlower');
+						break;
+					default:
+						console.log("bike +");
+						paceSpan.classList.remove('lapPaceSlower');
+						paceSpan.classList.add('lapPaceFaster');
+				}
+			default:
+				switch (firstChar) {
+					case '-':
+						console.log("diff is -: make green");
+						paceSpan.classList.remove('lapPaceSlower');
+						paceSpan.classList.add('lapPaceFaster');
+						break;
+					default:
+						console.log("diff is +: make red");
+						paceSpan.classList.remove('lapPaceFaster');
+						paceSpan.classList.add('lapPaceSlower');
+				}
+		}
 	}
 
 });

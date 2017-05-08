@@ -467,8 +467,20 @@ div.sepLine {
   font-size: .7rem; }
 
 .lastLapPaceMetric {
-  padding-right: .5rem;
   font-size: .7rem;
   color: #666; }
+
+.lapPaceDiff {
+  font-size: .9rem; }
+
+.lapPaceDiffDec {
+  padding-right: .5rem;
+  font-size: .7rem; }
+
+.lapPaceFaster {
+  color: green; }
+
+.lapPaceSlower {
+  color: red; }
 
 /*# sourceMappingURL=main.css.map */
